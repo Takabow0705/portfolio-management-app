@@ -1,0 +1,8 @@
+#ignore .files
+
+.gradle
+.idea
+build
+s
+#ignore output files
+**/*.iml
