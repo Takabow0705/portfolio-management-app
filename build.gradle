@@ -6,6 +6,7 @@ buildscript {
 
     dependencies {
         classpath 'org.springframework.boot:spring-boot-gradle-plugin:' + springBootVersion
+        classpath 'org.flywaydb:flyway-gradle-plugin:3.2.1'
     }
 }
 
@@ -42,6 +43,8 @@ jacocoTestReport {
 }
 
 build.dependsOn jacocoTestReport
+
+apply plugin: 'org.flywaydb.flyway'
 
 dependencies {
 
