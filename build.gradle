@@ -56,7 +56,7 @@ dependencies {
     //import spring framework
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web'
     implementation group: 'org.springframework.boot', name: 'spring-boot-devtools'
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-jooq'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-jpa'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security'
     
