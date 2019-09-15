@@ -1,16 +1,8 @@
 # ----------------------------------------
-# SECURITY PROPERTIES
-# ----------------------------------------
-spring:
-  security:
-    user:
-      name: user
-      password: root
-# ----------------------------------------
 # DB PROPERTIES
 # ----------------------------------------
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/portfolio_management
-    username: root
-    password: root
-    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:postgresql://localhost:5432/test0
+    username: test0
+    password: test
+    driverClassName: org.postgresql.Driver
