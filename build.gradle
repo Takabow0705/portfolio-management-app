@@ -20,7 +20,7 @@ plugins {
 group 'portfolio-management-app'
 version '1.0-SNAPSHOT'
 
-sourceCompatibility = 1.8
+sourceCompatibility = 1.11
 
 repositories {
     mavenCentral()
@@ -46,9 +46,9 @@ jacocoTestReport {
 build.dependsOn jacocoTestReport
 
 flyway {
-    url = 'jdbc:mysql://localhost:3306/portfolio_management'
-    user = 'root'
-    password = 'root'
+    url = 'jdbc:mysql://localhost:3306/app_dev_db?verifyServerCertificate=false&useSSL=true'
+    user = 'app-dev'
+    password = 'app_dev'
 }
 
 dependencies {
@@ -56,14 +56,14 @@ dependencies {
     //import spring framework
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web'
     implementation group: 'org.springframework.boot', name: 'spring-boot-devtools'
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-jpa'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf'
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security'
     
     //mysql connector
     implementation group: 'mysql', name: 'mysql-connector-java', version: '5.1.47'
     //logger
-    implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+    implementation group: 'com.google.flogger', name: 'flogger', version: '0.4'
+    runtime group: 'com.google.flogger', name: 'flogger-system-backend', version: '0.4'
     //lombok
     compileOnly group: 'org.projectlombok', name: 'lombok', version:'1.18.8'
     annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.8'
