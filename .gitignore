@@ -1,8 +1,13 @@
-#ignore .files
-
+#ignore auto-generated files
 .gradle
-.idea
 build
-s
-#ignore output files
+bin
+
+#ignore intellij auto-generated files
 **/*.iml
+.idea
+
+## ignore eclipse auto-generated files
+.classpath
+.project
+.settings/*
