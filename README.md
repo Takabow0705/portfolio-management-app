@@ -3,6 +3,7 @@
 ## 目次
 
 - [Amazon-Corretto-11の準備](./docs/java.md)
+- [Gradleの準備](./docs/gradle.md)
 - [eclipseの準備](./docs/eclipse.md)
 - [postgresSQLの準備](./docs/postgres.md)
 - [勉強会進行](./docs/tutorials.md)

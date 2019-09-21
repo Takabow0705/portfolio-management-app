@@ -3,7 +3,7 @@
 ## ダウンロード
 
 以下のリンクのサイトからダウンロード。バージョンは10.10にする。  
-[ダウンロードリンク](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads)
+[https://www.enterprisedb.com/downloads/postgres-postgresql-downloads](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads)
 
 
 **UNIX系OSの場合**  
@@ -20,6 +20,9 @@ Windowsのときは特に障害はない？？
 ## 初期設定
 
 以下の作業はすべて `postgres`ユーザで行う。
+また、コマンドプロンプトは `管理者権限`　で実行すること。
+
+下記で設定する `Role`、 `DB名`は自由に設定してください。
 
 ```
 psql user=postgres
@@ -27,13 +30,13 @@ psql user=postgres
 
 初期設定時のパスワードを要求されるので、それを入力。
 
-1. Roleの設定
+### 1. Roleの設定
 
 ```
 postgres=# create role <Role名> LOGIN CREATEDB PASSWORD '<Password>';
 ```
 
-2. peer認証の停止
+### 2. peer認証の停止(Windowsユーザは不要)
 
 設定ファイルのパスを表示
 
@@ -47,7 +50,7 @@ postgres=# SHOW hba_file;
 # local   all             all                                     peer
 local   all             all                                     trust
 ```
-3. Roleにスキーマを紐つける
+### 3. Roleにスキーマを紐つける
 
 ```
 postgres=# create database <DB名> owner <Role名>;
@@ -55,4 +58,5 @@ postgres=# create database <DB名> owner <Role名>;
 
 ## クライアントの設定
 
-a5m2でOracleと要領は同じ
+a5m2でOracleと要領は同じ。  
+windowsの場合は `pgAdmin` を使用する手もある。
