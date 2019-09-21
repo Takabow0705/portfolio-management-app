@@ -1,1 +1,1 @@
-# portfolio-management-app
+# Spring-Boot　Webアプリ開発の雛形
