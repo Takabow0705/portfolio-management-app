@@ -2,7 +2,7 @@
 # DB PROPERTIES
 # ----------------------------------------
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/portfolio_management
-    username: root
-    password: root
+    url: jdbc:mysql://127.0.0.1:3306/app_dev_db?verifyServerCertificate=false&useSSL=true
+    username: app-dev
+    password: app_dev
     driverClassName: com.mysql.jdbc.Driver
