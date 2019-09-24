@@ -1,10 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Portfolio Management Console</title>
+    <title>User Information Management Console</title>
 </head>
 <body>
-<p>this page is under construction</p>
+	<h1>ユーザリスト</h1>
+    <table>
+      <tr>
+        <th>ユーザID</th>
+        <th>バージョン</th>
+        <th>ユーザ名</th>
+        <th>パスワード</th>
+        <th>ユーザ権限</th>
+        <th>削除フラグ</th>
+        <th>ロックフラグ</th>
+      </tr>
+      <tr th:inline="text" th:each="userMaster:${users}">
+        <td>[[${userMaster.userId}]]</td>
+        <td>[[${userMaster.version}]]</td>
+        <td>[[${userMaster.userName}]]</td>
+        <td>[[${userMaster.password}]]</td>
+        <td>[[${userMaster.userAuthentication}]]</td>
+        <td>[[${userMaster.isDeleted}]]</td>
+        <td>[[${userMaster.isLocked}]]</td>
+      </tr>
+    </table>
 </body>
 </html>

@@ -1,20 +1,27 @@
 package controller;
 
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@EnableAutoConfiguration
+import commons.entities.UserMaster;
+import service.UserMasterService;
+
+@Controller
 public class HelloWorldController {
-    /** Hello world*/
-    private String helloWorld = "Hello World";
-
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    @ResponseBody
-    public String getHelloWorld(){
-        return helloWorld;
+	
+	@Autowired
+	private UserMasterService userMasterService;
+	
+    @RequestMapping(value = "/index")
+    public ModelAndView index(ModelAndView mav){
+    	List<UserMaster> users = userMasterService.findAll();
+       mav.addObject("users", users);
+       return mav;
     }
 }
