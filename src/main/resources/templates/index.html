@@ -1,10 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Portfolio Management Console</title>
+    <title>User Information Management Console</title>
+    <link rel="stylesheet" href="/css/bootstrap.css" />
+    <link rel="stylesheet" href="/css/normalize.css" />
+    <script src="/js/jquery.js"></script>
+    <script src="/js/bootstrap.js"></script>
 </head>
 <body>
-<p>this page is under construction</p>
+<h1>Top Page</h1>
+
+<a class="btn btn-default btn-xs" th:href="@{/management/user_master}">ユーザ情報管理画面</a>
 </body>
 </html>

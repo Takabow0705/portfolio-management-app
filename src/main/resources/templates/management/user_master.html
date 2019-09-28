@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Information Management Console</title>
+    <link rel="stylesheet" href="/css/bootstrap.css" />
+    <link rel="stylesheet" href="/css/normalize.css" />
+    <script src="/js/jquery.js"></script>
+    <script src="/js/bootstrap.js"></script>
+</head>
+<body>
+	<h1>ユーザリスト</h1>
+    <table class="table">
+      <tr>
+        <th>ユーザID</th>
+        <th>バージョン</th>
+        <th>ユーザ名</th>
+        <th>パスワード</th>
+        <th>ユーザ権限</th>
+        <th>削除フラグ</th>
+        <th>ロックフラグ</th>
+      </tr>
+      <tr th:each="userMaster:${users}">
+        <td th:text="${userMaster.getUserId()}"/>
+        <td th:text="${userMaster.getVersion()}"/>
+        <td th:text="${userMaster.getUserName()}"/>
+        <td th:text="${userMaster.getPassword()}"/>
+        <td th:text="${userMaster.getUserAuthentication()}"/>
+        <td th:text="${userMaster.isDeleted()}"/>
+        <td th:text="${userMaster.isLocked()}"/>
+      </tr>
+    </table>
+</body>
+</html>
