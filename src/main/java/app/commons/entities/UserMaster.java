@@ -1,4 +1,4 @@
-package commons.entities;
+package app.commons.entities;
 
 import java.io.Serializable;
 
@@ -8,13 +8,17 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
-import commons.enums.UserAuthentication;
+import app.commons.enums.UserAuthentication;
 @Entity
 @Table(name = "USER_MASTER")
-public class UserMaster {
+public class UserMaster implements Serializable{
 	
+	/**
+	 * Serial Version UID
+	 */
+	private static final long serialVersionUID = 1L;
+
 	protected UserMaster() {}
 	
 	/**
@@ -39,6 +43,7 @@ public class UserMaster {
 		this.isLocked = isLocked;
 	}
 
+	
     /** ユーザID*/
     @Id
     @Column(name="USER_ID")

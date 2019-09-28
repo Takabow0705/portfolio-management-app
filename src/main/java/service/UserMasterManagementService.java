@@ -9,7 +9,7 @@ import commons.entities.UserMaster;
 import repository.UserMasterRepository;
 
 @Service
-public class UserMasterService {
+public class UserMasterManagementService {
 	
 	@Autowired
 	private UserMasterRepository userMasterRepository;
@@ -23,6 +23,6 @@ public class UserMasterService {
 	 * @return List<UserMaster> ユーザマスタの情報
 	 */
 	public List<UserMaster> findAll(){
-		return userMasterRepository.findAll();
+		return this.userMasterRepository.findAll();
 	}
 }
