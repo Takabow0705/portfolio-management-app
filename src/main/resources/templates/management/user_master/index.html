@@ -5,10 +5,12 @@
     <title>User Information Management Console</title>
     <link rel="stylesheet" href="/css/bootstrap.css" />
     <link rel="stylesheet" href="/css/normalize.css" />
+    <link rel="stylesheet" href="/css/master_list.css" />
     <script src="/js/jquery.js"></script>
     <script src="/js/bootstrap.js"></script>
 </head>
 <body>
+<div class="master_table">
 	<h1>ユーザリスト</h1>
     <table class="table">
       <tr>
@@ -30,5 +32,9 @@
         <td th:text="${userMaster.isLocked()}"/>
       </tr>
     </table>
+    <div class="input_area">
+        <a class="btn btn-default" href="/management/user_master/create">新規作成</a>
+    </div>
+</div>
 </body>
 </html>
