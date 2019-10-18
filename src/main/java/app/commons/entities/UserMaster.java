@@ -2,16 +2,14 @@ package app.commons.entities;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+
+import app.commons.dto.UserMasterDto;
+import org.apache.commons.lang3.StringUtils;
 
 import app.commons.enums.UserAuthentication;
 @Entity
-@Table(name = "USER_MASTER")
+@Table(name = "user_master")
 public class UserMaster implements Serializable{
 	
 	/**
@@ -19,7 +17,7 @@ public class UserMaster implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	protected UserMaster() {}
+	private UserMaster() {}
 	
 	/**
 	 * 
@@ -31,7 +29,7 @@ public class UserMaster implements Serializable{
 	 * @param isDeleted
 	 * @param isLocked
 	 */
-	public UserMaster(String userId, long version, String userName, String password,
+	public UserMaster(Long userId, long version, String userName, String password,
 			UserAuthentication userAuthentication, boolean isDeleted, boolean isLocked) {
 		super();
 		this.userId = userId;
@@ -43,16 +41,33 @@ public class UserMaster implements Serializable{
 		this.isLocked = isLocked;
 	}
 
+	/**
+	 * <p>
+	 * 空のユーザマスタエンティティを返します
+	 * </p>
+	 */
+	public static UserMaster of(UserMasterDto userMasterDto){
+		return new UserMaster(
+				Long.getLong("-1")
+				,0
+				,userMasterDto.getUserName()
+				,userMasterDto.getPassword()
+				,UserAuthentication.convertFrom(userMasterDto.getUserAuthentication())
+				,false
+				,false
+		);
+	}
 	
     /** ユーザID*/
     @Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="USER_ID")
-    private String userId;
+    private Long userId;
     /** バージョン*/
     @Column(name="VERSION")
     private long version;
     /** ユーザ名*/
-    @Column(name="USER_NAME")
+    @Column(name="USER_NAME",unique = true)
     private String userName;
     /** パスワード*/
     @Column(name="PASSWORD")
@@ -68,10 +83,10 @@ public class UserMaster implements Serializable{
     @Column(name="IS_LOCKED")
     private boolean isLocked;
     
-	public String getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
-	public void setUserId(String userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 	public long getVersion() {

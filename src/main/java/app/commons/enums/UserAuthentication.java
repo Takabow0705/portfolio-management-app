@@ -4,20 +4,22 @@ package app.commons.enums;
 /**
  * ユーザ権限を表す列挙型
  *
- * @author takahiro-haraguchi
  */
 public enum UserAuthentication {
-    ADMIN("admin"),
-    GENERAL("general"),
-    UNDEFINED("undefined");
+    ADMIN("ADMIN"),
+    GENERAL("GENERAL"),
+    UNDEFINED("UNDEFINED");
 
     /** DBで保持される値*/
     private String dbValue;
-    /** */
-    private UserAuthentication(String dbValue) {}
-    
+
+    /** コンストラクタ*/
+    private UserAuthentication(String dbValue) {
+        this.dbValue = dbValue;
+    }
+
     /**
-     * 
+     *
      */
     public String getDbValue() {
     	return dbValue;
