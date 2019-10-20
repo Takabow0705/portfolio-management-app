@@ -5,5 +5,18 @@ import org.springframework.stereotype.Repository;
 
 import app.commons.entities.UserMaster;
 
+/**
+ * ユーザ情報の検索、永続化を担うJPA
+ */
 @Repository
-public interface UserMasterRepository extends JpaRepository<UserMaster, Long>{}
+public interface UserMasterRepository extends JpaRepository<UserMaster, Long>{
+    /**
+     * <p>
+     *     user_masterテーブルのuserIdは一意に決まるので、ひとつだけが検索で見つかる。
+     * </p>
+     *
+     * @param userId
+     * @return UserMaster
+     */
+    public UserMaster findByUserId(Long userId);
+}
