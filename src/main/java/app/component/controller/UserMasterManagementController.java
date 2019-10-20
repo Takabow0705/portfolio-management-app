@@ -13,10 +13,7 @@ import com.google.common.flogger.FluentLogger;
 import app.commons.entities.UserMaster;
 import app.component.service.UserMasterManagementService;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/management/user_master")
@@ -73,5 +70,28 @@ public class UserMasterManagementController {
 		userMasterManagementService.saveNewUser(userMasterDto);
 		return "redirect:/management/user_master/";
     }
+
+    @GetMapping("{id}/update")
+	public String update(@PathVariable Long id, Model model){
+		UserMaster userMaster = this.userMasterManagementService.findByUserId(id);
+		logger.atInfo().log("ユーザ詳細情報画面に遷移");
+		model.addAttribute("userMaster", userMaster);
+		model.addAttribute("auth", UserAuthentication.values());
+    	return "/management/user_master/update";
+	}
+	/**
+	 *<p>
+	 *     ユーザ情報の更新を行います。
+	 *     更新後はトップページにリダイレクトする。
+	 *</p>
+	 * @param userMaster
+	 * @return
+	 */
+	@PutMapping(path = "{id}")
+	public String updateUserMaster(@ModelAttribute UserMaster userMaster){
+    	logger.atInfo().log("ユーザ情報の更新を開始");
+    	this.userMasterManagementService.save(userMaster);
+		return "redirect:/management/user_master/";
+	}
 
 }

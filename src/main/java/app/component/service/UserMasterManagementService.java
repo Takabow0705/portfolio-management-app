@@ -1,6 +1,7 @@
 package app.component.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import app.commons.dto.UserMasterDto;
 import com.google.common.flogger.FluentLogger;
@@ -29,6 +30,18 @@ public class UserMasterManagementService {
 		return this.userMasterRepository.findAll();
 	}
 
+	public UserMaster findByUserId(Long userId){
+		return this.userMasterRepository.findByUserId(userId);
+	}
+	/**
+	 * <p>
+	 *     ユーザ情報の中で削除フラグの無いものだけを表示します。
+	 * </p>
+	 * @return
+	 */
+	public List<UserMaster> findAllActiveUser(){
+		return this.userMasterRepository.findAll().stream().filter(u -> (!u.isDeleted())).collect(Collectors.toList());
+	}
 	/**
 	 * <p>
 	 * ユーザ情報を新規に追加します。
@@ -54,4 +67,5 @@ public class UserMasterManagementService {
 		this.userMasterRepository.save(userMaster);
 	}
 }
+
 

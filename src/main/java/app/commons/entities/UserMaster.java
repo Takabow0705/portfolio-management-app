@@ -5,7 +5,6 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 import app.commons.dto.UserMasterDto;
-import org.apache.commons.lang3.StringUtils;
 
 import app.commons.enums.UserAuthentication;
 @Entity
@@ -26,19 +25,19 @@ public class UserMaster implements Serializable{
 	 * @param userName
 	 * @param password
 	 * @param userAuthentication
-	 * @param isDeleted
-	 * @param isLocked
+	 * @param deleted
+	 * @param locked
 	 */
 	public UserMaster(Long userId, long version, String userName, String password,
-			UserAuthentication userAuthentication, boolean isDeleted, boolean isLocked) {
+                      UserAuthentication userAuthentication, boolean deleted, boolean locked) {
 		super();
 		this.userId = userId;
 		this.version = version;
 		this.userName = userName;
 		this.password = password;
 		this.userAuthentication = userAuthentication;
-		this.isDeleted = isDeleted;
-		this.isLocked = isLocked;
+		this.deleted = deleted;
+		this.locked = locked;
 	}
 
 	/**
@@ -78,10 +77,10 @@ public class UserMaster implements Serializable{
     private UserAuthentication userAuthentication;
     /** 削除フラグ*/
     @Column(name="IS_DELETED")
-    private boolean isDeleted;
+    private boolean deleted;
     /** ロックフラグ*/    
     @Column(name="IS_LOCKED")
-    private boolean isLocked;
+    private boolean locked;
     
 	public Long getUserId() {
 		return userId;
@@ -114,22 +113,22 @@ public class UserMaster implements Serializable{
 		this.userAuthentication = userAuthentication;
 	}
 	public boolean isDeleted() {
-		return isDeleted;
+		return deleted;
 	}
 	public void setDeleted(boolean isDeleted) {
-		this.isDeleted = isDeleted;
+		this.deleted = isDeleted;
 	}
 	public boolean isLocked() {
-		return isLocked;
+		return locked;
 	}
 	public void setLocked(boolean isLocked) {
-		this.isLocked = isLocked;
+		this.locked = isLocked;
 	}
 
     @Override
 	public String toString() {
 		return "UserMaster [userId=" + userId + ", version=" + version + ", userName=" + userName + ", password="
-				+ password + ", userAuthentication=" + userAuthentication + ", isDeleted=" + isDeleted + ", isLocked="
-				+ isLocked + "]";
+				+ password + ", userAuthentication=" + userAuthentication + ", isDeleted=" + deleted + ", isLocked="
+				+ locked + "]";
 	}
 }
