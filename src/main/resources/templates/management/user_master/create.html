@@ -38,7 +38,6 @@
         </div>
         <div class="form-group">
             <label class="control-label">ユーザ権限</label>
-            <!-- <input class="form-control" type="text" name="user_auth" th:field="*{userAuthentication}"/> -->
             <select class="form-control"　 th:field="*{userAuthentication}">
                 <option th:each="userAuth:${auth}" th:value="${userAuth.toString()}" th:inline="text">[[${userAuth.toString()}]]</option>
             </select>
