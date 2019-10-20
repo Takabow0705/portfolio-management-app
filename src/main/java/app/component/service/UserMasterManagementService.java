@@ -66,6 +66,18 @@ public class UserMasterManagementService {
         logger.atInfo().log("以下のユーザを保存します。：%s", userMaster.toString());
 		this.userMasterRepository.save(userMaster);
 	}
+
+	/**
+	 * <p>
+	 *     ユーザ情報の削除を行う。
+	 * </p>
+	 * @param id
+	 */
+	public void delete(Long id){
+		UserMaster userMaster = this.userMasterRepository.findByUserId(id);
+		logger.atInfo().log("以下のユーザを削除します：%s", userMaster);
+		this.userMasterRepository.delete(userMaster);
+	}
 }
 
 

@@ -93,5 +93,12 @@ public class UserMasterManagementController {
     	this.userMasterManagementService.save(userMaster);
 		return "redirect:/management/user_master/";
 	}
+	
+	@DeleteMapping(path = "{id}")
+	public String delete(@PathVariable Long id){
+		this.userMasterManagementService.delete(id);
+		logger.atInfo().log("削除完了");
+		return "redirect:/management/user_master/";
+	}
 
 }
