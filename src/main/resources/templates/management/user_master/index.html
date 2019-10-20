@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Information Management Console</title>
+    <link rel="stylesheet" href="/css/bootstrap.css" />
+    <link rel="stylesheet" href="/css/normalize.css" />
+    <link rel="stylesheet" href="/css/master_list.css" />
+    <script src="/js/jquery.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script  language="JavaScript" type="text/javascript">
+        function confirm(){
+            	var result = confirm('本当に削除しますか？\n（削除実行後はデータを元に戻せません）');
+            	if(result) {
+                    window.alert("削除を実行しました。");
+                    return result;
+                }else{
+                    window.alert("削除をキャンセルしました。");
+                    return result;
+                }
+        }
+    </script>
+</head>
+<body>
+<div class="master_table">
+	<h1>ユーザリスト</h1>
+    <table class="table">
+      <tr>
+          <th>ユーザID</th>
+          <th>バージョン</th>
+          <th>ユーザ名</th>
+          <th>パスワード</th>
+          <th>ユーザ権限</th>
+          <th>削除フラグ</th>
+          <th>ロックフラグ</th>
+          <th></th>
+          <th></th>
+      </tr>
+      <tr th:each="userMaster:${users}">
+          <td th:text="${userMaster.getUserId()}"/>
+          <td th:text="${userMaster.getVersion()}"/>
+          <td th:text="${userMaster.getUserName()}"/>
+          <td th:text="${userMaster.getPassword()}"/>
+          <td th:text="${userMaster.getUserAuthentication()}"/>
+          <td th:text="${userMaster.isDeleted()}"/>
+          <td th:text="${userMaster.isLocked()}"/>
+          <td><a class="btn btn-default btn-xs" th:href="@{/management/user_master/{id}/update(id=${userMaster.getUserId()})}">編集</a></td>
+          <td>
+          <form th:action="@{/management/user_master/{id}(id=${userMaster.getUserId()})}" th:method="delete">
+              <input class="btn btn-default btn-xs" type="submit" value="削除"　onClick="confirm()"/>
+          </form>
+          </td>
+      </tr>
+    </table>
+    <div class="input_area">
+        <a class="btn btn-default" href="/management/user_master/create">新規作成</a>
+    </div>
+</div>
+</body>
+</html>

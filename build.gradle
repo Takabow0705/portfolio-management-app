@@ -63,6 +63,8 @@ dependencies {
     //logger
     implementation group: 'com.google.flogger', name: 'flogger', version: '0.4'
     runtime group: 'com.google.flogger', name: 'flogger-system-backend', version: '0.4'
+    //apache-commons-lang3
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
 
     //test tools
     testImplementation group: 'org.dbunit',     name: 'dbunit',             version: '2.5.3'
