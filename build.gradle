@@ -32,7 +32,7 @@ apply plugin: 'io.spring.dependency-management'
 // テストカバレッジにJacocoを使用する
 apply plugin: 'jacoco'
 jacoco {
-    toolVersion = '0.8.1'
+    toolVersion = '0.8.2'
 }
 
 jacocoTestReport {
