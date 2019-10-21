@@ -11,17 +11,17 @@ public class UserAuthenticationTest {
 
     @Test
     public void convertFromAdminString() {
-        assertThat(UserAuthentication.ADMIN, equalTo(UserAuthentication.convertFrom("admin")));
+        assertThat(UserAuthentication.ADMIN, equalTo(UserAuthentication.convertFrom("ADMIN")));
     }
 
     @Test
     public void convertFromGeneralString() {
-        assertThat(UserAuthentication.GENERAL, equalTo(UserAuthentication.convertFrom("general")));
+        assertThat(UserAuthentication.GENERAL, equalTo(UserAuthentication.convertFrom("GENERAL")));
     }
 
     @Test
     public void convertFromUndefinedString(){
-        assertThat(UserAuthentication.UNDEFINED, equalTo(UserAuthentication.convertFrom("undefined")));
+        assertThat(UserAuthentication.UNDEFINED, equalTo(UserAuthentication.convertFrom("UNDEFINED")));
     }
 
     @Test
