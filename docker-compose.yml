@@ -1,0 +1,40 @@
+version: '3.3'
+
+services:
+  
+  dbserver:
+    container_name: dbserver
+    build: docker/mysql
+    environment:
+      MYSQL_DATABASE: production
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: production
+      MYSQL_PASSWORD: production
+    ports:
+      - 3306:3306
+
+  nginx:
+    container_name: nginx
+    build: docker/nginx
+    restart: always
+    ports:
+      - "80:8080"
+
+  appserver:
+    container_name: appserver
+    restart: always
+    build: docker/springboot-prod
+    expose:
+      - 8090
+    depends_on: 
+      - dbserver
+
+#  appserver:
+#    container_name: app
+#    build: docker/springboot-local
+#    expose:
+#      - 8090
+#    depends_on: 
+#      - dbserver
+
+  
