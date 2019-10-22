@@ -1,0 +1,20 @@
+# ----------------------------------------
+# PROD VERSION PROPERTIES
+# ----------------------------------------
+spring:
+  profiles: prod
+  datasource:
+    url: jdbc:mysql://dbserver:3306/production?characterEncoding=UTF8&verifyServerCertificate=false&useSSL=true
+    username: production
+    password: production
+    driverClassName: com.mysql.jdbc.Driver
+    initialization-mode: never
+  jpa: 
+    hibernate: 
+      ddl-auto: none
+  flywayMigrate:
+    url: jdbc:mysql://dbserver:3306/production?characterEncoding=UTF8&verifyServerCertificate=false&useSSL=true
+    username: production
+    password: production
+server:
+  port : 8090
