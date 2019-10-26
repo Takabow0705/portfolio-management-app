@@ -3,7 +3,7 @@ FROM amazoncorretto:11
 WORKDIR /usr/app
 
 RUN yum update -y && yum upgrade -y \
-    && yum intall git curl \
+    && yum install git -y \
     && git clone https://github.com/Takabow0705/web-app.git \
     && cd web-app \
     && ./gradlew --full-stacktrace -q build
