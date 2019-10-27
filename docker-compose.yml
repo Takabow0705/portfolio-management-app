@@ -5,13 +5,14 @@ services:
   dbserver:
     container_name: dbserver
     build: docker/mysql
+    restart: always
     environment:
       MYSQL_DATABASE: production
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: production
       MYSQL_PASSWORD: production
     ports:
-      - 3306:3306
+      - "53306":3306"
 
   nginx:
     container_name: nginx
