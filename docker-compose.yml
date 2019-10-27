@@ -12,7 +12,7 @@ services:
       MYSQL_USER: production
       MYSQL_PASSWORD: production
     ports:
-      - "53306":3306"
+      - "53306:3306"
 
   nginx:
     container_name: nginx
