@@ -1,7 +1,16 @@
-version: '3.3'
+version: '3.7'
 
 services:
-  
+
+  nginx:
+    container_name: nginx
+    build: docker/nginx
+    restart: always
+    ports:
+      - "80:8080"
+    networks: 
+      - backend
+
   dbserver:
     container_name: dbserver
     build: docker/mysql
@@ -11,15 +20,17 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: production
       MYSQL_PASSWORD: production
-    ports:
-      - "53306:3306"
+    expose:
+      - 3306
+    networks: 
+      - backend
 
-  nginx:
-    container_name: nginx
-    build: docker/nginx
-    restart: always
+  admin:    
+    image: adminer    
     ports:
-      - "80:8080"
+      - "58080:8080"
+    networks: 
+      - backend
 
   appserver:
     container_name: appserver
@@ -29,13 +40,13 @@ services:
       - 8090
     depends_on: 
       - dbserver
+    tty: true
+    environment:
+      spring.profiles.active: "prod"
+    networks: 
+      - backend
 
-#  appserver:
-#    container_name: app
-#    build: docker/springboot-local
-#    expose:
-#      - 8090
-#    depends_on: 
-#      - dbserver
+networks:
+  backend:
 
   
