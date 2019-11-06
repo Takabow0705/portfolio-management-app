@@ -91,14 +91,14 @@ public class UserMasterManagementController {
 	public String updateUserMaster(@ModelAttribute UserMaster userMaster){
     	logger.atInfo().log("ユーザ情報の更新を開始");
     	this.userMasterManagementService.save(userMaster);
-		return "redirect:management/user_master/";
+		return "redirect:/management/user_master/";
 	}
 	
 	@DeleteMapping(path = "{id}")
 	public String delete(@PathVariable Long id){
 		this.userMasterManagementService.delete(id);
 		logger.atInfo().log("削除完了");
-		return "redirect:management/user_master/";
+		return "redirect:/management/user_master/";
 	}
 
 }
