@@ -16,3 +16,8 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/app_dev_db?verifyServerCertificate=false&useSSL=false
     username: app-dev
     password: app_dev
+  devtools:
+     restart:
+       enabled: true
+     remote:
+       secret: spring-remote
