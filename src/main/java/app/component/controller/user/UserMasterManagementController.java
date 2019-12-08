@@ -1,17 +1,18 @@
-package app.component.controller;
+package app.component.controller.user;
 
 import java.util.List;
 
 import app.commons.dto.UserMasterDto;
 import app.commons.enums.UserAuthentication;
+import app.component.service.userMaster.UserMasterManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 import com.google.common.flogger.FluentLogger;
 
 import app.commons.entities.UserMaster;
-import app.component.service.UserMasterManagementService;
 
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserMasterManagementController {
 
     /** ユーザ情報を管理する*/
+	@Qualifier("userMasterServiceImpl")
 	@Autowired
 	private UserMasterManagementService userMasterManagementService;
 	private static final FluentLogger logger = FluentLogger.forEnclosingClass();
