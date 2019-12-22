@@ -1,4 +1,4 @@
-package app.commons.entities;
+package app.commons.entities.products;
 
 import app.commons.entities.pk.BondMasterPK;
 import app.commons.enums.finance.PaymentType;

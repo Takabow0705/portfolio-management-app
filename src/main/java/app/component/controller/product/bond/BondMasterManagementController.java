@@ -1,6 +1,6 @@
 package app.component.controller.product.bond;
 
-import app.commons.entities.BondMaster;
+import app.commons.entities.products.BondMaster;
 import app.component.service.bondMaster.BondMasterManagementService;
 import com.google.common.flogger.FluentLogger;
 import org.springframework.beans.factory.annotation.Autowired;

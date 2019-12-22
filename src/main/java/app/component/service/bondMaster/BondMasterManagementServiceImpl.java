@@ -1,7 +1,7 @@
 package app.component.service.bondMaster;
 
-import app.commons.entities.BondMaster;
-import app.component.repository.BondMasterRepository;
+import app.commons.entities.products.BondMaster;
+import app.component.repository.product.BondMasterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;

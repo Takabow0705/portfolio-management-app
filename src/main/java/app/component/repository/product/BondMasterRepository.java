@@ -1,6 +1,6 @@
-package app.component.repository;
+package app.component.repository.product;
 
-import app.commons.entities.BondMaster;
+import app.commons.entities.products.BondMaster;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
