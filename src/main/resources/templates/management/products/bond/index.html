@@ -11,6 +11,34 @@
 </head>
 
 <body>
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
+    <a class="navbar-brand" th:href="@{/}">Home</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0" _lpchecked="1">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+<div class="pt-0 pb-1 pl-2 pr-3">
+    <span>pt-0 pb-1 pl-2 pr-3</span>
+</div>
+<div class="pt-0 pb-1 pl-2 pr-3">
+    <span>pt-0 pb-1 pl-2 pr-3</span>
+</div>
 <main role="main" class="container my-xl-3">
     <h1 class="display-5">債券マスタリスト</h1>
     <table class="table">
@@ -31,16 +59,16 @@
             <td th:text="${bond.getBondCode()}"/>
             <td th:text="${bond.getVersion()}"/>
             <td th:text="${bond.getBondName()}"/>
-            <td th:text="${bond.getIssueDate()}"/>
-            <td th:text="${bond.getMaturity()}"/>
+            <td th:text="${#dates.format(bond.getIssueDate(), 'yyyy-MM-dd')}"/>
+            <td th:text="${#dates.format(bond.getMaturity(), 'yyyy-MM-dd')}"/>
             <td th:text="${bond.getCouponRate()}"/>
             <td th:text="${bond.getUnit()}"/>
             <td th:text="${bond.getFaceValue()}"/>
             <td th:text="${bond.getIssuerSectorCode()}"/>
             <td><a class="btn btn-default btn-xs"
-                   th:href="@{/management/products/bond/{code}/{version}/update(id=${bond.getBondCode()},version=${bond.getVersion()})}">編集</a></td>
+                   th:href="@{/management/products/bond/{code}/{version}/update(code=${bond.getBondCode()},version=${bond.getVersion()})}">編集</a></td>
             <td>
-                <form th:action="@{/management/products/bond/{code}/{version}/(id=${bond.getBondCode()},version=${bond.getVersion()})}" th:method="delete">
+                <form th:action="@{/management/products/bond/{code}/{version}/(code=${bond.getBondCode()},version=${bond.getVersion()})}" th:method="delete">
                     <input class="btn btn-default btn-xs" type="submit" value="削除" 　onClick="confirm()"/>
                 </form>
             </td>

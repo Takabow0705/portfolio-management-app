@@ -46,7 +46,7 @@
     </nav>
     <div class="container">
         <h1>Create New User</h1>
-        <form th:action="@{/management/user_master}" th:method="post" th:object="${userMasterForm}" onSubmit="return validatePW()">
+        <form th:action="@{/management/users}" th:method="post" th:object="${userMasterForm}" onSubmit="return validatePW()">
             <div class="form-group">
                 <label class="control-label">ユーザ名</label>
                 <input class="form-control" type="text" name="user_name" th:field="*{userName}" />
@@ -68,7 +68,7 @@
             <button class="btn btn-default" type="submit">作成</button>
         </form>
         <div class="pull-right">
-            <a class="btn btn-link" href="/management/user_master">一覧画面へ</a>
+            <a class="btn btn-link" href="/management/users">一覧画面へ</a>
         </div>
     </div>
 </body>

@@ -1,12 +1,14 @@
 package app.commons.entities.products;
 
-import app.commons.entities.pk.BondMasterPK;
+
+import app.commons.entities.products.pk.BondMasterPK;
 import app.commons.enums.finance.PaymentType;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name = "bond_master")
@@ -148,4 +150,26 @@ public class BondMaster implements Serializable {
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BondMaster that = (BondMaster) o;
+        return bondCode.equals(that.bondCode) &&
+                version.equals(that.version) &&
+                Objects.equals(bondName, that.bondName) &&
+                Objects.equals(issueDate, that.issueDate) &&
+                Objects.equals(maturity, that.maturity) &&
+                Objects.equals(couponRate, that.couponRate) &&
+                paymentType == that.paymentType &&
+                Objects.equals(unit, that.unit) &&
+                Objects.equals(faceValue, that.faceValue) &&
+                Objects.equals(issuerSectorCode, that.issuerSectorCode) &&
+                Objects.equals(isDeleted, that.isDeleted);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(bondCode, version, bondName, issueDate, maturity, couponRate, paymentType, unit, faceValue, issuerSectorCode, isDeleted);
+    }
 }
