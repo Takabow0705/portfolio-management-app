@@ -32,6 +32,32 @@
             </form>
         </div>
     </nav>
+    <div class="pt-0 pb-1 pl-2 pr-3">
+        <span>pt-0 pb-1 pl-2 pr-3</span>
+    </div>
+    <div class="pt-0 pb-1 pl-2 pr-3">
+        <span>pt-0 pb-1 pl-2 pr-3</span>
+    </div>
+    <main role="main" class="container my-xl-3">
+        <h1 class="display-5">通貨マスタリスト</h1>
+        <table class="table">
+            <tr>
+                <th>通貨ID</th>
+                <th>通貨コード</th>
+                <th>通貨名</th>
+                <th>通貨発行国コード</th>
+            </tr>
+            <tr th:each="currency:${currencyList}">
+                <td th:text="${currency.getCurrencyId()}"/>
+                <td th:text="${currency.getCurrencyCode()}"/>
+                <td th:text="${currency.getCurrencyName()}"/>
+                <td th:text="${currency.getCountryCode()}"/>
+            </tr>
+        </table>
+        <div class="input_area">
+            <a class="btn btn-default" href="/management/products/currency/create">新規作成</a>
+        </div>
+    </main>
 </body>
 
 </html>
