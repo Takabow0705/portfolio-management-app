@@ -52,8 +52,6 @@
             <th>単元</th>
             <th>額面</th>
             <th>発行体業種コード</th>
-            <th></th>
-            <th></th>
         </tr>
         <tr th:each="bond:${bondList}">
             <td th:text="${bond.getBondCode()}"/>
@@ -65,13 +63,6 @@
             <td th:text="${bond.getUnit()}"/>
             <td th:text="${bond.getFaceValue()}"/>
             <td th:text="${bond.getIssuerSectorCode()}"/>
-            <td><a class="btn btn-default btn-xs"
-                   th:href="@{/management/products/bond/{code}/{version}/update(code=${bond.getBondCode()},version=${bond.getVersion()})}">編集</a></td>
-            <td>
-                <form th:action="@{/management/products/bond/{code}/{version}/(code=${bond.getBondCode()},version=${bond.getVersion()})}" th:method="delete">
-                    <input class="btn btn-default btn-xs" type="submit" value="削除" 　onClick="confirm()"/>
-                </form>
-            </td>
         </tr>
     </table>
     <div class="input_area">
