@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Japanese Stock Management Console</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="jumbotron.css" rel="stylesheet">
+    <script src="/js/jquery.js"></script>
+    <script src="/js/bootstrap.js"></script>
+</head>
+
+<body>
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
+    <a class="navbar-brand" th:href="@{/}">Home</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0" _lpchecked="1">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+<div class="pt-0 pb-1 pl-2 pr-3">
+    <span>pt-0 pb-1 pl-2 pr-3</span>
+</div>
+<div class="pt-0 pb-1 pl-2 pr-3">
+    <span>pt-0 pb-1 pl-2 pr-3</span>
+</div>
+<div class="container my-xl-3">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="panel-title">
+                <h2>検索条件</h2>
+            </div>
+        </div>
+        <div class="panel-body">
+            <form th:action="@{/management/products/stock/ja/search}" th:method="post" th:object="${searchCondition}" class="form-horizontal">
+                <div class="form-group">
+                    <label class="control-label col-sm-2">From</label>
+                    <div class="col-sm-4">
+                        <input type="number" name="fromNumber" th:field="*{fromNumber}" class="form-control input-sm"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">To</label>
+                    <div class="col-sm-4">
+                        <input type="number" name="toNumber" th:field="*{toNumber}" class="form-control input-sm"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">企業名</label>
+                    <div class="col-sm-6">
+                        <input type="text" name="partialMatchText" th:field="*{partialMatchText}" class="form-control input-sm"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" value="検索" class="btn btn-primary">検索</button>
+                </div>
+            </form>
+        </div>
+    </div>
+<hr>
+<main role="main" class="container my-xl-3">
+    <h1 class="display-5">日本株式マスタデータ</h1>
+    <table class="table-responsive-sm">
+        <tr>
+            <th>株式コード</th>
+            <th>企業名</th>
+            <th>単元</th>
+            <th>マーケット区分</th>
+            <th>33業種区分</th>
+            <th>17業種区分</th>
+            <th></th>
+        </tr>
+        <tr th:each="stock:${stocklist}">
+            <td th:text="${stock.getStockCode()}"/>
+            <td th:text="${stock.getStockName()}"/>
+            <td th:text="${stock.getUnit()}"/>
+            <td th:text="${stock.getMarket()}"/>
+            <td th:text="${stock.getSectorDetail33()}"/>
+            <td th:text="${stock.getSectorDetail17()}"/>
+            <td><a class="btn btn-default btn-xs"
+                   th:href="@{/management/products/stock/ja/{code}/detail(code=${stock.getStockCode()})}">詳細</a>
+            </td>
+            <td><a class="btn btn-default btn-xs"
+                   th:href="@{/management/products/stock/ja/{code}/update(code=${stock.getStockCode()})}">編集</a>
+            </td>
+        </tr>
+    </table>
+</main>
+</body>
+
+</html>

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>User Information Management Console</title>
+    <title>Bond Master Management Console</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link href="jumbotron.css" rel="stylesheet">
     <script src="/js/jquery.js"></script>
@@ -33,35 +33,42 @@
         </form>
     </div>
 </nav>
-
-<div class="jumbotron text-center">
-    <div class="container">
-        <h1 class="display-3">ポートフォリオ管理システム</h1>
-        <p>日々の損益計算だけでなく、ポートフォリオのリスク計算、レポートの作成を一括で行える（予定）</p>
-    </div>
+<div class="pt-0 pb-1 pl-2 pr-3">
+    <span>pt-0 pb-1 pl-2 pr-3</span>
 </div>
-
-<div class="container">
-    <!-- Example row of columns -->
-    <div class="row">
-        <div class="col-md-4">
-            <h2>金融商品情報管理</h2>
-            <p>債券、株式、外国為替、その他金融派生商品のマスタデータを管理します。</p>
-            <p><a class="btn btn-info" th:href="@{/management/products}" role="button">管理画面へ</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2>ユーザ情報管理</h2>
-            <p>アプリケーションのユーザ情報を管理します。</p>
-            <p><a class="btn btn-info" th:href="@{/management/users}" role="button">管理画面へ</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2>ポートフォリオ管理</h2>
-            <p>ポートフォリオの日次での損益管理、月次レポートの作成を行います。</p>
-            <p><a class="btn btn-info" th:href="@{/management/portfolio}" role="button">管理画面へ</a></p>
-        </div>
-    </div>
-    <hr>
+<div class="pt-0 pb-1 pl-2 pr-3">
+    <span>pt-0 pb-1 pl-2 pr-3</span>
 </div>
+<main role="main" class="container my-xl-3">
+    <h1 class="display-5">債券マスタリスト</h1>
+    <table class="table">
+        <tr>
+            <th>債券コード</th>
+            <th>バージョン</th>
+            <th>債券名</th>
+            <th>発行年月日</th>
+            <th>償還日</th>
+            <th>クーポンレート</th>
+            <th>単元</th>
+            <th>額面</th>
+            <th>発行体業種コード</th>
+        </tr>
+        <tr th:each="bond:${bondList}">
+            <td th:text="${bond.getBondCode()}"/>
+            <td th:text="${bond.getVersion()}"/>
+            <td th:text="${bond.getBondName()}"/>
+            <td th:text="${#dates.format(bond.getIssueDate(), 'yyyy-MM-dd')}"/>
+            <td th:text="${#dates.format(bond.getMaturity(), 'yyyy-MM-dd')}"/>
+            <td th:text="${bond.getCouponRate()}"/>
+            <td th:text="${bond.getUnit()}"/>
+            <td th:text="${bond.getFaceValue()}"/>
+            <td th:text="${bond.getIssuerSectorCode()}"/>
+        </tr>
+    </table>
+    <div class="input_area">
+        <a class="btn btn-default" href="/management/products/bond/create">新規作成</a>
+    </div>
+</main>
 </body>
 
 </html>

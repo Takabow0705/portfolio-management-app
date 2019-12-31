@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>User Information Management Console</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="jumbotron.css" rel="stylesheet">
+    <script src="/js/jquery.js"></script>
+    <script src="/js/bootstrap.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-primary">
+        <a class="navbar-brand" th:href="@{/}">Home</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0" _lpchecked="1">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+
+    <div class="container py-5">
+        <!-- Example row of columns -->
+        <div class="row">
+            <div class="col-lg-4">
+                <h2>日本株式</h2>
+                <p>東京証券取引所に上場している日本株式のマスターデータを管理します。</p>
+                <p><a class="btn btn-info" th:href="@{/management/products/stock/ja}" role="button">管理画面へ</a></p>
+            </div>
+            <div class="col-lg-4">
+                <h2>国内外債券</h2>
+                <p>国内外債券のマスターデータを管理します。</p>
+                <p><a class="btn btn-info" th:href="@{/management/products/bond}" role="button">管理画面へ</a></p>
+            </div>
+            <div class="col-lg-4">
+                <h2>外国為替</h2>
+                <p>外国為替のマスターデータを管理します。</p>
+                <p><a class="btn btn-info" th:href="@{/management/products/currency}" role="button">管理画面へ</a></p>
+            </div>
+        </div>
+        <hr>
+    </div>
+</body>
+
+</html>

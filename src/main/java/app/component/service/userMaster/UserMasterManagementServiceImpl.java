@@ -1,4 +1,4 @@
-package app.component.service;
+package app.component.service.userMaster;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -6,13 +6,15 @@ import java.util.stream.Collectors;
 import app.commons.dto.UserMasterDto;
 import com.google.common.flogger.FluentLogger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import app.commons.entities.UserMaster;
 import app.component.repository.UserMasterRepository;
 
 @Service
-public class UserMasterManagementService {
+@Qualifier("userMasterServiceImpl")
+public class UserMasterManagementServiceImpl implements UserMasterManagementService{
 	
 	@Autowired
 	private UserMasterRepository userMasterRepository;

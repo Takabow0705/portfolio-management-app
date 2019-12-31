@@ -4,7 +4,7 @@
 spring:
   profiles: prod
   datasource:
-    url: jdbc:mysql://dbserver:3306/production?characterEncoding=UTF8&verifyServerCertificate=false&useSSL=false
+    url: jdbc:mysql://dbserver:3306/production?verifyServerCertificate=false&useSSL=false
     username: production
     password: production
     driverClassName: com.mysql.jdbc.Driver
@@ -13,7 +13,7 @@ spring:
     hibernate: 
       ddl-auto: none
   flywayMigrate:
-    url: jdbc:mysql://dbserver:3306/production?characterEncoding=UTF8&verifyServerCertificate=false&useSSL=false
+    url: jdbc:mysql://dbserver:3306/production?verifyServerCertificate=false&useSSL=false
     username: production
     password: production
 server:

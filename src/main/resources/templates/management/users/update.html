@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>User Details</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="jumbotron.css" rel="stylesheet">
+    <script src="/js/jquery.js"></script>
+    <script src="/js/bootstrap.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
+        <a class="navbar-brand" href="#">Home</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0" _lpchecked="1">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+    <div class="pt-0 pb-1 pl-2 pr-3">
+        <span>pt-0 pb-1 pl-2 pr-3</span>
+    </div>
+    <div class="pt-0 pb-1 pl-2 pr-3">
+        <span>pt-0 pb-1 pl-2 pr-3</span>
+    </div>
+    <div class="container">
+        <h1>Update User</h1>
+        <form th:action="@{/management/users/{id}(id=*{userId})}" th:method="put" th:object="${userMaster}" onSubmit="return validatePW()">
+            <div class="form-group">
+                <label class="control-label">ユーザID</label>
+                <input class="form-control" type="text" name="userId" th:value="*{userId}" readonly/>
+            </div>
+            <div class="form-group">
+                <label class="control-label">バージョン</label>
+                <input class="form-control" type="text" name="version" th:value="*{version} + 1" readonly/>
+            </div>
+            <div class="form-group">
+                <label class="control-label">ユーザ名</label>
+                <input class="form-control" type="text" name="userName" th:value="*{userName}" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">パスワード</label>
+                <input class="form-control" id="pw1" type="text" name="password" th:value="*{password}" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">パスワード再入力</label>
+                <input class="form-control" id="pw2" type="text" name="password2" th:value="*{password}" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">ユーザ権限</label>
+                <select class="form-control" th:field="*{userAuthentication}">
+                <option th:each="userAuth:${auth}" th:value="${userAuth.toString()}" th:inline="text">[[${userAuth.toString()}]]</option>
+            </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">アカウントステータス</label>
+                <select class="form-control" th:field="*{deleted}">
+                <option class="form-control" th:value="${true}" th:inline="text">[[${userMaster.isDeleted() ? '無効' : '有効'}]]</option>
+                <option class="form-control" th:value="${false}" th:inline="text">[[${userMaster.isDeleted() ? '有効' : '無効'}]]</option>
+            </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">使用可否</label>
+                <select class="form-control" th:field="*{locked}">
+                <option class="form-control" th:value="${true}" th:inline="text">[[${userMaster.isLocked() ? 'ロック中' : '使用可能'}]]</option>
+                <option class="form-control" th:value="${false}" th:inline="text">[[${userMaster.isLocked() ? '使用可能' : 'ロック中'}]]</option>
+            </select>
+            </div>
+            <button class="btn btn-default" type="submit">更新</button>
+        </form>
+        <div class="input_area">
+            <a class="btn btn-default" href="/management/users/">トップへ戻る</a>
+        </div>
+    </div>
+</body>
+
+</html>

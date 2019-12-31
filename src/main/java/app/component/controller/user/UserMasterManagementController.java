@@ -1,25 +1,27 @@
-package app.component.controller;
+package app.component.controller.user;
 
 import java.util.List;
 
 import app.commons.dto.UserMasterDto;
 import app.commons.enums.UserAuthentication;
+import app.component.service.userMaster.UserMasterManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 import com.google.common.flogger.FluentLogger;
 
 import app.commons.entities.UserMaster;
-import app.component.service.UserMasterManagementService;
 
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/management/user_master")
+@RequestMapping("/management/users")
 public class UserMasterManagementController {
 
     /** ユーザ情報を管理する*/
+	@Qualifier("userMasterServiceImpl")
 	@Autowired
 	private UserMasterManagementService userMasterManagementService;
 	private static final FluentLogger logger = FluentLogger.forEnclosingClass();
@@ -37,7 +39,7 @@ public class UserMasterManagementController {
     	List<UserMaster> users = userMasterManagementService.findAll();
 		logger.atInfo().log("ユーザリストを取得しました リスト: %s", users);
     	model.addAttribute("users", users);
-        return "management/user_master/index";
+        return "management/users/index";
     }
 
     /**
@@ -53,7 +55,7 @@ public class UserMasterManagementController {
 		logger.atInfo().log("新規作成画面へ遷移");
         model.addAttribute("userMasterForm", new UserMasterDto());
         model.addAttribute("auth", UserAuthentication.values());
-	    return "/management/user_master/create";
+	    return "management/users/create";
 	}
 
     /**
@@ -68,7 +70,7 @@ public class UserMasterManagementController {
     public String saveUser(@ModelAttribute UserMasterDto userMasterDto){
 	    logger.atInfo().log("新規ユーザの保存開始");
 		userMasterManagementService.saveNewUser(userMasterDto);
-		return "redirect:/management/user_master/";
+		return "redirect:/management/users/";
     }
 
     @GetMapping("{id}/update")
@@ -77,7 +79,7 @@ public class UserMasterManagementController {
 		logger.atInfo().log("ユーザ詳細情報画面に遷移");
 		model.addAttribute("userMaster", userMaster);
 		model.addAttribute("auth", UserAuthentication.values());
-    	return "/management/user_master/update";
+    	return "management/users/update";
 	}
 	/**
 	 *<p>
@@ -91,14 +93,14 @@ public class UserMasterManagementController {
 	public String updateUserMaster(@ModelAttribute UserMaster userMaster){
     	logger.atInfo().log("ユーザ情報の更新を開始");
     	this.userMasterManagementService.save(userMaster);
-		return "redirect:/management/user_master/";
+		return "redirect:/management/users/";
 	}
 	
 	@DeleteMapping(path = "{id}")
 	public String delete(@PathVariable Long id){
 		this.userMasterManagementService.delete(id);
 		logger.atInfo().log("削除完了");
-		return "redirect:/management/user_master/";
+		return "redirect:/management/users/";
 	}
 
 }
