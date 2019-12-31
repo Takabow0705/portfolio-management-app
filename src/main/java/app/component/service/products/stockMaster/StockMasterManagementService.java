@@ -1,6 +1,6 @@
-package app.component.service.stockMaster;
+package app.component.service.products.stockMaster;
 
-import app.commons.entities.products.BondMaster;
+import app.commons.dto.SearchCondition;
 import app.commons.entities.products.StockMaster;
 
 import java.util.List;
@@ -8,4 +8,6 @@ import java.util.List;
 public interface StockMasterManagementService {
 
     abstract List<StockMaster> findAll();
+
+    abstract List<StockMaster> findByCondition(SearchCondition condition);
 }
