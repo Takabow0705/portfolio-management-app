@@ -12,7 +12,7 @@ import org.springframework.ui.Model;
 
 import com.google.common.flogger.FluentLogger;
 
-import app.commons.entities.UserMaster;
+import app.commons.entities.user.UserMaster;
 
 import org.springframework.web.bind.annotation.*;
 
