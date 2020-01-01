@@ -39,9 +39,8 @@
                 <a class="nav-link" href="#">Link</a>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0" _lpchecked="1">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        <form class="form-inline my-2 my-lg-0" _lpchecked="1" th:action="@{/logout}" th:method="post">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">ログアウト</button>
         </form>
     </div>
 </nav>
