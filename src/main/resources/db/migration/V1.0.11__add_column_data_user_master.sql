@@ -1,0 +1,1 @@
+alter table user_master add column MAIL_ADDRESS varchar(100) unique;
