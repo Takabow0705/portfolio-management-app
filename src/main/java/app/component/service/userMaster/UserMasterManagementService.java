@@ -1,7 +1,7 @@
 package app.component.service.userMaster;
 
 import app.commons.dto.UserMasterDto;
-import app.commons.entities.UserMaster;
+import app.commons.entities.user.UserMaster;
 
 import java.util.List;
 

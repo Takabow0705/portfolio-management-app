@@ -13,6 +13,8 @@ public class UserMasterDto {
     private String password;
     /** ユーザ権限*/
     private String userAuthentication;
+    /** メールアドレス*/
+    private String mailAddress;
 
     public String getUserName() {
         return userName;
@@ -36,6 +38,14 @@ public class UserMasterDto {
 
     public void setUserAuthentication(String userAuthentication) {
         this.userAuthentication = userAuthentication;
+    }
+
+    public String getMailAddress() {
+        return mailAddress;
+    }
+
+    public void setMailAddress(String mailAddress) {
+        this.mailAddress = mailAddress;
     }
 
     @Override

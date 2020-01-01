@@ -1,4 +1,4 @@
-package app.commons.entities;
+package app.commons.entities.user;
 
 import java.io.Serializable;
 
@@ -29,7 +29,7 @@ public class UserMaster implements Serializable{
 	 * @param locked
 	 */
 	public UserMaster(Long userId, long version, String userName, String password,
-                      UserAuthentication userAuthentication, boolean deleted, boolean locked) {
+                      UserAuthentication userAuthentication, boolean deleted, boolean locked, String mailAddress) {
 		super();
 		this.userId = userId;
 		this.version = version;
@@ -38,6 +38,7 @@ public class UserMaster implements Serializable{
 		this.userAuthentication = userAuthentication;
 		this.deleted = deleted;
 		this.locked = locked;
+		this.mailAddress = mailAddress;
 	}
 
 	/**
@@ -54,34 +55,46 @@ public class UserMaster implements Serializable{
 				,UserAuthentication.convertFrom(userMasterDto.getUserAuthentication())
 				,false
 				,false
+				,userMasterDto.getMailAddress()
 		);
 	}
 	
     /** ユーザID*/
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="USER_ID")
+    @Column(name = "USER_ID")
     private Long userId;
     /** バージョン*/
-    @Column(name="VERSION")
+    @Column(name = "VERSION")
     private long version;
     /** ユーザ名*/
-    @Column(name="USER_NAME",unique = true)
+    @Column(name = "USER_NAME",unique = true)
     private String userName;
     /** パスワード*/
-    @Column(name="PASSWORD")
+    @Column(name = "ENCODED_PASSWORD")
     private String password;
     /** ユーザ権限*/
-    @Column(name="USER_AUTHENTICATION")
+    @Column(name = "USER_AUTHENTICATION")
     @Enumerated(EnumType.STRING)
     private UserAuthentication userAuthentication;
     /** 削除フラグ*/
-    @Column(name="IS_DELETED")
+    @Column(name = "IS_DELETED")
     private boolean deleted;
     /** ロックフラグ*/    
-    @Column(name="IS_LOCKED")
+    @Column(name = "IS_LOCKED")
     private boolean locked;
-    
+    /** メールアドレス*/
+    @Column(name = "MAIL_ADDRESS")
+    private String mailAddress;
+
+	public String getMailAddress() {
+		return mailAddress;
+	}
+
+	public void setMailAddress(String mailAddress) {
+		this.mailAddress = mailAddress;
+	}
+
 	public Long getUserId() {
 		return userId;
 	}
