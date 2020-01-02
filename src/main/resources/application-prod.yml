@@ -16,5 +16,10 @@ spring:
     url: jdbc:mysql://dbserver:3306/production?verifyServerCertificate=false&useSSL=false
     username: production
     password: production
+  session:
+    store-type: redis
+  redis:
+    host: redis
+    port: 6379
 server:
   port : 8090
