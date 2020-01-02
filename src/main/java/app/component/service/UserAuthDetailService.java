@@ -3,6 +3,7 @@ package app.component.service;
 import app.commons.entities.user.UserAuthInfo;
 import app.commons.entities.user.UserMaster;
 import app.component.repository.UserMasterRepository;
+import com.google.common.flogger.FluentLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserAuthDetailService implements UserDetailsService {
 
+    private static final FluentLogger logger = FluentLogger.forEnclosingClass();
     @Autowired
     private UserMasterRepository userMasterRepository;
 
@@ -26,11 +28,13 @@ public class UserAuthDetailService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         if (username == null || "".equals(username)) {
+            logger.atWarning().log("UserName is Empty");
             throw new UsernameNotFoundException("Username is empty");
         }
 
         UserMaster userMaster = this.userMasterRepository.findByMailAddress(username);
         if (userMaster == null) {
+            logger.atWarning().log("User not found for name: %s", username);
             throw new UsernameNotFoundException("User not found for name: " + username);
         }
 
