@@ -20,7 +20,7 @@ message Message{
 
 
 service HelloWorld{
-
+    rpc responseHello(HelloWorldRequest) returns (HelloWorldResponse) {}
 }
 
 
