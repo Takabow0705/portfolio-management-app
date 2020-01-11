@@ -1,0 +1,100 @@
+buildscript {
+    def springBootVersion = '2.1.6.RELEASE'
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath  group: 'org.springframework.boot', name:'spring-boot-gradle-plugin', version: springBootVersion
+        classpath  group: 'mysql', name: 'mysql-connector-java', version: '5.1.47'
+        classpath  group: 'org.yaml', name: 'snakeyaml', version: '1.19'
+    }
+}
+
+plugins {
+    id 'groovy'
+    id 'java'
+    id "org.flywaydb.flyway" version "5.2.4"
+}
+
+repositories {
+    mavenCentral()
+}
+
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group 'portfolio-management-app'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.11
+targetCompatibility = 1.11
+
+/**
+ * テストカバレッジツール
+ */
+apply plugin: 'jacoco'
+jacoco {
+    toolVersion = '0.8.2'
+}
+
+/**
+ * jacocoのカバレッジレポートを出力
+ */
+jacocoTestReport {
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+}
+//buildタスクに組み込む
+build.dependsOn jacocoTestReport
+
+/**
+ * flywayの接続対象
+ */
+flyway {
+    def env = System.getenv("spring.profiles.active") ?: "local"
+    def applicationYml = new org.yaml.snakeyaml.Yaml()
+            .load(new File("src/main/resources/" + "application-" + env  +".yml")
+                    .newInputStream())
+
+    url = "${applicationYml.spring.flywayMigrate.url}"
+    user = "${applicationYml.spring.flywayMigrate.username}"
+    password = "${applicationYml.spring.flywayMigrate.password}"
+}
+
+/**
+ * bootJarの生成
+ */
+bootJar{
+    baseName = "portfolio-management-app"
+    version =  '0.1.0-SNAPSHOT'
+}
+
+dependencies {
+    //import spring framework
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-devtools'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-aop'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-redis'
+    implementation group: 'org.springframework.session', name: 'spring-session-data-redis'
+    //mysql connector
+    implementation group: 'mysql', name: 'mysql-connector-java', version: '5.1.47'
+    //logger
+    implementation group: 'com.google.flogger', name: 'flogger', version: '0.4'
+    runtime group: 'com.google.flogger', name: 'flogger-system-backend', version: '0.4'
+    //apache-commons-lang3
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
+
+    //test tools
+    testImplementation group: 'org.dbunit',     name: 'dbunit',             version: '2.5.3'
+    testImplementation group: 'junit',          name: 'junit',              version: '4.12'
+    testImplementation group: 'org.hamcrest',   name: 'hamcrest',           version: '2.1'
+    testImplementation group: 'org.hamcrest',   name: 'hamcrest-library',   version: '2.1'
+    testImplementation group: 'org.mockito',    name: 'mockito-core',       version: '2.19.0'
+    testImplementation group: 'org.springframework.boot', name:'spring-boot-starter-test'
+}
