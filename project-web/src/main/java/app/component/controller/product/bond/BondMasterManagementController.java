@@ -27,6 +27,6 @@ public class BondMasterManagementController {
         List<BondMaster> bondList = bondMasterManagementService.findAll();
         model.addAttribute("bondList",bondList);
         logger.atInfo().log("以下の債券情報を取得しました。：%s",bondList);
-        return "/management/products/bond/index";
+        return "management/products/bond/index";
     }
 }
