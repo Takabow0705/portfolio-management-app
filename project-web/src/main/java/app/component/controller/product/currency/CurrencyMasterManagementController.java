@@ -23,6 +23,6 @@ public class CurrencyMasterManagementController {
     public String index(Model model){
         List<CurrencyMaster> currencyList = this.currencyMasterManagementService.findAll();
         model.addAttribute("currencyList", currencyList);
-        return "/management/products/currency/index";
+        return "management/products/currency/index";
     }
 }
