@@ -1,5 +1,7 @@
 package app.commons.dto;
 
+import java.util.Objects;
+
 /**
  * <p>
  *      新規ユーザ作成時に使う入力フォーマット
@@ -55,6 +57,22 @@ public class UserMasterDto {
                 ", password='" + password + '\'' +
                 ", userAuthentication='" + userAuthentication + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserMasterDto that = (UserMasterDto) o;
+        return Objects.equals(userName, that.userName) &&
+                Objects.equals(password, that.password) &&
+                Objects.equals(userAuthentication, that.userAuthentication) &&
+                Objects.equals(mailAddress, that.mailAddress);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userName, password, userAuthentication, mailAddress);
     }
 }
 
