@@ -13,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
+import testcase.testdata.entity.UserMasterDataFactory;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -50,15 +51,7 @@ public class UserMasterManagementControllerTest {
     public void getIndexPageWithStatus200() throws Exception{
 
         //given
-        UserMaster userMaster = new UserMaster();
-        userMaster.setUserId(Long.valueOf(1));
-        userMaster.setVersion(Long.valueOf(0));
-        userMaster.setUserName("root_user1");
-        userMaster.setPassword("$2a$10$BQ1OVcmKcoc9VSiqY9A56.m95od6AB.C25NBsjEGlEro/oyxq5nNG");
-        userMaster.setMailAddress("root-user01@example.com");
-        userMaster.setUserAuthentication(UserAuthentication.ADMIN);
-        userMaster.setDeleted(false);
-        userMaster.setLocked(false);
+        UserMaster userMaster = UserMasterDataFactory.createActiveUser();
         List<UserMaster> userMasterList = Arrays.asList(userMaster);
 
         given(userMasterManagementService.findAll()).willReturn(userMasterList);
@@ -145,15 +138,7 @@ public class UserMasterManagementControllerTest {
     @WithMockUser
     public void getUpdatePagesWith200() throws Exception{
 
-        UserMaster userMaster = new UserMaster();
-        userMaster.setUserId(Long.valueOf(1));
-        userMaster.setVersion(Long.valueOf(0));
-        userMaster.setUserName("root_user1");
-        userMaster.setPassword("$2a$10$BQ1OVcmKcoc9VSiqY9A56.m95od6AB.C25NBsjEGlEro/oyxq5nNG");
-        userMaster.setMailAddress("root-user01@example.com");
-        userMaster.setUserAuthentication(UserAuthentication.ADMIN);
-        userMaster.setDeleted(false);
-        userMaster.setLocked(false);
+        UserMaster userMaster = UserMasterDataFactory.createActiveUser();
 
         given(userMasterManagementService.findByUserId(Long.valueOf(1))).willReturn(userMaster);
 
@@ -174,15 +159,7 @@ public class UserMasterManagementControllerTest {
     public void deleteUserWithRedirect() throws Exception{
 
         //given
-        UserMaster userMaster = new UserMaster();
-        userMaster.setUserId(Long.valueOf(1));
-        userMaster.setVersion(Long.valueOf(0));
-        userMaster.setUserName("root_user1");
-        userMaster.setPassword("$2a$10$BQ1OVcmKcoc9VSiqY9A56.m95od6AB.C25NBsjEGlEro/oyxq5nNG");
-        userMaster.setMailAddress("root-user01@example.com");
-        userMaster.setUserAuthentication(UserAuthentication.ADMIN);
-        userMaster.setDeleted(false);
-        userMaster.setLocked(false);
+        UserMaster userMaster = UserMasterDataFactory.createActiveUser();
         List<UserMaster> userMasterList = Arrays.asList(userMaster);
 
         given(userMasterManagementService.findAll()).willReturn(userMasterList);
