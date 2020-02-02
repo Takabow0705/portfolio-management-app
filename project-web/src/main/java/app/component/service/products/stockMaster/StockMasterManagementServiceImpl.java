@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,7 +25,8 @@ public class StockMasterManagementServiceImpl implements StockMasterManagementSe
 
     @Override
     public List<StockMaster> findAll() {
-        return this.stockMasterRepository.findAll();
+        List<StockMaster> result = this.stockMasterRepository.findAll();
+        return result == null ? Collections.emptyList() : result;
     }
 
     @Override

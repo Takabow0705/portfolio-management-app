@@ -11,8 +11,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
+import testcase.testdata.entity.StockMasterDataFactory;
 
-import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -46,16 +46,7 @@ class StockMasterManagementControllerTest {
     public void getIndexPageWithStatus200() throws Exception{
 
         //given
-        StockMaster stockMaster = new StockMaster();
-        stockMaster.setStockCode(Long.valueOf(1000));
-        stockMaster.setStockName("test stock");
-        stockMaster.setMarket("test1");
-        stockMaster.setSectorCode17(Long.valueOf(99));
-        stockMaster.setSectorDetail17("test detail");
-        stockMaster.setSectorCode33(Long.valueOf(10));
-        stockMaster.setSectorDetail33("hoge");
-        stockMaster.setMarketDevisionCode(Long.valueOf(1000));
-        stockMaster.setUnit(new BigDecimal(("100")));
+        StockMaster stockMaster = StockMasterDataFactory.createStock();
 
         List<StockMaster> stockMasterList = Arrays.asList(stockMaster);
 

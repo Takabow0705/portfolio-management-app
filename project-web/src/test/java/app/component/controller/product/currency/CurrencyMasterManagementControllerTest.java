@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
+import testcase.testdata.entity.CurrencyMasterDataDactory;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -45,11 +46,7 @@ class CurrencyMasterManagementControllerTest {
     public void getIndexPageWithStatus200() throws Exception{
 
         //given
-        CurrencyMaster currencyMaster = new CurrencyMaster();
-        currencyMaster.setCountryCode("100");
-        currencyMaster.setCurrencyCode("001");
-        currencyMaster.setCurrencyId("1");
-        currencyMaster.setCurrencyName("test currency");
+        CurrencyMaster currencyMaster = CurrencyMasterDataDactory.createCurrency();
 
         List<CurrencyMaster> currencyList = Arrays.asList(currencyMaster);
 

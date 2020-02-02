@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -17,6 +18,7 @@ public class CurrencyMasterManagementServiceImpl implements CurrencyMasterManage
 
     @Override
     public List<CurrencyMaster> findAll() {
-        return this.currencyMasterRepository.findAll();
+        List<CurrencyMaster> result = this.currencyMasterRepository.findAll();
+        return result == null ? Collections.emptyList() : result;
     }
 }
