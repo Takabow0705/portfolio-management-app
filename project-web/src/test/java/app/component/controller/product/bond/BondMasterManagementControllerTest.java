@@ -38,7 +38,7 @@ class BondMasterManagementControllerTest {
 
     /**
      * トップページを正常に取得できること
-     * currencyList attributeが存在すること
+     * bondList attributeが存在すること
      *
      * @throws Exception
      */
@@ -62,15 +62,15 @@ class BondMasterManagementControllerTest {
 
         given(bondMasterManagementService.findAll()).willReturn(bondMasterList);
 
-        mockMvc.perform(get("/management/products/currency"))
+        mockMvc.perform(get("/management/products/bond"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("management/products/currency/index"))
+                .andExpect(view().name("management/products/bond/index"))
                 .andExpect((model().attribute("bondList", bondMasterList)));
     }
 
     /**
      * トップページを正常に取得できること
-     * currencyList attributeが存在すること
+     * bondLList attributeが存在すること
      *
      * @throws Exception
      */

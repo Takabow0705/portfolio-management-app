@@ -1,17 +1,17 @@
 package app.component.service.userMaster;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import app.commons.dto.UserMasterDto;
+import app.commons.entities.user.UserMaster;
+import app.component.repository.UserMasterRepository;
 import com.google.common.flogger.FluentLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import app.commons.entities.user.UserMaster;
-import app.component.repository.UserMasterRepository;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Qualifier("userMasterServiceImpl")
@@ -32,7 +32,8 @@ public class UserMasterManagementServiceImpl implements UserMasterManagementServ
 	 * @return List<UserMaster> ユーザマスタの情報
 	 */
 	public List<UserMaster> findAll(){
-		return this.userMasterRepository.findAll();
+		List<UserMaster> result = this.userMasterRepository.findAll();
+		return result == null ? Collections.emptyList() : result;
 	}
 
 	public UserMaster findByUserId(Long userId){
@@ -45,7 +46,7 @@ public class UserMasterManagementServiceImpl implements UserMasterManagementServ
 	 * @return
 	 */
 	public List<UserMaster> findAllActiveUser(){
-		return this.userMasterRepository.findAll().stream().filter(u -> (!u.isDeleted())).collect(Collectors.toList());
+		return this.findAll().stream().filter(u -> (!u.isDeleted())).collect(Collectors.toList());
 	}
 	/**
 	 * <p>
