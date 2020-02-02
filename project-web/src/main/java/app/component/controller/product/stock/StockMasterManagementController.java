@@ -29,7 +29,7 @@ public class StockMasterManagementController {
         List<StockMaster> stockMasterList = this.stockMasterManagementService.findAll();
         model.addAttribute("searchCondition",new SearchCondition());
         model.addAttribute("stocklist",stockMasterList);
-        return "/management/products/stock/ja/index";
+        return "management/products/stock/ja/index";
     }
 
     @PostMapping("/search")
@@ -38,6 +38,6 @@ public class StockMasterManagementController {
         List<StockMaster> stockMasterList = this.stockMasterManagementService.findByCondition(condition);
         model.addAttribute("searchCondition", condition);
         model.addAttribute("stocklist",stockMasterList);
-        return "/management/products/stock/ja/index";
+        return "management/products/stock/ja/index";
     }
 }
