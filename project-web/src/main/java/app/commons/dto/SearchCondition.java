@@ -1,7 +1,5 @@
 package app.commons.dto;
 
-import java.util.Optional;
-
 /**
  * 検索条件を定義するDTOクラスです。
  */
@@ -13,8 +11,6 @@ public class SearchCondition {
     private Long toNumber;
     /** 部分一致テキストを保持するフィールド*/
     private String partialMatchText;
-    /** 完全一致を期待するテキストを保持するフィールド*/
-    private String perfectMatchText;
 
     public Long getFromNumber() {
         return fromNumber;
@@ -40,21 +36,13 @@ public class SearchCondition {
         this.partialMatchText = partialMatchText;
     }
 
-    public String getPerfectMatchText() {
-        return perfectMatchText;
-    }
-
-    public void setPerfectMatchText(String perfectMatchText) {
-        this.perfectMatchText = perfectMatchText;
-    }
-
     @Override
     public String toString() {
         return "SearchCondition{" +
                 "fromNumber=" + fromNumber +
                 ", toNumber=" + toNumber +
                 ", partialMatchText='" + partialMatchText + '\'' +
-                ", perfectMatchText='" + perfectMatchText + '\'' +
+                ", perfectMatchText='" + '\'' +
                 '}';
     }
 }

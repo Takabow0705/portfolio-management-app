@@ -24,5 +24,9 @@ spring:
   devtools:
      restart:
        enabled: true
+       exclude: META-INF/maven/**,META-INF/resources/**,resources/**,static/**,public/**,templates/**,**/*Test.class,**/*Tests.class,git.properties,META-INF/build-info.properties
+       log-condition-evaluation-delta: true
+       poll-interval: 5s
+       quiet-period: 400ms
      remote:
        secret: spring-remote

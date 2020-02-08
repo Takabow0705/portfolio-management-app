@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -23,6 +24,7 @@ public class BondMasterManagementServiceImpl implements BondMasterManagementServ
      * @return
      */
     public List<BondMaster> findAll(){
-        return this.bondMasterRepository.findAll();
+        List<BondMaster> result = this.bondMasterRepository.findAll();
+        return result == null ? Collections.emptyList() : result;
     }
 }

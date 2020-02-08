@@ -43,6 +43,10 @@ flyway {
     password = "${applicationYml.spring.flywayMigrate.password}"
 }
 
+test {
+    useJUnitPlatform()
+}
+
 dependencies {
     //import spring framework
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web'
@@ -66,5 +70,9 @@ dependencies {
 
     //test tools
     testImplementation group: 'org.dbunit',     name: 'dbunit',             version: '2.5.3'
-    testImplementation group: 'org.springframework.boot', name:'spring-boot-starter-test'
+    testImplementation ('org.springframework.boot:spring-boot-starter-test'){
+        exclude module: 'junit'
+    }
+    testImplementation group: 'org.springframework.security', name: 'spring-security-test'
 }
+

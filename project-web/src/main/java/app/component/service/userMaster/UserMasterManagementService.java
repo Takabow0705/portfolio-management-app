@@ -15,4 +15,6 @@ public interface UserMasterManagementService {
     abstract void save(UserMaster userMaster);
 
     abstract void delete(Long id);
+
+    abstract List<UserMaster> findAllActiveUser();
 }

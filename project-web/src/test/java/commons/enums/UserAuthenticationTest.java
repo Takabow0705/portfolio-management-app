@@ -1,6 +1,6 @@
 package commons.enums;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import app.commons.enums.UserAuthentication;
 

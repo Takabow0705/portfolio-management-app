@@ -1,12 +1,12 @@
 package app.commons.entities.user;
 
-import java.io.Serializable;
+import app.commons.dto.UserMasterDto;
+import app.commons.enums.UserAuthentication;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Objects;
 
-import app.commons.dto.UserMasterDto;
-
-import app.commons.enums.UserAuthentication;
 @Entity
 @Table(name = "user_master")
 public class UserMaster implements Serializable{
@@ -16,7 +16,7 @@ public class UserMaster implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private UserMaster() {}
+	public UserMaster() {}
 	
 	/**
 	 * 
@@ -143,5 +143,25 @@ public class UserMaster implements Serializable{
 		return "UserMaster [userId=" + userId + ", version=" + version + ", userName=" + userName + ", password="
 				+ password + ", userAuthentication=" + userAuthentication + ", isDeleted=" + deleted + ", isLocked="
 				+ locked + "]";
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		UserMaster that = (UserMaster) o;
+		return version == that.version &&
+				deleted == that.deleted &&
+				locked == that.locked &&
+				Objects.equals(userId, that.userId) &&
+				Objects.equals(userName, that.userName) &&
+				Objects.equals(password, that.password) &&
+				userAuthentication == that.userAuthentication &&
+				Objects.equals(mailAddress, that.mailAddress);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(userId, version, userName, password, userAuthentication, deleted, locked, mailAddress);
 	}
 }
