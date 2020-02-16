@@ -1,3 +1,2 @@
 rootProject.name = 'portfolio-management-app'
-include 'project-web','project-grpc'
-
+include 'project-web','project-grpc','project-calculator'
