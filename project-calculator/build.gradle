@@ -14,23 +14,48 @@ plugins {
     id 'application'
 }
 
+jar{
+    archiveBaseName = "calculator-api"
+    archiveVersion = "0.1.0-SNAPSHOT"
+}
+
 repositories {
     // Use jcenter for resolving dependencies.
     // You can declare any Maven/Ivy/file repository here.
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {
     //import spring framework
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jdbc'
     implementation group: 'org.springframework.boot', name: 'spring-boot-devtools'
+    implementation group: 'io.github.lognet', name: 'grpc-spring-boot-starter', version: '3.5.1'
+
     //mysql connector
     implementation group: 'mysql', name: 'mysql-connector-java', version: '5.1.47'
+    //logger
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.30'
+    implementation group: 'net.logstash.logback', name: 'logstash-logback-encoder', version: '6.3'
+    testImplementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+    //submodules
+    implementation project(":project-grpc")
+
+    //lombok
+    compileOnly 'org.projectlombok:lombok:1.18.12'
+    annotationProcessor 'org.projectlombok:lombok:1.18.12'
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.12'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.12'
+
+    testImplementation ('org.springframework.boot:spring-boot-starter-test'){
+        exclude module: 'junit'
+    }
 }
 
 application {
     // Define the main class for the application.
-    mainClassName = 'project.calculator.CalculationServerApp'
+    mainClassName = 'project.calculator.CalculationServerMain'
 }
 
 test {

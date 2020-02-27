@@ -1,0 +1,17 @@
+# ----------------------------------------
+# DEFAULT ACTIVE MODE
+# ----------------------------------------
+spring:
+  profiles:
+    active: local
+logging: 
+  level: 
+    org: 
+      hibernate: 
+        SQL: DEBUG
+        type: 
+          descriptor:
+            sql:
+              BasicBinder: TRACE
+
+

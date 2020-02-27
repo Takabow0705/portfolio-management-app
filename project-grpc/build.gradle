@@ -17,6 +17,12 @@ repositories {
 def grpcVersion = '1.26.0' // CURRENT_GRPC_VERSION
 def protocVersion = '3.11.0'
 
+
+jar{
+    archiveBaseName = "grpc-lib"
+    archiveVersion = "0.1.0-SNAPSHOT"
+}
+
 dependencies {
     // grpc-alts transitively depends on grpc-netty-shaded, grpc-protobuf, and grpc-stub
     implementation "io.grpc:grpc-alts:${grpcVersion}"
