@@ -1,6 +1,6 @@
 package project.calculator.domain.finance.bond.algo;
 
-import java.math.BigDecimal;
+import project.calculator.data.response.CalculationResult;
 
 /**
  * 計算アルゴリズムを抽象化するインターフェース
@@ -8,5 +8,5 @@ import java.math.BigDecimal;
  */
 @FunctionalInterface
 public interface CalculationStrategy<T> {
-    public abstract BigDecimal execute(T data);
+    public abstract CalculationResult execute(T data);
 }

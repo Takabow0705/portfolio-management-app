@@ -15,7 +15,7 @@ public class GrpcProdConfig  {
     @Autowired
     private GrpcCalculatorProdProperty property;
 
-    @Bean
+    @Bean(name = "calculator")
     public ManagedChannel managedChannel(){
         String hostname = property.getHostname();
         int port = Integer.parseInt(property.getPort());
