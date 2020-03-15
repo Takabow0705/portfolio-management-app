@@ -30,3 +30,5 @@ spring:
        quiet-period: 400ms
      remote:
        secret: spring-remote
+grpc:
+  enable-reflection: true

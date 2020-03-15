@@ -30,3 +30,7 @@ spring:
        quiet-period: 400ms
      remote:
        secret: spring-remote
+server:
+  error:
+    whitelabel:
+      enabled: false
