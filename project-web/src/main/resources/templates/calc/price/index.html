@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>User Information Management Console</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="jumbotron.css" rel="stylesheet">
+    <script src="/js/jquery.js"></script>
+    <script src="/js/bootstrap.js"></script>
+</head>
+
+<body>
+<nav class="navbar navbar-expand-md navbar-dark bg-primary">
+    <a class="navbar-brand" th:href="@{/}">Home</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0" _lpchecked="1" th:action="@{/logout}" th:method="post">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">ログアウト</button>
+        </form>
+    </div>
+</nav>
+
+<div class="container py-5">
+    <!-- Example row of columns -->
+    <div class="row">
+        <div class="col-lg-4">
+            <h2>債券</h2>
+            <p>債券の理論価格を計算します</p>
+            <p><a class="btn btn-info" th:href="@{/calc/price/bond}" role="button">計算実行画面へ</a></p>
+        </div>
+        <div class="col-lg-4">
+            <h2>オプション</h2>
+            <p>ヨーロピアンオプションの理論価格を計算します。</p>
+            <p><a class="btn btn-info" th:href="@{/calc/price/option}" role="button">計算実行画面へ</a></p>
+        </div>
+    </div>
+    <hr>
+</div>
+</body>
+
+</html>

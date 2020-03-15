@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Calculate Bond Price</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="jumbotron.css" rel="stylesheet">
+    <script src="/js/jquery.js"></script>
+    <script src="/js/bootstrap.js"></script>
+</head>
+
+<body>
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
+    <a class="navbar-brand" href="@{/}">Home</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0" _lpchecked="1" th:action="@{/logout}" th:method="post">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">ログアウト</button>
+        </form>
+    </div>
+</nav>
+
+<div class="pt-0 pb-1 pl-2 pr-3">
+    <span></span>
+</div>
+<div class="pt-0 pb-1 pl-2 pr-3">
+    <span></span>
+</div>
+<div class="pt-0 pb-1 pl-2 pr-3">
+    <span></span>
+</div>
+<div class="pt-0 pb-1 pl-2 pr-3">
+    <span></span>
+</div>
+<div class="pt-0 pb-1 pl-2 pr-3">
+    <span></span>
+</div>
+<div class="pt-0 pb-1 pl-2 pr-3">
+    <span></span>
+</div>
+
+<hr>
+<div class="container">
+<div class="form-group" th:object="${form}">
+    <label class="control-label">理論価格</label>
+    <input class="form-control" type="text" name="theoreticalPrice" th:field="*{theoreticalPrice}" readonly/>
+</div>
+</div>
+<hr>
+
+<div class="pt-0 pb-1 pl-2 pr-3">
+    <span></span>
+</div>
+
+<div class="container">
+    <form th:action="@{/calc/price/bond/execute}" th:method="post" th:object="${form}">
+        <div class="form-group">
+            <label class="control-label">価格計算アルゴリズム</label>
+            <select class="form-control" th:field="*{algorithms}">
+                <option th:each="algo:${algorithms}" th:value="${algo.toString()}" th:inline="text">[[${algo.toString()}]]</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="control-label">単位</label>
+            <input class="form-control" type="text" name="unit" th:field="*{unit}" />
+        </div>
+        <div class="form-group">
+            <label class="control-label">クーポンレート</label>
+            <input class="form-control" type="text" name="couponRate" th:field="*{couponRate}" />
+        </div>
+        <div class="form-group">
+            <label class="control-label">残存期間</label>
+            <input class="form-control" type="text" name="currentMaturity" th:field="*{currentMaturity}" />
+        </div>
+        <div class="form-group">
+            <label class="control-label">利払い方式</label>
+            <select class="form-control" th:field="*{paymentType}">
+                <option value="Annual">一年払い</option>
+                <option value="SemiAnnual">半期払い</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="control-label">期末払いかどうか</label>
+            <select class="form-control" th:field="*{isTermEndPayment}">
+                <option value="true">期末払い</option>
+                <option value="false">期初払い</option>
+            </select>
+        </div>
+        <button class="btn btn-default" type="submit">計算実行</button>
+    </form>
+    <div class="pull-right">
+        <a class="btn btn-link" href="/">トップへ</a>
+    </div>
+</div>
+</body>
+
+</html>
