@@ -40,8 +40,32 @@
     </div>
 </div>
 
+<!-- 管理機能本体-->
 <div class="container">
-    <!-- Example row of columns -->
+    <div class="row">
+        <div class="col-md-4">
+            <h2>ポートフォリオ管理</h2>
+            <p>ポートフォリオの日次での損益管理、月次レポートの作成を行います。</p>
+            <p><a class="btn btn-info" th:href="@{/management/portfolio}" role="button">管理画面へ</a></p>
+        </div>
+    </div>
+    <hr>
+</div>
+
+<!-- 価格計算、リスク計量、リスク値計算-->
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <h2>金融商品価格計算</h2>
+            <p>債券、株式、外国為替、その他金融派生商品の理論価格を計算します。</p>
+            <p><a class="btn btn-info" th:href="@{/calc/price}" role="button">管理画面へ</a></p>
+        </div>
+    </div>
+    <hr>
+</div>
+
+<!-- マスターデータ管理機能-->
+<div class="container">
     <div class="row">
         <div class="col-md-4">
             <h2>金融商品情報管理</h2>
@@ -49,14 +73,9 @@
             <p><a class="btn btn-info" th:href="@{/management/products}" role="button">管理画面へ</a></p>
         </div>
         <div class="col-md-4">
-            <h2>ユーザ情報管理</h2>
+            <h2>ユーザマスタ管理</h2>
             <p>アプリケーションのユーザ情報を管理します。</p>
             <p><a class="btn btn-info" th:href="@{/management/users}" role="button">管理画面へ</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2>ポートフォリオ管理</h2>
-            <p>ポートフォリオの日次での損益管理、月次レポートの作成を行います。</p>
-            <p><a class="btn btn-info" th:href="@{/management/portfolio}" role="button">管理画面へ</a></p>
         </div>
     </div>
     <hr>

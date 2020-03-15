@@ -1,0 +1,32 @@
+syntax="proto3";
+
+option java_package = "io.grpc.finance.calculation.product.bond";
+option java_multiple_files = true;
+
+package finance.product.bond;
+import "util/status.proto";
+
+/** 理論価格計算に用いるデータの指定 */
+message BondPricingRequest {
+    string bond_code = 10;
+    string current_price = 1;
+    string book_price = 2;
+    string coupon_rate = 3;
+    string unit = 4;
+    PaymentTypeRpc payment_type = 5;
+    bool isTermEndPayment = 6;
+    string current_maturity_by_day = 7;
+    string current_maturity = 8;
+}
+
+/** 利払い周期を表す */
+enum PaymentTypeRpc{
+    ANNUAL = 0;
+    SEMI_ANNUAL = 1;
+}
+
+/** 理論価格計算の結果を返却する */
+message BondTheoreticalPriceResponse {
+    util.status.StatusMsg status_msg = 1;
+    string theoretical_price = 2;
+}

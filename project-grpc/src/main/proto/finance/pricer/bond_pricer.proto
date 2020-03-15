@@ -1,0 +1,13 @@
+syntax="proto3";
+
+option java_package = "io.grpc.finance.calculation.pricer.bond";
+option java_multiple_files = true;
+
+package finance.pricer.bond;
+
+import "finance/product/bond.proto";
+
+service BondPriceCalculatorGrpcService {
+    rpc responseTheoreticalPriceByDiscountFactor(finance.product.bond.BondPricingRequest)
+        returns (finance.product.bond.BondTheoreticalPriceResponse){}
+}

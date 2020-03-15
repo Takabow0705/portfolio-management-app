@@ -13,3 +13,7 @@ logging:
           descriptor:
             sql:
               BasicBinder: TRACE
+server:
+  port : 58080
+grpc:
+  enable-reflection: true
