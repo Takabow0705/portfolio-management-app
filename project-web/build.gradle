@@ -28,6 +28,19 @@ jacocoTestReport {
 //buildタスクに組み込む
 build.dependsOn jacocoTestReport
 
+sourceCompatibility = '14'
+
+tasks.withType(JavaCompile) {
+    options.compilerArgs += ['--enable-preview']
+}
+
+test {
+    jvmArgs = ['--enable-preview']
+}
+
+bootRun {
+    jvmArgs = ['--enable-preview']
+}
 
 /**
  * flywayの接続対象
@@ -59,6 +72,8 @@ dependencies {
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-redis'
     implementation group: 'org.springframework.session', name: 'spring-session-data-redis'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-cache'
     //mysql connector
     implementation group: 'mysql', name: 'mysql-connector-java', version: '5.1.47'
     //logger
