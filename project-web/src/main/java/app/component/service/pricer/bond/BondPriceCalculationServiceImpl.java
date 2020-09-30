@@ -5,15 +5,17 @@ import app.component.external.calculator.CalculatorGrpcFacade;
 import com.google.common.flogger.FluentLogger;
 import io.grpc.finance.calculation.product.bond.BondTheoreticalPriceResponse;
 import io.grpc.util.Status;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
 public class BondPriceCalculationServiceImpl implements BondPriceCalculationService {
 
     private final CalculatorGrpcFacade facade;
     private static final FluentLogger logger = FluentLogger.forEnclosingClass();
+
+    public BondPriceCalculationServiceImpl(CalculatorGrpcFacade facade) {
+        this.facade = facade;
+    }
 
     @Override
     public BondDataDto calculateBondPriceByDiscountFactor(BondDataDto request){
