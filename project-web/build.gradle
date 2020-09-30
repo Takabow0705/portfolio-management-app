@@ -1,6 +1,6 @@
 buildscript {
 
-    def springBootVersion = '2.1.6.RELEASE'
+    def springBootVersion = '2.3.4.RELEASE'
     repositories {
         mavenCentral()
     }
@@ -28,19 +28,6 @@ jacocoTestReport {
 //buildタスクに組み込む
 build.dependsOn jacocoTestReport
 
-sourceCompatibility = '14'
-
-tasks.withType(JavaCompile) {
-    options.compilerArgs += ['--enable-preview']
-}
-
-test {
-    jvmArgs = ['--enable-preview']
-}
-
-bootRun {
-    jvmArgs = ['--enable-preview']
-}
 
 /**
  * flywayの接続対象
