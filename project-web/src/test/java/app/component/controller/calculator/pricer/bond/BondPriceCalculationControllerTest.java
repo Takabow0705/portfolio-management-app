@@ -38,6 +38,6 @@ class BondPriceCalculationControllerTest {
 
         mockMvc.perform(get("/calc/price/bond"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("/calc/price/bond/index"));
+                .andExpect(view().name("calc/price/bond/index"));
     }
 }
