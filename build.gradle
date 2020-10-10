@@ -4,7 +4,7 @@ apply plugin: 'idea'
 
 buildscript {
     ext {
-        springBootVersion = '2.1.6.RELEASE'
+        springBootVersion = '2.3.4.RELEASE'
     }
     repositories {
         mavenCentral()
@@ -25,8 +25,8 @@ subprojects {
     dependencies {
         testImplementation group: 'junit', name: 'junit', version: '4.12'
     }
-    sourceCompatibility = 11
-    targetCompatibility = 11
+    sourceCompatibility = 14
+    targetCompatibility = 14
 }
 
 project(":project-web"){

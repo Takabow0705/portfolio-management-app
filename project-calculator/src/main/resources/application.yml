@@ -4,6 +4,11 @@
 spring:
   profiles:
     active: local
+  cache:
+      jcache:
+        config: classpath:ehcache.xml
+  lifecycle:
+    timeout-per-shutdown-phase: 20s
 logging: 
   level: 
     org: 
@@ -15,5 +20,6 @@ logging:
               BasicBinder: TRACE
 server:
   port : 58080
+  shutdown: graceful
 grpc:
   enable-reflection: true
