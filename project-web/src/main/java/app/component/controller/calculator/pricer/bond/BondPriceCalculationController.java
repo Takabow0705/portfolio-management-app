@@ -35,7 +35,7 @@ public class BondPriceCalculationController {
     public String index(Model model){
         model.addAttribute("form", new BondDataDto());
         model.addAttribute("algorithms", BondPricingAlgorithmsEnum.values());
-        return "/calc/price/bond/index";
+        return "calc/price/bond/index";
     }
 
     /**
@@ -54,12 +54,12 @@ public class BondPriceCalculationController {
         if( result == null ){
             model.addAttribute("form", bondDataDto);
             model.addAttribute("algorithms", BondPricingAlgorithmsEnum.values());
-            return "/calc/price/bond/index";
+            return "calc/price/bond/index";
         }
 
         bondDataDto.setTheoreticalPrice(result.getTheoreticalPrice());
         model.addAttribute("form", bondDataDto);
         model.addAttribute("algorithms", BondPricingAlgorithmsEnum.values());
-        return "/calc/price/bond/index";
+        return "calc/price/bond/index";
     }
 }
