@@ -5,12 +5,14 @@ package project.calculator;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 
 
 /**
  * 金融、統計などの複雑な計算を処理するサーバ
  * 基本的にgRPC通信のみを受け付けるように設計する。
  */
+@EnableCaching
 @SpringBootApplication
 public class CalculationServerMain {
     public static void main(String[] args){

@@ -3,9 +3,11 @@ package project.calculator.data.response;
 import io.grpc.util.StatusMsg;
 import project.calculator.data.enums.PricingMethod;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public final class CalculationResult {
+public final class CalculationResult implements Serializable {
+    private static final Long serialVersionUID = 1L;
     private final BigDecimal result;
     private final PricingMethod method;
     private final StatusMsg resultDetail;

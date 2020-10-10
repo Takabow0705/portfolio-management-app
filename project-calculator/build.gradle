@@ -28,6 +28,8 @@ dependencies {
     implementation group: 'io.github.lognet', name: 'grpc-spring-boot-starter', version: '3.5.1'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-cache'
+    implementation 'javax.cache:cache-api'
+    implementation 'org.ehcache:ehcache:3.8.1'
 
     //mysql connector
     implementation group: 'mysql', name: 'mysql-connector-java', version: '5.1.47'

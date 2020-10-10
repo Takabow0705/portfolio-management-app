@@ -5,5 +5,5 @@ import project.calculator.data.response.CalculationResult;
 
 public interface BondPriceCalculatorService {
 
-    abstract CalculationResult calculateByDisCountFactor(BondPricingData data);
+    abstract CalculationResult calculateByDiscountFactor(BondPricingData data);
 }

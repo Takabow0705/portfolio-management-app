@@ -2,10 +2,12 @@ package project.calculator.data;
 
 import project.calculator.data.enums.PaymentType;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 //ToDo ユニットテストをstatic factoryに対応させる。
-public final class BondPricingData {
+public final class BondPricingData implements Serializable {
+    private static final Long serialVersionUID = 1L;
     private final String bondCode;
     private final BigDecimal currentPrice;
     private final BigDecimal bookPrice;

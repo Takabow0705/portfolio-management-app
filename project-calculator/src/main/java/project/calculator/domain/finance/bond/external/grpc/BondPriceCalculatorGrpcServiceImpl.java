@@ -26,7 +26,7 @@ public class BondPriceCalculatorGrpcServiceImpl extends BondPriceCalculatorGrpcS
     @Override
     public void responseTheoreticalPriceByDiscountFactor(BondPricingRequest request, StreamObserver<BondTheoreticalPriceResponse> responseObserver) {
         BondPricingData data = BondRequestConverter.convertFrom(request);
-        CalculationResult result = this.bondPriceCalculatorService.calculateByDisCountFactor(data);
+        CalculationResult result = this.bondPriceCalculatorService.calculateByDiscountFactor(data);
         BondTheoreticalPriceResponse response = BondTheoreticalPriceResponse.newBuilder()
                 .setTheoreticalPrice(result.getResult().toPlainString())
                 .setStatusMsg(result.getResultDetail()).build();
