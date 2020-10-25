@@ -2,7 +2,10 @@ package app.commons.dto;
 
 import app.commons.enums.BondPricingAlgorithmsEnum;
 
+import java.util.UUID;
+
 public class BondDataDto {
+    private UUID uuid;
     private String bondCode;
     private String currentPrice;
     private String bookPrice;
@@ -15,10 +18,14 @@ public class BondDataDto {
     private String currentMaturity;
     private String theoreticalPrice;
     private BondPricingAlgorithmsEnum algorithms;
+    private String errorDetails;
 
-    public BondDataDto(){}
+    public BondDataDto(){
+        this.uuid = UUID.randomUUID();
+    }
 
     private BondDataDto(String bondCode, String currentPrice, String bookPrice, String unit, String couponRate, String paymentType, Boolean isTermEndPayment, String currentMaturity, String theoreticalPrice, BondPricingAlgorithmsEnum algorithms) {
+        this.uuid = UUID.randomUUID();
         this.bondCode = bondCode;
         this.currentPrice = currentPrice;
         this.bookPrice = bookPrice;
@@ -33,6 +40,10 @@ public class BondDataDto {
 
     public static BondDataDto of(String bondCode, String currentPrice, String bookPrice, String unit, String couponRate, String paymentType, Boolean isTermEndPayment, String currentMaturity, String theoreticalPrice, BondPricingAlgorithmsEnum algorithms) {
         return new BondDataDto(bondCode, currentPrice, bookPrice, unit, couponRate, paymentType, isTermEndPayment, currentMaturity, theoreticalPrice, algorithms);
+    }
+
+    public UUID getUuid() {
+        return uuid;
     }
 
     public String getBondCode() {
@@ -115,6 +126,14 @@ public class BondDataDto {
         this.algorithms = algorithms;
     }
 
+    public String getErrorDetails() {
+        return errorDetails;
+    }
+
+    public void setErrorDetails(String errorDetails) {
+        this.errorDetails = errorDetails;
+    }
+
     public boolean equals(final Object o) {
         if (o == this) return true;
         if (!(o instanceof BondDataDto)) return false;
@@ -190,7 +209,21 @@ public class BondDataDto {
         return result;
     }
 
+    @Override
     public String toString() {
-        return "BondDataDto(bondCode=" + this.getBondCode() + ", currentPrice=" + this.getCurrentPrice() + ", bookPrice=" + this.getBookPrice() + ", unit=" + this.getUnit() + ", couponRate=" + this.getCouponRate() + ", paymentType=" + this.getPaymentType() + ", isTermEndPayment=" + this.getIsTermEndPayment() + ", currentMaturity=" + this.getCurrentMaturity() + ", theoreticalPrice=" + this.getTheoreticalPrice() + ", algorithms=" + this.getAlgorithms() + ")";
+        return "BondDataDto{" +
+                "uuid=" + uuid +
+                ", bondCode='" + bondCode + '\'' +
+                ", currentPrice='" + currentPrice + '\'' +
+                ", bookPrice='" + bookPrice + '\'' +
+                ", unit='" + unit + '\'' +
+                ", couponRate='" + couponRate + '\'' +
+                ", paymentType='" + paymentType + '\'' +
+                ", isTermEndPayment=" + isTermEndPayment +
+                ", currentMaturity='" + currentMaturity + '\'' +
+                ", theoreticalPrice='" + theoreticalPrice + '\'' +
+                ", algorithms=" + algorithms +
+                ", errorDetails='" + errorDetails + '\'' +
+                '}';
     }
 }
