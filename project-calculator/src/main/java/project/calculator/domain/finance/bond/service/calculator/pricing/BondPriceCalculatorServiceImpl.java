@@ -1,6 +1,7 @@
 package project.calculator.domain.finance.bond.service.calculator.pricing;
 
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import project.calculator.data.BondPricingData;
 import project.calculator.data.response.CalculationResult;
@@ -20,9 +21,9 @@ public class BondPriceCalculatorServiceImpl implements BondPriceCalculatorServic
     /**
      *
      */
-    public CalculationResult calculateByDisCountFactor(BondPricingData data){
+    @Cacheable("bondPriceCache")
+    public CalculationResult calculateByDiscountFactor(BondPricingData data){
         CalculationResult result = this.pricingAlgoByDF.execute(data);
         return result;
     }
-
 }

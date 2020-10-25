@@ -32,6 +32,6 @@ class PricingControllerTest {
     public void getIndexPageWithStatus200() throws Exception{
         mockMvc.perform(get("/calc/price/"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("/calc/price/index"));
+                .andExpect(view().name("calc/price/index"));
     }
 }

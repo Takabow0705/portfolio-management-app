@@ -1,7 +1,9 @@
 #ignore auto-generated files
 .gradle
 build
-bin
+./bin
+scripts/logs/*
+!scripts/logs/.gitkeep
 
 #ignore intellij auto-generated files
 **/*.iml
@@ -11,3 +13,5 @@ bin
 .classpath
 .project
 .settings/*
+
+#

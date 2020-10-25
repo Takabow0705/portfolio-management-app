@@ -1,6 +1,5 @@
 package project.calculator.domain.repository.master.discountFactor;
 
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -16,11 +15,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Repository
-@AllArgsConstructor
 @Qualifier("prod")
 public class DiscountFactorDataRepositoryJdbcImpl implements DiscountFactorDataRepository {
 
     private final JdbcTemplate jdbcTemplate;
+
+    public DiscountFactorDataRepositoryJdbcImpl(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     @Override
     public List<BigDecimal> loadAnnualDiscountFactor() {

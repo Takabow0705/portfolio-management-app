@@ -4,7 +4,6 @@ import app.commons.dto.BondDataDto;
 import app.commons.enums.BondPricingAlgorithmsEnum;
 import app.component.service.pricer.bond.BondPriceCalculationService;
 import com.google.common.flogger.FluentLogger;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,12 +12,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@AllArgsConstructor
 @RequestMapping("/calc/price/bond")
 public class BondPriceCalculationController {
 
     private final BondPriceCalculationService bondPriceCalculationService;
     private static final FluentLogger logger = FluentLogger.forEnclosingClass();
+
+    public BondPriceCalculationController(BondPriceCalculationService bondPriceCalculationService) {
+        this.bondPriceCalculationService = bondPriceCalculationService;
+    }
 
 
     /**
@@ -33,7 +35,7 @@ public class BondPriceCalculationController {
     public String index(Model model){
         model.addAttribute("form", new BondDataDto());
         model.addAttribute("algorithms", BondPricingAlgorithmsEnum.values());
-        return "/calc/price/bond/index";
+        return "calc/price/bond/index";
     }
 
     /**
@@ -52,12 +54,12 @@ public class BondPriceCalculationController {
         if( result == null ){
             model.addAttribute("form", bondDataDto);
             model.addAttribute("algorithms", BondPricingAlgorithmsEnum.values());
-            return "/calc/price/bond/index";
+            return "calc/price/bond/index";
         }
 
         bondDataDto.setTheoreticalPrice(result.getTheoreticalPrice());
         model.addAttribute("form", bondDataDto);
         model.addAttribute("algorithms", BondPricingAlgorithmsEnum.values());
-        return "/calc/price/bond/index";
+        return "calc/price/bond/index";
     }
 }

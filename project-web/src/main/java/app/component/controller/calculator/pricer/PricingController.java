@@ -11,6 +11,6 @@ public class PricingController{
 
     @GetMapping
     public String index(Model model){
-        return "/calc/price/index";
+        return "calc/price/index";
     }
 }

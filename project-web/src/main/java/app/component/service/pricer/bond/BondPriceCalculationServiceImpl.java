@@ -3,19 +3,23 @@ package app.component.service.pricer.bond;
 import app.commons.dto.BondDataDto;
 import app.component.external.calculator.CalculatorGrpcFacade;
 import com.google.common.flogger.FluentLogger;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.grpc.finance.calculation.product.bond.BondTheoreticalPriceResponse;
 import io.grpc.util.Status;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-@AllArgsConstructor
 public class BondPriceCalculationServiceImpl implements BondPriceCalculationService {
 
     private final CalculatorGrpcFacade facade;
     private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
+    public BondPriceCalculationServiceImpl(CalculatorGrpcFacade facade) {
+        this.facade = facade;
+    }
+
     @Override
+    @CircuitBreaker(name = "default", fallbackMethod = "fallback")
     public BondDataDto calculateBondPriceByDiscountFactor(BondDataDto request){
         BondTheoreticalPriceResponse response = this.facade.getBondPricingGrpcClientService().calculateBondPriceByDiscountFactor(request);
 
@@ -30,9 +34,12 @@ public class BondPriceCalculationServiceImpl implements BondPriceCalculationServ
         }
 
         request.setTheoreticalPrice(response.getTheoreticalPrice());
-        BondDataDto result = request;
         logger.atInfo().log("RPC受信結果：%s", request);
         return request;
     }
 
+    public BondDataDto fallback(BondDataDto request, Exception e) {
+        logger.atWarning().log("リクエストは実行されませんでした。対象リクエストID: %s [理由：%s]", request.getUuid(), e.getMessage());
+        return request;
+    }
 }
