@@ -6,4 +6,4 @@ create table discount_factor_master(
     update_time datetime DEFAULT NOW(),
     update_user varchar(100) ,
     PRIMARY KEY (term(255), payment_type, version(255))
-)
+) ROW_FORMAT=DYNAMIC;

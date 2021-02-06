@@ -1,34 +1,22 @@
 # ----------------------------------------
-# LOCAL VERSION PROPERTIES
+# LOCAL ACTIVE MODE
 # ----------------------------------------
 spring:
-  profiles: local
-  datasource:
-    url: jdbc:mysql://127.0.0.1:3306/app_dev_db?verifyServerCertificate=false&useSSL=false
-    username: app-dev
-    password: app_dev
-    driverClassName: com.mysql.jdbc.Driver
-    initialization-mode: never
-  jpa: 
-    hibernate: 
-      ddl-auto: none
-  flywayMigrate:
-    url: jdbc:mysql://127.0.0.1:3306/app_dev_db?verifyServerCertificate=false&useSSL=false
-    username: app-dev
-    password: app_dev
-  session:
-    store-type: redis
-  redis:
-    host: localhost
-    port: 6379
-  devtools:
-     restart:
-       enabled: true
-       exclude: META-INF/maven/**,META-INF/resources/**,resources/**,static/**,public/**,templates/**,**/*Test.class,**/*Tests.class,git.properties,META-INF/build-info.properties
-       log-condition-evaluation-delta: true
-       poll-interval: 5s
-       quiet-period: 400ms
-     remote:
-       secret: spring-remote
+  profiles:
+    active: local
+  cache:
+    jcache:
+      config: classpath:ehcache.xml
+  lifecycle:
+    timeout-per-shutdown-phase: 20s
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
 grpc:
   enable-reflection: true

@@ -17,25 +17,11 @@ plugins {
 }
 
 /**
- * jacocoのカバレッジレポートを出力
- */
-jacocoTestReport {
-    reports {
-        xml.enabled = true
-        html.enabled = true
-    }
-}
-//buildタスクに組み込む
-build.dependsOn jacocoTestReport
-
-
-/**
  * flywayの接続対象
  */
 flyway {
-    def env = System.getenv("spring.profiles.active") ?: "local"
     def applicationYml = new org.yaml.snakeyaml.Yaml()
-            .load(new File(projectDir, "src/main/resources/" + "application-" + env  +".yml")
+            .load(new File(projectDir, "src/main/resources/" + "application.yml")
                     .newInputStream())
 
     url = "${applicationYml.spring.flywayMigrate.url}"

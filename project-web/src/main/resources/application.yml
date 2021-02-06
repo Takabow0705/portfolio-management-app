@@ -1,19 +1,41 @@
 # ----------------------------------------
-# DEFAULT ACTIVE MODE
+# DEFAULT VERSION PROPERTIES
 # ----------------------------------------
 spring:
-  profiles:
-    active: local
-  lifecycle:
-    timeout-per-shutdown-phase: 20s
-logging: 
-  level: 
-    org: 
-      hibernate: 
-        SQL: DEBUG
-        type: 
-          descriptor:
-            sql:
-              BasicBinder: TRACE
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST:127.0.0.1}:${MYSQL_PORT:53306}/production?verifyServerCertificate=false&useSSL=false
+    username: ${MYSQL_USERNAME:production}
+    password: ${MYSQL_PASSWORD:production}
+    driverClassName: com.mysql.jdbc.Driver
+    initialization-mode: never
+  jpa:
+    hibernate:
+      ddl-auto: none
+  flywayMigrate:
+    url: jdbc:mysql://127.0.0.1:53306/production?verifyServerCertificate=false&useSSL=false
+    username: production
+    password: production
+  session:
+    store-type: redis
+  redis:
+    host: ${REDIS_HOST:localhost}
+    port: ${REDIS_PORT:56379}
 server:
+  port : 8090
   shutdown: graceful
+  error:
+    whitelabel:
+      enabled: false
+resilience4j:
+  circuitbreaker:
+    backends:
+      default:
+        truering-buffer-size-in-closed-state: 5
+        ring-buffer-size-in-half-open-state: 3
+        wait-duration-in-open-state : 5000
+        failure-rate-threshold: 50
+grpc:
+  calculator:
+    hostname: ${CALC_HOST:localhost}
+    port: ${CALC_PORT:6565}
+

@@ -1,6 +1,6 @@
 package app.commons.config;
 
-import app.commons.properties.GrpcCalculatorLocalProperty;
+import app.commons.properties.GrpcCalculatorProperty;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Profile;
 public class GrpcLocalConfig {
 
     @Autowired
-    private GrpcCalculatorLocalProperty property;
+    private GrpcCalculatorProperty property;
 
     @Bean(name = "calculator")
     public ManagedChannel managedChannel(){

@@ -1,16 +1,6 @@
 version: '3.2'
 
 services:
-  nginx:
-    container_name: nginx
-    build: docker/nginx
-    restart: always
-    depends_on:
-      - appserver
-    ports:
-      - "80:8080"
-    networks:
-      - backend
   dbserver:
     container_name: dbserver
     build: docker/mysql
@@ -40,13 +30,21 @@ services:
       - "56379:6379"
     networks:
       - backend
+  redisinsight:
+    image: redislabs/redisinsight:latest
+    ports:
+      - 8001:8001
+    volumes:
+      - ./redisinsight:/db
+    networks:
+      - backend
   appserver:
     container_name: appserver
     image: web-app
     expose:
       - 8090
     ports:
-      - "8080:8080"
+      - "58888:8090"
     restart: always
     tty: true
     depends_on:
@@ -56,6 +54,14 @@ services:
       SPRING_PROFILES_ACTIVE: "prod"
       JAVA_OPTS: ${JAVA_OPTS}
       JAVA_TOOL_OPTIONS: ${JAVA_TOOL_OPTIONS}
+      MYSQL_HOST: dbserver
+      MYSQL_PORT: 3306
+      MYSQL_USERNAME: production
+      MYSQL_PASSWORD: production
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      CALC_HOST: calculator
+      CALC_PORT: 6565
     networks:
       - backend
   calculator:
@@ -70,6 +76,14 @@ services:
       SPRING_PROFILES_ACTIVE: "prod"
       JAVA_OPTS: ${JAVA_OPTS}
       JAVA_TOOL_OPTIONS: ${JAVA_TOOL_OPTIONS}
+      MYSQL_HOST: dbserver
+      MYSQL_PORT: 3306
+      MYSQL_USERNAME: production
+      MYSQL_PASSWORD: production
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      CALC_HOST: calculator
+      CALC_PORT: 6565
     networks:
       - backend
 networks:
