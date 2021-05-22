@@ -1,0 +1,18 @@
+# ----------------------------------------
+# DEFAULT ACTIVE MODE
+# ----------------------------------------
+spring:
+  profiles:
+    active: local
+  lifecycle:
+    timeout-per-shutdown-phase: 20s
+  devtools:
+    restart:
+      enabled: true
+      exclude: META-INF/maven/**,META-INF/resources/**,resources/**,static/**,public/**,templates/**,**/*Test.class,**/*Tests.class,git.properties,META-INF/build-info.properties
+      log-condition-evaluation-delta: true
+      poll-interval: 5s
+      quiet-period: 400ms
+    remote:
+      secret: spring-remote
+

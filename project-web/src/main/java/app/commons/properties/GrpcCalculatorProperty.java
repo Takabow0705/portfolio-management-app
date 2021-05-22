@@ -3,11 +3,16 @@ package app.commons.properties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+
+@ConfigurationProperties(prefix = "external.calculator")
 @Component
-@ConfigurationProperties(prefix = "grpc.calculator")
 public class GrpcCalculatorProperty {
     private String hostname;
-    private String port;
+    @Min(1)
+    @Max(65535)
+    private Integer port;
 
     public GrpcCalculatorProperty() {
     }
@@ -16,7 +21,7 @@ public class GrpcCalculatorProperty {
         return this.hostname;
     }
 
-    public String getPort() {
+    public Integer getPort() {
         return this.port;
     }
 
@@ -24,7 +29,7 @@ public class GrpcCalculatorProperty {
         this.hostname = hostname;
     }
 
-    public void setPort(String port) {
+    public void setPort(Integer port) {
         this.port = port;
     }
 
