@@ -31,16 +31,14 @@ services:
     networks:
       - backend
   redisinsight:
-    image: redislabs/redisinsight:latest
+    image: redislabs/redisinsight:1.8.0
     ports:
       - 8001:8001
-    volumes:
-      - ./redisinsight:/db
     networks:
       - backend
   appserver:
     container_name: appserver
-    image: web-app
+    image: web-app:0.0.1
     expose:
       - 8090
     ports:
@@ -51,39 +49,41 @@ services:
       - dbserver
       - redis
     environment:
-      SPRING_PROFILES_ACTIVE: "prod"
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE}
       JAVA_OPTS: ${JAVA_OPTS}
       JAVA_TOOL_OPTIONS: ${JAVA_TOOL_OPTIONS}
-      MYSQL_HOST: dbserver
-      MYSQL_PORT: 3306
-      MYSQL_USERNAME: production
-      MYSQL_PASSWORD: production
-      REDIS_HOST: redis
-      REDIS_PORT: 6379
-      CALC_HOST: calculator
-      CALC_PORT: 6565
+      MYSQL_HOST: ${MYSQL_HOST}
+      MYSQL_PORT: ${MYSQL_PORT}
+      MYSQL_USERNAME: ${MYSQL_USERNAME}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABSE: ${MYSQL_DATABSE}
+      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PORT: ${REDIS_PORT}
+      CALC_HOST: ${CALC_HOST}
+      CALC_PORT: ${CALC_PORT}
     networks:
       - backend
   calculator:
     container_name: calculator
-    image: calculator
+    image: calculator:0.0.1
     restart: always
     tty: true
     depends_on:
       - dbserver
       - redis
     environment:
-      SPRING_PROFILES_ACTIVE: "prod"
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE}
       JAVA_OPTS: ${JAVA_OPTS}
       JAVA_TOOL_OPTIONS: ${JAVA_TOOL_OPTIONS}
-      MYSQL_HOST: dbserver
-      MYSQL_PORT: 3306
-      MYSQL_USERNAME: production
-      MYSQL_PASSWORD: production
-      REDIS_HOST: redis
-      REDIS_PORT: 6379
-      CALC_HOST: calculator
-      CALC_PORT: 6565
+      MYSQL_HOST: ${MYSQL_HOST}
+      MYSQL_PORT: ${MYSQL_PORT}
+      MYSQL_USERNAME: ${MYSQL_USERNAME}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABSE: ${MYSQL_DATABSE}
+      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PORT: ${REDIS_PORT}
+      CALC_HOST: ${CALC_HOST}
+      CALC_PORT: ${CALC_PORT}
     networks:
       - backend
 networks:
