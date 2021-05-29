@@ -1,24 +1,27 @@
 package app.commons.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
-@Component
-@ConfigurationProperties(prefix = "grpc.calculator.prod")
-@PropertySource(value = "classpath:/grpc.properties")
-public class GrpcCalculatorProdProperty {
-    private String hostname;
-    private String port;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
-    public GrpcCalculatorProdProperty() {
+@ConfigurationProperties(prefix = "external.calculator")
+@Component
+public class GrpcCalculatorProperty {
+    private String hostname;
+    @Min(1)
+    @Max(65535)
+    private Integer port;
+
+    public GrpcCalculatorProperty() {
     }
 
     public String getHostname() {
         return this.hostname;
     }
 
-    public String getPort() {
+    public Integer getPort() {
         return this.port;
     }
 
@@ -26,14 +29,14 @@ public class GrpcCalculatorProdProperty {
         this.hostname = hostname;
     }
 
-    public void setPort(String port) {
+    public void setPort(Integer port) {
         this.port = port;
     }
 
     public boolean equals(final Object o) {
         if (o == this) return true;
-        if (!(o instanceof GrpcCalculatorProdProperty)) return false;
-        final GrpcCalculatorProdProperty other = (GrpcCalculatorProdProperty) o;
+        if (!(o instanceof GrpcCalculatorProperty)) return false;
+        final GrpcCalculatorProperty other = (GrpcCalculatorProperty) o;
         if (!other.canEqual((Object) this)) return false;
         final Object this$hostname = this.getHostname();
         final Object other$hostname = other.getHostname();
@@ -45,7 +48,7 @@ public class GrpcCalculatorProdProperty {
     }
 
     protected boolean canEqual(final Object other) {
-        return other instanceof GrpcCalculatorProdProperty;
+        return other instanceof GrpcCalculatorProperty;
     }
 
     public int hashCode() {
@@ -59,6 +62,6 @@ public class GrpcCalculatorProdProperty {
     }
 
     public String toString() {
-        return "GrpcCalculatorProdProperty(hostname=" + this.getHostname() + ", port=" + this.getPort() + ")";
+        return "GrpcCalculatorLocalProperty(hostname=" + this.getHostname() + ", port=" + this.getPort() + ")";
     }
 }

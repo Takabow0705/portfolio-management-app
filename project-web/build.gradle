@@ -17,25 +17,11 @@ plugins {
 }
 
 /**
- * jacocoのカバレッジレポートを出力
- */
-jacocoTestReport {
-    reports {
-        xml.enabled = true
-        html.enabled = true
-    }
-}
-//buildタスクに組み込む
-build.dependsOn jacocoTestReport
-
-
-/**
  * flywayの接続対象
  */
 flyway {
-    def env = System.getenv("spring.profiles.active") ?: "local"
     def applicationYml = new org.yaml.snakeyaml.Yaml()
-            .load(new File(projectDir, "src/main/resources/" + "application-" + env  +".yml")
+            .load(new File(projectDir, "src/main/resources/" + "application.yml")
                     .newInputStream())
 
     url = "${applicationYml.spring.flywayMigrate.url}"
@@ -62,6 +48,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-cache'
     implementation 'io.github.resilience4j:resilience4j-spring-boot2:1.6.1'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
     //mysql connector
     implementation group: 'mysql', name: 'mysql-connector-java', version: '5.1.47'
     //logger
@@ -72,8 +60,8 @@ dependencies {
     //grpc
     implementation group: 'io.github.lognet', name: 'grpc-spring-boot-starter', version: '3.5.1'
     implementation "io.grpc:grpc-alts:${grpcVersion}"
-    compileOnly group: 'javax.annotation', name :'javax.annotation-api', version:'1.3.2'
-
+    annotationProcessor group: 'javax.annotation', name :'javax.annotation-api', version:'1.3.2'
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
     //submodules
     implementation project(":project-grpc")
 

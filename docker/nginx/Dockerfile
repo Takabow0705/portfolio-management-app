@@ -1,3 +1,3 @@
-FROM nginx
+FROM nginx:1.15.0
 
-ADD nginx.conf /etc/nginx/conf.d/nginx.conf
+ADD default.conf /etc/nginx/conf.d/default.conf

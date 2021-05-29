@@ -14,6 +14,10 @@ buildscript {
     }
 }
 
+tasks.withType(AbstractCompile) {
+    options.encoding = 'UTF-8'
+}
+
 subprojects {
     apply plugin: "groovy"
     apply plugin: "java"
@@ -25,12 +29,11 @@ subprojects {
     dependencies {
         testImplementation group: 'junit', name: 'junit', version: '4.12'
     }
-    sourceCompatibility = 14
-    targetCompatibility = 14
+    sourceCompatibility = 11
+    targetCompatibility = 11
 }
 
 project(":project-web"){
-    apply plugin: 'jacoco'
     apply plugin: "io.spring.dependency-management"
     apply plugin: "org.springframework.boot"
 

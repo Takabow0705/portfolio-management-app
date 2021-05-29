@@ -1,25 +1,31 @@
 # ----------------------------------------
-# DEFAULT ACTIVE MODE
+# DEFAULT VERSION PROPERTIES
 # ----------------------------------------
 spring:
-  profiles:
-    active: local
-  cache:
-      jcache:
-        config: classpath:ehcache.xml
-  lifecycle:
-    timeout-per-shutdown-phase: 20s
-logging: 
-  level: 
-    org: 
-      hibernate: 
-        SQL: DEBUG
-        type: 
-          descriptor:
-            sql:
-              BasicBinder: TRACE
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST:127.0.0.1}:${MYSQL_PORT:53306}/${MYSQL_DATABSE:production}?verifyServerCertificate=false&useSSL=false
+    username: ${MYSQL_USERNAME:app-dev}
+    password: ${MYSQL_PASSWORD:app_dev}
+    driverClassName: com.mysql.jdbc.Driver
+    initialization-mode: never
+  jpa:
+    hibernate:
+      ddl-auto: none
+  session:
+    store-type: redis
+  redis:
+    host: ${REDIS_HOST:localhost}
+    port: ${REDIS_PORT:56379}
+  devtools:
+    restart:
+      enabled: true
+      exclude: META-INF/maven/**,META-INF/resources/**,resources/**,static/**,public/**,templates/**,**/*Test.class,**/*Tests.class,git.properties,META-INF/build-info.properties
+      log-condition-evaluation-delta: true
+      poll-interval: 5s
+      quiet-period: 400ms
+    remote:
+      secret: spring-remote
 server:
   port : 58080
   shutdown: graceful
-grpc:
-  enable-reflection: true
+

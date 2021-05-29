@@ -1,52 +1,93 @@
 version: '3.2'
 
 services:
-
-  nginx:
-    container_name: nginx
-    build: docker/nginx
-    restart: always
-    ports:
-      - "80:8080"
-    networks: 
-      - backend
-
   dbserver:
     container_name: dbserver
     build: docker/mysql
+    command: --default-authentication-plugin=mysql_native_password
     restart: always
     environment:
-      MYSQL_DATABASE: production
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_USER: production
-      MYSQL_PASSWORD: production
-    expose:
-      - 3306
-    networks: 
+      - MYSQL_DATABASE=production
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=production
+      - MYSQL_PASSWORD=production
+    ports:
+      - "53306:3306"
+    volumes:
+      - "db:/var/lib/mysql/data/"
+    networks:
       - backend
-
-  admin:    
+  admin:
     image: adminer    
     ports:
       - "58080:8080"
-    networks: 
+    networks:
       - backend
-
+  redis:
+    container_name: redis
+    image: redis
+    ports:
+      - "56379:6379"
+    networks:
+      - backend
+  redisinsight:
+    image: redislabs/redisinsight:1.8.0
+    ports:
+      - 8001:8001
+    networks:
+      - backend
   appserver:
     container_name: appserver
-    restart: always
-    build: docker/springboot-prod
+    image: web-app:0.0.1
     expose:
       - 8090
-    depends_on: 
-      - dbserver
+    ports:
+      - "58888:8090"
+    restart: always
     tty: true
+    depends_on:
+      - dbserver
+      - redis
     environment:
-      spring.profiles.active: "prod"
-    networks: 
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE}
+      JAVA_OPTS: ${JAVA_OPTS}
+      JAVA_TOOL_OPTIONS: ${JAVA_TOOL_OPTIONS}
+      MYSQL_HOST: ${MYSQL_HOST}
+      MYSQL_PORT: ${MYSQL_PORT}
+      MYSQL_USERNAME: ${MYSQL_USERNAME}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABSE: ${MYSQL_DATABSE}
+      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PORT: ${REDIS_PORT}
+      CALC_HOST: ${CALC_HOST}
+      CALC_PORT: ${CALC_PORT}
+    networks:
       - backend
-
+  calculator:
+    container_name: calculator
+    image: calculator:0.0.1
+    restart: always
+    tty: true
+    depends_on:
+      - dbserver
+      - redis
+    environment:
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE}
+      JAVA_OPTS: ${JAVA_OPTS}
+      JAVA_TOOL_OPTIONS: ${JAVA_TOOL_OPTIONS}
+      MYSQL_HOST: ${MYSQL_HOST}
+      MYSQL_PORT: ${MYSQL_PORT}
+      MYSQL_USERNAME: ${MYSQL_USERNAME}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABSE: ${MYSQL_DATABSE}
+      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PORT: ${REDIS_PORT}
+      CALC_HOST: ${CALC_HOST}
+      CALC_PORT: ${CALC_PORT}
+    networks:
+      - backend
 networks:
   backend:
-
-  
+volumes:
+  db:
+    external: false
