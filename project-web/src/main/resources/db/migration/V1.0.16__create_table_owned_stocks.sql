@@ -1,11 +1,18 @@
-CREATE TABLE stock_portfolios (
+CREATE TABLE owned_stocks (
     id BIGINT NOT NULL AUTO_INCREMENT,
-    user_mail_address NOT NULL varchar(100),
-	portofolio_name varchar,
-	details varchar,
-    is_deleted boolean NOT NULL,
-    update_timestamp timestamp without time zone NOT NULL,
-    update_user character varying COLLATE pg_catalog."default" NOT NULL,
-    CONSTRAINT stock_portfolios_pkey PRIMARY KEY (id)
-    FOREIGN KEY (user_mail_address) references user_master(MAIL_ADDRESS);
+    stock_code CHAR(50) NOT NULL,
+    stock_portfolios_id BIGINT NOT NULL,
+	stock_name VARCHAR(500) NOT NULL,
+	book_value DECIMAL(10, 10) NOT NULL,
+	amount DECIMAL(10,10) NOT NULL,
+	start_hold_date Date NOT NULL,
+	end_hold_date Date,
+    is_deleted boolean NOT NULL default False,
+    update_timestamp DATETIME NOT NULL,
+    update_user varchar(500) NOT NULL,
+    create_timestamp DATETIME NOT NULL,
+    create_user varchar(500) NOT NULL,
+    CONSTRAINT owned_stocks PRIMARY KEY (id),
+    FOREIGN KEY owned_stocks_fkey1 (stock_code) references stock_master(stock_code),
+    FOREIGN KEY owned_stocks_fkey2 (stock_portfolios_id) references stock_portfolios(id)
 )

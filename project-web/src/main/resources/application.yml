@@ -3,23 +3,23 @@
 # ----------------------------------------
 spring:
   datasource:
-    url: jdbc:mysql://${MYSQL_HOST:127.0.0.1}:${MYSQL_PORT:53306}/${MYSQL_DATABSE:production}?verifyServerCertificate=false&useSSL=false
-    username: ${MYSQL_USERNAME:production}
-    password: ${MYSQL_PASSWORD:production}
+    url: jdbc:mysql://${MYSQL_HOST:127.0.0.1}:${MYSQL_PORT:3306}/${MYSQL_DATABSE:app_dev_db}?verifyServerCertificate=false&useSSL=false
+    username: ${MYSQL_USERNAME:app-dev}
+    password: ${MYSQL_PASSWORD:app_dev}
     driverClassName: com.mysql.jdbc.Driver
     initialization-mode: never
   jpa:
     hibernate:
       ddl-auto: none
   flywayMigrate:
-    url: jdbc:mysql://127.0.0.1:53306/production?verifyServerCertificate=false&useSSL=false
+    url: jdbc:mysql://127.0.0.1:3306/production?verifyServerCertificate=false&useSSL=false&allowPublicKeyRetrieval=true&
     username: production
     password: production
   session:
     store-type: redis
   redis:
     host: ${REDIS_HOST:localhost}
-    port: ${REDIS_PORT:56379}
+    port: ${REDIS_PORT:6379}
 server:
   port : 8090
   shutdown: graceful
