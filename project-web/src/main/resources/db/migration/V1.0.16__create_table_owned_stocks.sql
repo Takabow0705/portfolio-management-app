@@ -12,7 +12,7 @@ CREATE TABLE owned_stock (
     update_user varchar(500) NOT NULL,
     create_timestamp DATETIME NOT NULL,
     create_user varchar(500) NOT NULL,
-    CONSTRAINT owned_stocks PRIMARY KEY (id),
+    CONSTRAINT owned_stock PRIMARY KEY (id),
     FOREIGN KEY owned_stocks_fkey1 (stock_code) references stock_master(stock_code),
-    FOREIGN KEY owned_stocks_fkey2 (stock_portfolios_id) references stock_portfolios(id)
+    FOREIGN KEY owned_stocks_fkey2 (stock_portfolios_id) references stock_portfolio(id)
 )
