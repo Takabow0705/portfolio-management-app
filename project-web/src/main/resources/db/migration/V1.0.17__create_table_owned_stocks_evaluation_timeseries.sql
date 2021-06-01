@@ -1,4 +1,4 @@
-CREATE TABLE owned_stocks_evaluation_timeseries (
+CREATE TABLE owned_stock_evaluation_timeseries (
     owned_stocks_id BIGINT NOT NULL AUTO_INCREMENT,
     evaluation_date Date Not null,
 	current_value DECIMAL(10, 10) NOT NULL,

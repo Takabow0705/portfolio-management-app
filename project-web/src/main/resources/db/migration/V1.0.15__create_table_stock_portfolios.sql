@@ -1,4 +1,4 @@
-CREATE TABLE stock_portfolios (
+CREATE TABLE stock_portfolio (
     id BIGINT NOT NULL AUTO_INCREMENT,
     user_id int(11) unsigned NOT NULL,
 	portofolio_name varchar(500),

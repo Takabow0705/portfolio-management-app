@@ -1,4 +1,4 @@
-CREATE TABLE owned_stocks (
+CREATE TABLE owned_stock (
     id BIGINT NOT NULL AUTO_INCREMENT,
     stock_code CHAR(50) NOT NULL,
     stock_portfolios_id BIGINT NOT NULL,

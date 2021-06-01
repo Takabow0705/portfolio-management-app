@@ -9,7 +9,7 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 @MappedSuperclass
-public class StockPortfoliosBase implements Serializable {
+public class StockPortfolioBase implements Serializable {
 
     @Id
     @Column(name = "ID")
@@ -121,7 +121,7 @@ public class StockPortfoliosBase implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        StockPortfoliosBase that = (StockPortfoliosBase) o;
+        StockPortfolioBase that = (StockPortfolioBase) o;
         return id == that.id;
     }
 
