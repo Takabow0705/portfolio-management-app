@@ -1,7 +1,7 @@
-CREATE TABLE owned_stock_evaluation_timeseries (
+CREATE TABLE stock_evaluation_timeseries (
     owned_stock_id BIGINT NOT NULL AUTO_INCREMENT,
     evaluation_date Date Not null,
-	current_value DECIMAL(10, 10) NOT NULL,
+	current_value DECIMAL(20, 10) NOT NULL,
     is_deleted boolean NOT NULL default False,
     update_timestamp DATETIME NOT NULL,
     update_user varchar(500) NOT NULL,

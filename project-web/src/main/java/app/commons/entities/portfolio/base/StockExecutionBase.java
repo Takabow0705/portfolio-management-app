@@ -1,8 +1,8 @@
 package app.commons.entities.portfolio.base;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import app.commons.enums.finance.BuySellType;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -11,33 +11,46 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @MappedSuperclass
-public class OwnedStockBase implements Serializable {
+public class StockExecutionBase implements Serializable {
     private static final long serialVersionUID = 1l;
 
     @Id
-    @Column(name = "ID")
+    @Column(name = "id")
     private long id;
 
-    @Column(name = "stock_code")
-    private String stockCode;
-
     @Column(name = "stock_portfolios_id")
+    @NotNull
     private long stockPortfolioId;
 
+    @Column(name = "stock_code")
+    @NotNull
+    private String stockCode;
+
     @Column(name = "stock_name")
+    @NotNull
     private String stockName;
 
     @Column(name = "book_value")
+    @NotNull
     private BigDecimal bookValue;
 
+    @Column(name = "currency_code")
+    @NotNull
+    private String currencyCode;
+
     @Column(name = "amount")
+    @NotNull
     private BigDecimal amount;
 
-    @Column(name = "start_hold_date")
-    private LocalDate startHoldDate;
+    @Column(name = "execution_date")
+    private LocalDate executionDate;
 
-    @Column(name = "end_hold_date")
-    private LocalDate endHoldDate;
+    @Column(name = "value_date")
+    private LocalDate valueDate;
+
+    @Column(name = "buy_sell_type")
+    @Enumerated(EnumType.ORDINAL)
+    private BuySellType buySellType;
 
     @Column(name = "is_deleted")
     @NotNull
@@ -67,20 +80,20 @@ public class OwnedStockBase implements Serializable {
         this.id = id;
     }
 
-    public String getStockCode() {
-        return stockCode;
-    }
-
-    public void setStockCode(String stockCode) {
-        this.stockCode = stockCode;
-    }
-
     public long getStockPortfolioId() {
         return stockPortfolioId;
     }
 
     public void setStockPortfolioId(long stockPortfolioId) {
         this.stockPortfolioId = stockPortfolioId;
+    }
+
+    public String getStockCode() {
+        return stockCode;
+    }
+
+    public void setStockCode(String stockCode) {
+        this.stockCode = stockCode;
     }
 
     public String getStockName() {
@@ -99,6 +112,14 @@ public class OwnedStockBase implements Serializable {
         this.bookValue = bookValue;
     }
 
+    public String getCurrencyCode() {
+        return currencyCode;
+    }
+
+    public void setCurrencyCode(String currencyCode) {
+        this.currencyCode = currencyCode;
+    }
+
     public BigDecimal getAmount() {
         return amount;
     }
@@ -107,20 +128,20 @@ public class OwnedStockBase implements Serializable {
         this.amount = amount;
     }
 
-    public LocalDate getStartHoldDate() {
-        return startHoldDate;
+    public LocalDate getExecutionDate() {
+        return executionDate;
     }
 
-    public void setStartHoldDate(LocalDate startHoldDate) {
-        this.startHoldDate = startHoldDate;
+    public void setExecutionDate(LocalDate executionDate) {
+        this.executionDate = executionDate;
     }
 
-    public LocalDate getEndHoldDate() {
-        return endHoldDate;
+    public LocalDate getValueDate() {
+        return valueDate;
     }
 
-    public void setEndHoldDate(LocalDate endHoldDate) {
-        this.endHoldDate = endHoldDate;
+    public void setValueDate(LocalDate valueDate) {
+        this.valueDate = valueDate;
     }
 
     public boolean isDeleted() {
@@ -167,7 +188,7 @@ public class OwnedStockBase implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        OwnedStockBase that = (OwnedStockBase) o;
+        StockExecutionBase that = (StockExecutionBase) o;
         return id == that.id;
     }
 
