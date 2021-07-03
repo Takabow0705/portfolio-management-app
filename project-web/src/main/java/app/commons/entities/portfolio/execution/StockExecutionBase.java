@@ -26,10 +26,6 @@ public class StockExecutionBase implements Serializable {
     @NotNull
     private String stockCode;
 
-    @Column(name = "stock_name")
-    @NotNull
-    private String stockName;
-
     @Column(name = "book_value")
     @NotNull
     private BigDecimal bookValue;
@@ -94,14 +90,6 @@ public class StockExecutionBase implements Serializable {
 
     public void setStockCode(String stockCode) {
         this.stockCode = stockCode;
-    }
-
-    public String getStockName() {
-        return stockName;
-    }
-
-    public void setStockName(String stockName) {
-        this.stockName = stockName;
     }
 
     public BigDecimal getBookValue() {
@@ -182,6 +170,14 @@ public class StockExecutionBase implements Serializable {
 
     public void setCreateUser(String createUser) {
         this.createUser = createUser;
+    }
+
+    public BuySellType getBuySellType() {
+        return buySellType;
+    }
+
+    public void setBuySellType(BuySellType buySellType) {
+        this.buySellType = buySellType;
     }
 
     @Override
