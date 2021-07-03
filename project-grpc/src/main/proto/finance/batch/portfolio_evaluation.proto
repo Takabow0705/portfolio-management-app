@@ -1,0 +1,27 @@
+syntax="proto3";
+
+option java_package = "io.grpc.finance.calculation.batch.portfolio";
+option java_multiple_files = true;
+
+package finance.batch;
+
+import "util/status.proto";
+
+service PortfolioEvaluationBatchService{
+    rpc executeForceEvaluation(finance.batch.PortfolioEvaluationRequest)
+        returns (finance.batch.PortfolioEvaluationResponse){};
+    rpc executeReviseEvaluation(finance.batch.PortfolioEvaluationRequest)
+        returns (finance.batch.PortfolioEvaluationResponse){};
+    rpc executeRegularEvaluation(finance.batch.PortfolioEvaluationRequest)
+        returns (finance.batch.PortfolioEvaluationResponse){};
+}
+
+message PortfolioEvaluationRequest{
+    int64 portfolio_id = 1;
+    string start_date = 2;
+    string end_date = 3;
+}
+
+message PortfolioEvaluationResponse{
+    util.status.StatusMsg status_msg = 1;
+}
