@@ -1,25 +1,28 @@
 package app.commons.enums.finance;
 
 public enum BuySellType {
-    BUY(1)
-    ,SELL(3)
-    ,OTHER(9);
+    BUY("BUY")
+    ,SELL("SELL")
+    ,OTHER("OTHER");
 
-    private BuySellType(int buySellType){
+    BuySellType(String buySellType){
         this.buySellType = buySellType;
     }
-    private final int buySellType;
+    private final String buySellType;
 
-    public static BuySellType convertFrom(int buySellType){
+    public static BuySellType convertFrom(String buySellType){
         switch (buySellType){
-            case 1 :
+            case "BUY" :
                 return BuySellType.BUY;
-            case 3 :
+            case "SELL" :
                 return BuySellType.SELL;
-            case 9:
+            case "OTHER":
                 return BuySellType.OTHER;
             default:
                 throw new IllegalArgumentException(String.format("Unexpected Argument. buySellType = %d", buySellType));
         }
+    }
+    public String getType() {
+        return buySellType;
     }
 }

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>User Information Management Console</title>
+    <title>Stock PortfolioManagement Console</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link href="jumbotron.css" rel="stylesheet">
     <script src="/js/jquery.js"></script>
@@ -50,38 +50,49 @@
 <div class="pt-0 pb-1 pl-2 pr-3">
     <span>pt-0 pb-1 pl-2 pr-3</span>
 </div>
-    <main role="main" class="container my-xl-3">
-        <h1 class="display-5">ユーザリスト</h1>
-        <table class="table">
-            <tr>
-                <th>ユーザID</th>
-                <th>バージョン</th>
-                <th>ユーザ名</th>
-                <th>ユーザ権限</th>
-                <th>削除フラグ</th>
-                <th>ロックフラグ</th>
-                <th></th>
-                <th></th>
-            </tr>
-            <tr th:each="userMaster:${users}">
-                <td th:text="${userMaster.getUserId()}" />
-                <td th:text="${userMaster.getVersion()}" />
-                <td th:text="${userMaster.getUserName()}" />
-                <td th:text="${userMaster.getUserAuthentication()}" />
-                <td th:text="${userMaster.isDeleted()}" />
-                <td th:text="${userMaster.isLocked()}" />
-                <td><a class="btn btn-default btn-xs" th:href="@{/management/users/{id}/update(id=${userMaster.getUserId()})}">編集</a></td>
-                <td>
-                    <form th:action="@{/management/users/{id}(id=${userMaster.getUserId()})}" th:method="delete">
-                        <input class="btn btn-default btn-xs" type="submit" value="削除" 　onClick="confirm()" />
-                    </form>
-                </td>
-            </tr>
-        </table>
-        <div class="input_area">
-            <a class="btn btn-default" href="/management/users/create">新規作成</a>
+<main role="main" class="container my-xl-3">
+    <h1 class="display-5">株式ポートフォリオリスト</h1>
+    <table class="table">
+        <tr>
+            <th>ポートフォリオ名称</th>
+            <th>詳細</th>
+            <th></th>
+            <th></th>
+
+        </tr>
+        <tr th:each="po:${portfolio}">
+            <td th:text="${po.getPortfolioName()}"/>
+            <td th:text="${po.getDetails()}"/>
+            <td><a class="btn btn-default btn-xs"
+                   th:href="@{/management/portfolio/stock/{id}/update(id=${po.getId()})}">編集</a></td>
+            <td>
+                <a class="btn btn-default btn-xs"
+                   th:href="@{/management/portfolio/stock/evaluation-history/{id}(id=${po.getId()})}">
+                    損益参照画面へ
+                </a>
+            </td>
+        </tr>
+    </table>
+    <div class="input_area">
+        <a class="btn btn-default" href="management/portfolio/stock/create">新規作成</a>
+    </div>
+</main>
+<hr>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <h2>株式約定管理</h2>
+            <p>株式取引の入力、訂正を行います</p>
+            <p><a class="btn btn-info" th:href="@{/management/portfolio/stock/execution}" role="button">管理画面へ</a></p>
         </div>
-    </main>
+        <div class="col-md-4">
+            <h2>キャッシュフロー管理(※未実装)</h2>
+            <p>入出金の入力、訂正を行います</p>
+            <p><a class="btn btn-info" th:href="@{/management/cashflow}" role="button">管理画面へ</a></p>
+        </div>
+    </div>
+
+</div>
 </body>
 
 </html>

@@ -1,4 +1,4 @@
-package app.commons.entities.portfolio.base;
+package app.commons.entities.portfolio.execution;
 
 import app.commons.enums.finance.BuySellType;
 
@@ -15,10 +15,12 @@ public class StockExecutionBase implements Serializable {
     private static final long serialVersionUID = 1l;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "stock_execution_id_generator")
+    @SequenceGenerator(name = "stock_execution_id_generator", sequenceName = "stock_execution_seq",allocationSize = 1)
     @Column(name = "id")
     private long id;
 
-    @Column(name = "stock_portfolios_id")
+    @Column(name = "stock_portfolio_id")
     @NotNull
     private long stockPortfolioId;
 
@@ -45,7 +47,7 @@ public class StockExecutionBase implements Serializable {
     private LocalDate valueDate;
 
     @Column(name = "buy_sell_type")
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private BuySellType buySellType;
 
     @Column(name = "is_deleted")
@@ -67,6 +69,23 @@ public class StockExecutionBase implements Serializable {
     @Column(name = "create_user")
     @NotNull
     private String createUser;
+
+    public StockExecutionBase(){}
+    public StockExecutionBase(long stockPortfolioId, String stockCode, BigDecimal bookValue, String currencyCode, BigDecimal amount, LocalDate executionDate, LocalDate valueDate, BuySellType buySellType, boolean isDeleted, Timestamp updateTimestamp, String updateUser, Timestamp createTimestamp, String createUser) {
+        this.stockPortfolioId = stockPortfolioId;
+        this.stockCode = stockCode;
+        this.bookValue = bookValue;
+        this.currencyCode = currencyCode;
+        this.amount = amount;
+        this.executionDate = executionDate;
+        this.valueDate = valueDate;
+        this.buySellType = buySellType;
+        this.isDeleted = isDeleted;
+        this.updateTimestamp = updateTimestamp;
+        this.updateUser = updateUser;
+        this.createTimestamp = createTimestamp;
+        this.createUser = createUser;
+    }
 
     public long getId() {
         return id;

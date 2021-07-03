@@ -1,4 +1,4 @@
-package app.component.domain.portfolio.file.csv;
+package app.component.domain.portfolio.dto;
 
 import java.io.Serializable;
 import java.time.LocalDate;

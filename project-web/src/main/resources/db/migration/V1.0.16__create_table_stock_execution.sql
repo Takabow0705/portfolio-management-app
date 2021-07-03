@@ -1,18 +1,20 @@
-CREATE TABLE owned_stock (
+CREATE TABLE stock_execution (
     id BIGINT NOT NULL AUTO_INCREMENT,
+    stock_portfolio_id BIGINT NOT NULL,
     stock_code CHAR(50) NOT NULL,
-    stock_portfolios_id BIGINT NOT NULL,
-	stock_name VARCHAR(500) NOT NULL,
 	book_value DECIMAL(20, 10) NOT NULL,
+	currency_code CHAR(5) NOT NULL,
 	amount DECIMAL(20,10) NOT NULL,
-	start_hold_date Date NOT NULL,
-	end_hold_date Date,
+	execution_date Date NOT NULL,
+	value_date Date NOT NULL,
+	buy_sell_type char(10) NOT NULL,
     is_deleted boolean NOT NULL default False,
     update_timestamp DATETIME NOT NULL,
     update_user varchar(500) NOT NULL,
     create_timestamp DATETIME NOT NULL,
     create_user varchar(500) NOT NULL,
-    CONSTRAINT owned_stock PRIMARY KEY (id),
-    FOREIGN KEY owned_stocks_fkey1 (stock_code) references stock_master(stock_code),
-    FOREIGN KEY owned_stocks_fkey2 (stock_portfolios_id) references stock_portfolio(id)
+    CONSTRAINT stock_execution PRIMARY KEY (id),
+    FOREIGN KEY stock_execution_fkey1 (stock_code) references stock_master(stock_code),
+    FOREIGN KEY stock_execution_fkey2 (currency_code) references currency_master(currency_code),
+    FOREIGN KEY stock_execution_fkey3 (stock_portfolio_id) references stock_portfolio(id)
 )

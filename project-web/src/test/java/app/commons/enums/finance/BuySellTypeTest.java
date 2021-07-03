@@ -18,17 +18,17 @@ class BuySellTypeTest {
 
     @Test
     public void whenBuySellTypeIsOneReturnsBUY(){
-        Assert.assertEquals(BuySellType.BUY, BuySellType.convertFrom(1));
+        Assert.assertEquals(BuySellType.BUY, BuySellType.convertFrom("BUY"));
     }
 
     @Test
     public void whenBuySellTypeIsThreeReturnsSELL(){
-        Assert.assertEquals(BuySellType.SELL, BuySellType.convertFrom(3));
+        Assert.assertEquals(BuySellType.SELL, BuySellType.convertFrom("SELL"));
     }
 
     @Test
     public void whenBuySellTypeIsNineReturnsOHTER(){
-        Assert.assertEquals(BuySellType.OTHER, BuySellType.convertFrom(9));
+        Assert.assertEquals(BuySellType.OTHER, BuySellType.convertFrom("OTHER"));
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -36,7 +36,7 @@ class BuySellTypeTest {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage("Unexpected Argument. buySellType = 99");
 
-        BuySellType buySellType = BuySellType.convertFrom(99);
+        BuySellType buySellType = BuySellType.convertFrom("UNEXPECTED");
     }
 
 }

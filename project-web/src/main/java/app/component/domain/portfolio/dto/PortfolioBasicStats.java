@@ -1,2 +1,4 @@
-package app.component.domain.portfolio.dto;public class PortfolioBasicStats {
+package app.component.domain.portfolio.dto;
+
+public class PortfolioBasicStats {
 }
