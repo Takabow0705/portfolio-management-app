@@ -4,6 +4,15 @@
 spring:
   profiles:
     active: local
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST:127.0.0.1}:${MYSQL_PORT:3306}/${MYSQL_DATABSE:production}?verifyServerCertificate=false&useSSL=false&allowPublicKeyRetrieval=true
+    username: ${MYSQL_USERNAME:production}
+    password: ${MYSQL_PASSWORD:production}
+    driverClassName: com.mysql.jdbc.Driver
+    initialization-mode: never
+  jpa:
+    hibernate:
+      ddl-auto: none
 logging: 
   level: 
     org: 
@@ -13,5 +22,6 @@ logging:
           descriptor:
             sql:
               BasicBinder: TRACE
-
+calculator:
+  work-stealing-parallelism: ${AVAILABLE_PROCESSOR_NUM:2}
 
