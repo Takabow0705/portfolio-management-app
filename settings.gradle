@@ -1,1 +1,1 @@
-include 'project-web','project-grpc','project-calculator'
+include 'project-web','project-grpc','project-calculator','project-infra'
