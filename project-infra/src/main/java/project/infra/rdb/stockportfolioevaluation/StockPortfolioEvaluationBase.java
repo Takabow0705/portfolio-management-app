@@ -177,7 +177,7 @@ public class StockPortfolioEvaluationBase implements Serializable{
         @Column(name = "stock_portfolio_id")
         private long stockPortfolioId;
         @Column(name = "stock_code")
-        private long stockCode;
+        private String stockCode;
         @Column(name = "base_date")
         private LocalDate baseDate;
 
@@ -189,11 +189,11 @@ public class StockPortfolioEvaluationBase implements Serializable{
             this.stockPortfolioId = stockPortfolioId;
         }
 
-        public long getStockCode() {
+        public String getStockCode() {
             return stockCode;
         }
 
-        public void setStockCode(long stockCode) {
+        public void setStockCode(String stockCode) {
             this.stockCode = stockCode;
         }
 

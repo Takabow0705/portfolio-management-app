@@ -62,6 +62,10 @@ public class StockPriceBase implements Serializable {
     @NotNull
     private String createUser;
 
+    public String getStockCode(){
+        return this.pk.getStockCode();
+    }
+
     public PK getPk() {
         return pk;
     }
@@ -182,15 +186,15 @@ public class StockPriceBase implements Serializable {
     public static class PK implements Serializable {
         private static final long serialVersionUID = 1l;
         @Column(name = "stock_code")
-        private long stockCode;
+        private String stockCode;
         @Column(name = "base_date")
         private LocalDate baseDate;
 
-        public long getStockCode() {
+        public String getStockCode() {
             return stockCode;
         }
 
-        public void setStockCode(long stockCode) {
+        public void setStockCode(String stockCode) {
             this.stockCode = stockCode;
         }
 
