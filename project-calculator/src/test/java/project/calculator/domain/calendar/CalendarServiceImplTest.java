@@ -9,12 +9,12 @@ import project.calculator.domain.repository.master.holidays.Holiday;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.Matchers.equalTo;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -39,7 +39,7 @@ class CalendarServiceImplTest {
             // given
             when(holidayService.getHolidayByCountryCode(CountryCode.JP)).thenReturn(Collections.emptySet());
             // when
-            List<LocalDate> result = calendarService.getBusinessDaysBefore(CountryCode.JP, LocalDate.of(2021, 4, 9), 2);
+            Set<LocalDate> result = calendarService.getBusinessDaysBefore(CountryCode.JP, LocalDate.of(2021, 4, 9), 2);
 
             assertThat(result.size(), equalTo(2));
             assertThat(result, containsInAnyOrder(LocalDate.of(2021, 4, 9),
@@ -54,7 +54,7 @@ class CalendarServiceImplTest {
             // given
             when(holidayService.getHolidayByCountryCode(CountryCode.JP)).thenReturn(Collections.emptySet());
             // when
-            List<LocalDate> result = calendarService.getBusinessDaysBefore(CountryCode.JP, LocalDate.of(2021, 4, 9), 9);
+            Set<LocalDate> result = calendarService.getBusinessDaysBefore(CountryCode.JP, LocalDate.of(2021, 4, 9), 9);
 
             assertThat(result.size(), equalTo(9));
             assertThat(result, containsInAnyOrder(LocalDate.of(2021, 4, 9),
@@ -77,7 +77,7 @@ class CalendarServiceImplTest {
             Set<Holiday> holiday = Arrays.asList(create20210405()).stream().collect(Collectors.toSet());
             when(holidayService.getHolidayByCountryCode(CountryCode.JP)).thenReturn(holiday);
             // when
-            List<LocalDate> result = calendarService.getBusinessDaysBefore(CountryCode.JP, LocalDate.of(2021, 4, 9), 9);
+            Set<LocalDate> result = calendarService.getBusinessDaysBefore(CountryCode.JP, LocalDate.of(2021, 4, 9), 9);
 
             assertThat(result.size(), equalTo(9));
             assertThat(result, containsInAnyOrder(LocalDate.of(2021, 4, 9),
@@ -100,7 +100,7 @@ class CalendarServiceImplTest {
             when(holidayService.getHolidayByCountryCode(CountryCode.JP)).thenReturn(Collections.emptySet());
 
             // when
-            List<LocalDate> result = calendarService.getBusinessDaysBefore(CountryCode.JP, LocalDate.of(2021, 4, 4), 2);
+            Set<LocalDate> result = calendarService.getBusinessDaysBefore(CountryCode.JP, LocalDate.of(2021, 4, 4), 2);
 
             assertThat(result.size(), equalTo(2));
             assertThat(result, containsInAnyOrder(LocalDate.of(2021, 4, 2),
@@ -117,7 +117,7 @@ class CalendarServiceImplTest {
             when(holidayService.getHolidayByCountryCode(CountryCode.JP)).thenReturn(holiday);
 
             // when
-            List<LocalDate> result = calendarService.getBusinessDaysBefore(CountryCode.JP, LocalDate.of(2021, 4, 5), 2);
+            Set<LocalDate> result = calendarService.getBusinessDaysBefore(CountryCode.JP, LocalDate.of(2021, 4, 5), 2);
 
             assertThat(result.size(), equalTo(2));
             assertThat(result, containsInAnyOrder(LocalDate.of(2021, 4, 2),
@@ -138,7 +138,7 @@ class CalendarServiceImplTest {
             LocalDate startDate = LocalDate.of(2021, 4, 5);
             LocalDate endDate = LocalDate.of(2021, 4, 9);
 
-            List<LocalDate> result = calendarService.getBusinessDaysBetween(CountryCode.JP, startDate, endDate);
+            Set<LocalDate> result = calendarService.getBusinessDaysBetween(CountryCode.JP, startDate, endDate);
             assertThat(result.size(), equalTo(5));
             assertThat(result, containsInAnyOrder(
                     LocalDate.of(2021, 4, 9),
@@ -159,7 +159,7 @@ class CalendarServiceImplTest {
             LocalDate startDate = LocalDate.of(2021, 4, 4);
             LocalDate endDate = LocalDate.of(2021, 4, 9);
 
-            List<LocalDate> result = calendarService.getBusinessDaysBetween(CountryCode.JP, startDate, endDate);
+            Set<LocalDate> result = calendarService.getBusinessDaysBetween(CountryCode.JP, startDate, endDate);
             assertThat(result.size(), equalTo(5));
             assertThat(result, containsInAnyOrder(
                     LocalDate.of(2021, 4, 9),
@@ -180,7 +180,7 @@ class CalendarServiceImplTest {
             LocalDate startDate = LocalDate.of(2021, 4, 4);
             LocalDate endDate = LocalDate.of(2021, 4, 9);
 
-            List<LocalDate> result = calendarService.getBusinessDaysBetween(CountryCode.JP, startDate, endDate);
+            Set<LocalDate> result = calendarService.getBusinessDaysBetween(CountryCode.JP, startDate, endDate);
             assertThat(result.size(), equalTo(4));
             assertThat(result, containsInAnyOrder(
                     LocalDate.of(2021, 4, 9),
@@ -199,7 +199,7 @@ class CalendarServiceImplTest {
             LocalDate startDate = LocalDate.of(2021, 4, 4);
             LocalDate endDate = LocalDate.of(2021, 4, 10);
 
-            List<LocalDate> result = calendarService.getBusinessDaysBetween(CountryCode.JP, startDate, endDate);
+            Set<LocalDate> result = calendarService.getBusinessDaysBetween(CountryCode.JP, startDate, endDate);
             assertThat(result.size(), equalTo(5));
             assertThat(result, containsInAnyOrder(
                     LocalDate.of(2021, 4, 9),

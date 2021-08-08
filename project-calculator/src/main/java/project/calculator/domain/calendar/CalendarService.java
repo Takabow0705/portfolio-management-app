@@ -1,10 +1,10 @@
 package project.calculator.domain.calendar;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.util.Set;
 
 public interface CalendarService {
-    public abstract List<LocalDate> getBusinessDaysBefore(CountryCode countryCode, LocalDate endDate, long days);
-    public abstract List<LocalDate> getBusinessDaysBetween(CountryCode countryCode, LocalDate startDate, LocalDate endDate) ;
-    public abstract List<LocalDate> getBusinessDaysAfter(CountryCode countryCode, LocalDate startDate, long days);
+    public abstract Set<LocalDate> getBusinessDaysBefore(CountryCode countryCode, LocalDate endDate, long days);
+    public abstract Set<LocalDate> getBusinessDaysBetween(CountryCode countryCode, LocalDate startDate, LocalDate endDate) ;
+    public abstract Set<LocalDate> getBusinessDaysAfter(CountryCode countryCode, LocalDate startDate, long days);
 }

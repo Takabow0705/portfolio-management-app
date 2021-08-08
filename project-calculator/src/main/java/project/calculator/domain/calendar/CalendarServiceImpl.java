@@ -6,7 +6,6 @@ import project.calculator.domain.repository.master.holidays.Holiday;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.Collections;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -34,18 +33,18 @@ public class CalendarServiceImpl implements CalendarService {
      * @return
      */
     @Override
-    public List<LocalDate> getBusinessDaysBefore(CountryCode countryCode, LocalDate endDate, long days) {
+    public Set<LocalDate> getBusinessDaysBefore(CountryCode countryCode, LocalDate endDate, long days) {
         if (days < 0) {
-            return Collections.emptyList();
+            return Collections.emptySet();
         }
         Set<LocalDate> holidays = this.holidayService.getHolidayByCountryCode(countryCode).stream().map(Holiday::getDate).collect(Collectors.toSet());
-        List<LocalDate> businessDays = Stream.iterate(0l, l -> l + 1)
+        Set<LocalDate> businessDays = Stream.iterate(0l, l -> l + 1)
                 .map(l -> endDate.minusDays(l))
                 .filter(date -> date.getDayOfWeek() != DayOfWeek.SUNDAY)
                 .filter(date -> date.getDayOfWeek() != DayOfWeek.SATURDAY)
                 .filter(date -> !holidays.contains(date))
                 .limit(days)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
         return businessDays;
     }
 
@@ -59,32 +58,32 @@ public class CalendarServiceImpl implements CalendarService {
      * @return
      */
     @Override
-    public List<LocalDate> getBusinessDaysBetween(CountryCode countryCode, LocalDate startDate, LocalDate endDate) {
+    public Set<LocalDate> getBusinessDaysBetween(CountryCode countryCode, LocalDate startDate, LocalDate endDate) {
         if (startDate.isAfter(endDate)) {
-            return Collections.emptyList();
+            return Collections.emptySet();
         }
         Set<LocalDate> holidays = this.holidayService.getHolidayByCountryCode(countryCode).stream().map(Holiday::getDate).collect(Collectors.toSet());
-        List<LocalDate> businessDays = Stream.concat(startDate.datesUntil(endDate), Stream.of(endDate))
+        Set<LocalDate> businessDays = Stream.concat(startDate.datesUntil(endDate), Stream.of(endDate))
                 .filter(date -> date.getDayOfWeek() != DayOfWeek.SUNDAY)
                 .filter(date -> date.getDayOfWeek() != DayOfWeek.SATURDAY)
                 .filter(date -> !holidays.contains(date))
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
         return businessDays;
     }
 
     @Override
-    public List<LocalDate> getBusinessDaysAfter(CountryCode countryCode, LocalDate startDate, long days) {
+    public Set<LocalDate> getBusinessDaysAfter(CountryCode countryCode, LocalDate startDate, long days) {
         if (days < 0) {
-            return Collections.emptyList();
+            return Collections.emptySet();
         }
         Set<LocalDate> holidays = this.holidayService.getHolidayByCountryCode(countryCode).stream().map(Holiday::getDate).collect(Collectors.toSet());
-        List<LocalDate> businessDays = Stream.iterate(0l, l -> l + 1)
+        Set<LocalDate> businessDays = Stream.iterate(0l, l -> l + 1)
                 .map(l -> startDate.plusDays(l))
                 .filter(date -> date.getDayOfWeek() != DayOfWeek.SUNDAY)
                 .filter(date -> date.getDayOfWeek() != DayOfWeek.SATURDAY)
                 .filter(date -> !holidays.contains(date))
                 .limit(days)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
         return businessDays;
     }
 }
