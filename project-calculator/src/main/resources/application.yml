@@ -28,4 +28,10 @@ spring:
 server:
   port : 58080
   shutdown: graceful
+calculator:
+  work-stealing-parallelism: ${AVAILABLE_PROCESSOR_NUM:2}
+  thread-pool-executor:
+    core-pool-size: ${CORE_POOL_SIZE:5}
+    max-pool-size: ${MAX_POOL_SIZE:10}
+    queue-capacity: ${QUEUE_CAPACITY:25}
 
