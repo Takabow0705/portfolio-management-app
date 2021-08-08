@@ -1,6 +1,6 @@
-CREATE TABLE stock_price_timeseries (
+CREATE TABLE stock_price (
     stock_code CHAR(50) NOT NULL,
-    evaluation_date Date Not null,
+    base_date Date Not null,
 	open_price DECIMAL(30, 10) NOT NULL,
     high_price DECIMAL(30, 10) NOT NULL,
     low_price DECIMAL(30, 10) NOT NULL,
@@ -12,6 +12,6 @@ CREATE TABLE stock_price_timeseries (
     update_user varchar(500) NOT NULL,
     create_timestamp DATETIME NOT NULL,
     create_user varchar(500) NOT NULL,
-    CONSTRAINT stock_price_timeseries_pkey PRIMARY KEY (stock_code, evaluation_date),
-    FOREIGN KEY stock_price_timeseries_fkey1 (stock_code) references stock_master(stock_code)
+    CONSTRAINT stock_price_pkey PRIMARY KEY (stock_code, base_date),
+    FOREIGN KEY stock_price_fkey1 (stock_code) references stock_master(stock_code)
 )
