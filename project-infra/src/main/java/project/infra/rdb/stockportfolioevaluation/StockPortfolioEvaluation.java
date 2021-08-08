@@ -1,6 +1,4 @@
-package app.commons.entities.portfolio;
-
-import app.commons.entities.portfolio.base.StockPortfolioEvaluationBase;
+package project.infra.rdb.stockportfolioevaluation;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;

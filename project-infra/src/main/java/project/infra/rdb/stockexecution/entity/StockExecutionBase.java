@@ -1,10 +1,10 @@
 package project.infra.rdb.stockexecution.entity;
 
 
-import com.sun.istack.NotNull;
 import project.infra.rdb.stockexecution.BuySellType;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;

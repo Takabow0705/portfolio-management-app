@@ -1,10 +1,10 @@
-package app.commons.entities.portfolio.base;
+package project.infra.rdb.stockportfolioevaluation;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.MappedSuperclass;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -16,11 +16,15 @@ public class StockPortfolioEvaluationBase implements Serializable{
     private static final long serialVersionUID = 1l;
 
     @EmbeddedId
-    private StockPortfolioEvaluationBase.PK pk;
+    private PK pk;
 
     @Column(name = "current_value")
     @NotNull
     private BigDecimal currentValue;
+
+    @Column(name = "book_value")
+    @NotNull
+    private BigDecimal bookValue;
 
     @Column(name = "amount")
     @NotNull
@@ -29,6 +33,14 @@ public class StockPortfolioEvaluationBase implements Serializable{
     @Column(name = "currency_code")
     @NotNull
     private String currencyCode;
+
+    @Column(name = "is_lock_out")
+    @NotNull
+    private boolean isLockOut;
+
+    @Column(name = "evaluation_data_base_date")
+    @NotNull
+    private LocalDate evaluationDateBaseDate;
 
     @Column(name = "is_deleted")
     @NotNull
@@ -122,6 +134,30 @@ public class StockPortfolioEvaluationBase implements Serializable{
         this.createUser = createUser;
     }
 
+    public BigDecimal getBookValue() {
+        return bookValue;
+    }
+
+    public void setBookValue(BigDecimal bookValue) {
+        this.bookValue = bookValue;
+    }
+
+    public boolean isLockOut() {
+        return isLockOut;
+    }
+
+    public void setLockOut(boolean lockOut) {
+        isLockOut = lockOut;
+    }
+
+    public LocalDate getEvaluationDateBaseDate() {
+        return evaluationDateBaseDate;
+    }
+
+    public void setEvaluationDateBaseDate(LocalDate evaluationDateBaseDate) {
+        this.evaluationDateBaseDate = evaluationDateBaseDate;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -138,11 +174,20 @@ public class StockPortfolioEvaluationBase implements Serializable{
     @Embeddable
     public  static class PK implements Serializable {
         private static final long serialVersionUID = 1l;
-
+        @Column(name = "stock_portfolio_id")
+        private long stockPortfolioId;
         @Column(name = "stock_code")
         private long stockCode;
-        @Column(name = "evaluation_date")
-        private LocalDate evaluationDate;
+        @Column(name = "base_date")
+        private LocalDate baseDate;
+
+        public long getStockPortfolioId() {
+            return stockPortfolioId;
+        }
+
+        public void setStockPortfolioId(long stockPortfolioId) {
+            this.stockPortfolioId = stockPortfolioId;
+        }
 
         public long getStockCode() {
             return stockCode;
@@ -152,12 +197,12 @@ public class StockPortfolioEvaluationBase implements Serializable{
             this.stockCode = stockCode;
         }
 
-        public LocalDate getEvaluationDate() {
-            return evaluationDate;
+        public LocalDate getBaseDate() {
+            return baseDate;
         }
 
-        public void setEvaluationDate(LocalDate evaluationDate) {
-            this.evaluationDate = evaluationDate;
+        public void setBaseDate(LocalDate baseDate) {
+            this.baseDate = baseDate;
         }
 
         @Override
@@ -165,12 +210,12 @@ public class StockPortfolioEvaluationBase implements Serializable{
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
             PK pk = (PK) o;
-            return stockCode == pk.stockCode && Objects.equals(evaluationDate, pk.evaluationDate);
+            return stockPortfolioId == pk.stockPortfolioId && stockCode == pk.stockCode && baseDate.equals(pk.baseDate);
         }
 
         @Override
         public int hashCode() {
-            return Objects.hash(stockCode, evaluationDate);
+            return Objects.hash(stockPortfolioId, stockCode, baseDate);
         }
     }
 }
