@@ -22,4 +22,16 @@
             <offheap unit="MB">1</offheap>
         </resources>
     </cache>
+
+    <cache alias="holidays">
+        <key-type>java.lang.String</key-type>
+        <value-type>project.calculator.domain.repository.master.holidays.Holiday</value-type>
+        <expiry>
+            <ttl unit="minutes">30</ttl>
+        </expiry>
+        <resources>
+            <heap>20</heap>
+            <offheap unit="MB">1</offheap>
+        </resources>
+    </cache>
 </config>
