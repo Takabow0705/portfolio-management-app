@@ -1,9 +1,6 @@
 package project.infra.rdb.stockportfolioevaluation;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.EmbeddedId;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -12,11 +9,21 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @MappedSuperclass
+@IdClass(StockPortfolioEvaluationBase.PK.class)
 public class StockPortfolioEvaluationBase implements Serializable{
     private static final long serialVersionUID = 1l;
 
-    @EmbeddedId
-    private PK pk;
+    @Id
+    @Column(name = "stock_portfolio_id")
+    private long stockPortfolioId;
+
+    @Column(name = "stock_code")
+    @Id
+    private String stockCode;
+
+    @Id
+    @Column(name = "base_date")
+    private LocalDate baseDate;
 
     @Column(name = "current_value")
     @NotNull
@@ -29,6 +36,10 @@ public class StockPortfolioEvaluationBase implements Serializable{
     @Column(name = "amount")
     @NotNull
     private BigDecimal amount;
+
+    @Column(name = "current_pl")
+    @NotNull
+    private BigDecimal currentPl;
 
     @Column(name = "currency_code")
     @NotNull
@@ -62,14 +73,6 @@ public class StockPortfolioEvaluationBase implements Serializable{
     @NotNull
     private String createUser;
 
-    public PK getPk() {
-        return pk;
-    }
-
-    public void setPk(PK pk) {
-        this.pk = pk;
-    }
-
     public BigDecimal getCurrentValue() {
         return currentValue;
     }
@@ -84,6 +87,14 @@ public class StockPortfolioEvaluationBase implements Serializable{
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
+    }
+
+    public BigDecimal getCurrentPl() {
+        return currentPl;
+    }
+
+    public void setCurrentPl(BigDecimal currentPl) {
+        this.currentPl = currentPl;
     }
 
     public String getCurrencyCode() {
@@ -158,21 +169,45 @@ public class StockPortfolioEvaluationBase implements Serializable{
         this.evaluationDateBaseDate = evaluationDateBaseDate;
     }
 
+    public long getStockPortfolioId() {
+        return stockPortfolioId;
+    }
+
+    public void setStockPortfolioId(long stockPortfolioId) {
+        this.stockPortfolioId = stockPortfolioId;
+    }
+
+    public String getStockCode() {
+        return stockCode;
+    }
+
+    public void setStockCode(String stockCode) {
+        this.stockCode = stockCode;
+    }
+
+    public LocalDate getBaseDate() {
+        return baseDate;
+    }
+
+    public void setBaseDate(LocalDate baseDate) {
+        this.baseDate = baseDate;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         StockPortfolioEvaluationBase that = (StockPortfolioEvaluationBase) o;
-        return Objects.equals(pk, that.pk);
+        return stockPortfolioId == that.stockPortfolioId && Objects.equals(stockCode, that.stockCode) && Objects.equals(baseDate, that.baseDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(pk);
+        return Objects.hash(stockPortfolioId, stockCode, baseDate);
     }
 
     @Embeddable
-    public  static class PK implements Serializable {
+    public static class PK implements Serializable {
         private static final long serialVersionUID = 1l;
         @Column(name = "stock_portfolio_id")
         private long stockPortfolioId;

@@ -1,9 +1,6 @@
 package project.infra.rdb.strockpricetimeseries;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.EmbeddedId;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -12,11 +9,17 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @MappedSuperclass
+@IdClass(StockPriceBase.PK.class)
 public class StockPriceBase implements Serializable {
     private static final long serialVersionUID = 1l;
 
-    @EmbeddedId
-    private PK pk;
+    @Id
+    @Column(name = "stock_code")
+    private String stockCode;
+
+    @Id
+    @Column(name = "base_date")
+    private LocalDate baseDate;
 
     @Column(name = "open_price")
     @NotNull
@@ -62,16 +65,20 @@ public class StockPriceBase implements Serializable {
     @NotNull
     private String createUser;
 
-    public String getStockCode(){
-        return this.pk.getStockCode();
+    public String getStockCode() {
+        return stockCode;
     }
 
-    public PK getPk() {
-        return pk;
+    public void setStockCode(String stockCode) {
+        this.stockCode = stockCode;
     }
 
-    public void setPk(PK pk) {
-        this.pk = pk;
+    public LocalDate getBaseDate() {
+        return baseDate;
+    }
+
+    public void setBaseDate(LocalDate baseDate) {
+        this.baseDate = baseDate;
     }
 
     public BigDecimal getOpenPrice() {
@@ -163,23 +170,28 @@ public class StockPriceBase implements Serializable {
     }
 
     @Override
+    public String toString() {
+        return "StockPriceBase{" +
+                "stockCode='" + stockCode + '\'' +
+                ", baseDate=" + baseDate +
+                ", openPrice=" + openPrice +
+                ", highPrice=" + highPrice +
+                ", lowPrice=" + lowPrice +
+                ", closePrice=" + closePrice +
+                '}';
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         StockPriceBase that = (StockPriceBase) o;
-        return Objects.equals(pk, that.pk);
+        return stockCode.equals(that.stockCode) && baseDate.equals(that.baseDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(pk);
-    }
-
-    @Override
-    public String toString() {
-        return "StockPriceBase{" +
-                "pk=" + pk +
-                '}';
+        return Objects.hash(stockCode, baseDate);
     }
 
     @Embeddable

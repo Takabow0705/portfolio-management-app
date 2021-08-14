@@ -45,6 +45,16 @@ public class StockExecution extends StockExecutionBase implements Serializable {
                 root.get(StockExecution_.stockPortfolioId.getName()).in(portfolioIds);
     }
 
+    /**
+     * 特定のユーザのデータを取得するSpecificationを返す
+     * @param portfolioId
+     * @return
+     */
+    public static Specification<StockExecution> equalsTo(Long portfolioId){
+        return portfolioId == null? null : (root, query, builder) ->
+                builder.equal(root.get(StockExecution_.stockPortfolioId.getName()), portfolioId);
+    }
+
     public void setCreateUser(String userName){
         super.setCreateUser(userName);
     }
