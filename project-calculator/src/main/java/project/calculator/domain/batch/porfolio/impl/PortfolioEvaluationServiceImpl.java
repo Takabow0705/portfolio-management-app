@@ -54,8 +54,8 @@ public class PortfolioEvaluationServiceImpl implements PortfolioEvaluationServic
         logger.info(String.format("Start Regular Evaluation"));
         long start = System.currentTimeMillis();
         long stockPortfolioId = request.getPortfolioId();
-        LocalDate startDate = LocalDate.parse(request.getStartDate(), DateTimeFormatter.BASIC_ISO_DATE);
-        LocalDate endDate = LocalDate.parse(request.getEndDate(), DateTimeFormatter.BASIC_ISO_DATE);
+        LocalDate startDate = LocalDate.parse(request.getStartDate(), DateTimeFormatter.ISO_LOCAL_DATE);
+        LocalDate endDate = LocalDate.parse(request.getEndDate(), DateTimeFormatter.ISO_LOCAL_DATE);
 
         //評価済みの期間データを取得&評価対象の日付を取得
         BusinessDays businessDays = BusinessDays.of(this.calendarService.getBusinessDaysBetween(CountryCode.JP,startDate,endDate));
@@ -95,6 +95,7 @@ public class PortfolioEvaluationServiceImpl implements PortfolioEvaluationServic
         List<StockPortfolioEvaluation> evaluationResult = futures.stream().map(CompletableFuture::join).flatMap(sl -> sl.stream()).collect(Collectors.toList());
         //bulkInsert(全て新規作成なので全て正常に更新されるはず
         this.stockPortfolioEvaluationRepository.saveAll(evaluationResult);
+        logger.info(String.format("Register [%s] Evaluation Results.", evaluationResult.size()));
         logger.info(String.format("Finish Evaluation. Processing Time : %d [ms]", System.currentTimeMillis() - start));
     }
 

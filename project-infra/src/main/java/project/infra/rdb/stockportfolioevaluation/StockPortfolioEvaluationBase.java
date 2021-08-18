@@ -250,4 +250,20 @@ public class StockPortfolioEvaluationBase implements Serializable{
             return Objects.hash(stockPortfolioId, stockCode, baseDate);
         }
     }
+
+    @Override
+    public String toString() {
+        return "StockPortfolioEvaluationBase{" +
+                "stockPortfolioId=" + stockPortfolioId +
+                ", stockCode='" + stockCode + '\'' +
+                ", baseDate=" + baseDate +
+                ", currentValue=" + currentValue +
+                ", bookValue=" + bookValue +
+                ", amount=" + amount +
+                ", currentPl=" + currentPl +
+                ", currencyCode='" + currencyCode + '\'' +
+                ", isLockOut=" + isLockOut +
+                ", evaluationDateBaseDate=" + evaluationDateBaseDate +
+                '}';
+    }
 }

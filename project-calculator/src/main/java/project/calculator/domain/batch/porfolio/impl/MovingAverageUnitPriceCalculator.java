@@ -1,5 +1,7 @@
 package project.calculator.domain.batch.porfolio.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import project.calculator.domain.batch.porfolio.DailyPosition;
 import project.calculator.domain.batch.porfolio.UnitPriceCalculator;
 import project.calculator.domain.calendar.BusinessDays;
@@ -27,6 +29,8 @@ public class MovingAverageUnitPriceCalculator implements UnitPriceCalculator<Lis
     private final List<StockPrice> stockPrice;
     private final BusinessDays businessDays;
 
+    private static final Logger logger = LoggerFactory.getLogger(MovingAverageUnitPriceCalculator.class);
+
     private MovingAverageUnitPriceCalculator(List<StockExecution> execution, List<StockPrice> stockPrice, BusinessDays businessDays) {
         this.execution = execution;
         this.stockPrice = stockPrice;
@@ -49,6 +53,7 @@ public class MovingAverageUnitPriceCalculator implements UnitPriceCalculator<Lis
         if(marketDateCodes.isEmpty() || marketDateCodes.size() != 1){
             throw new IllegalArgumentException(String.format("StockPrice must have only 1 stock code. Actual Num -> %d", marketDateCodes.size()));
         }
+        logger.info(String.format("Generate Calculator : StockCode: %s", stockCodes.toString()));
         return new MovingAverageUnitPriceCalculator(execution,stockPrice,businessDays);
     }
 
@@ -64,7 +69,7 @@ public class MovingAverageUnitPriceCalculator implements UnitPriceCalculator<Lis
                 .map(baseDate -> DailyPosition.aggregateDailyExecution(baseDate, execution))
                 .collect(Collectors.toList());
 
-        List<StockPortfolioEvaluation> result = new ArrayList<>();
+        List<StockPortfolioEvaluation> tmpResult = new ArrayList<>();
         for(LocalDate businessday : this.businessDays.getBusinessDays()){
             // businessdayのポジションを取得。
             DailyPosition tPosition = dailyPositions.stream().filter(p -> p.getBaseDate().equals(businessday)).findFirst().orElseThrow(IllegalArgumentException::new);
@@ -72,11 +77,12 @@ public class MovingAverageUnitPriceCalculator implements UnitPriceCalculator<Lis
             // T時点までの買ポジションの合計を算出する。
             BigDecimal totalAmount = prevAmount.add(tPosition.getLongAmount());
             // ポジションが存在するならT-1 時点までの平均取得単価からT時点までの平均取得単価を計算する。
-            if(!totalAmount.equals(BigDecimal.ZERO)){
-                prevBookValue = prevTotalValue.add(tPosition.calculateLongValue()).divide(prevBookValue.add(tPosition.getLongAmount()), 10 , RoundingMode.DOWN);
+            if(!(totalAmount.signum() == 0)){
+                prevBookValue = (prevTotalValue.add(tPosition.calculateLongValue())).divide(totalAmount, 10 , RoundingMode.DOWN);
             }
             // T-1 までの残高に T のポジション残高を加算する。
             prevAmount = prevAmount.add(tPosition.calculateTotalAmount());
+            prevTotalValue = prevBookValue.multiply(prevAmount);
 
             // マーケットデータを取得する。
             StockPrice stockPrice = this.retrieveStockPrice(businessday);
@@ -95,7 +101,6 @@ public class MovingAverageUnitPriceCalculator implements UnitPriceCalculator<Lis
 
             // 必要なエンティティを構築する。
             StockPortfolioEvaluation evaluation = new StockPortfolioEvaluation();
-
             evaluation.setStockPortfolioId(tPosition.getStockPortfolioId());
             evaluation.setStockCode(tPosition.getStockCode());
             evaluation.setBaseDate(businessday);
@@ -104,12 +109,17 @@ public class MovingAverageUnitPriceCalculator implements UnitPriceCalculator<Lis
             evaluation.setAmount(prevAmount);
             evaluation.setCurrentPl(currentPl);
             evaluation.setLockOut(isLockOut);
+            evaluation.setCurrencyCode(tPosition.getCurrencyCode());
             evaluation.setEvaluationDateBaseDate(evaluationDateBaseDate);
             evaluation.setCreateUser("Calculator_" + Thread.currentThread().getName());
             evaluation.setCreateTimestamp(Timestamp.valueOf(LocalDateTime.now()));
             evaluation.setUpdateUser("Calculator_" + Thread.currentThread().getName());
             evaluation.setUpdateTimestamp(Timestamp.valueOf(LocalDateTime.now()));
+            tmpResult.add(evaluation);
+            logger.debug(String.format("Finished Evaluation : %s", evaluation));
+            logger.debug(String.format("MarketDataBaseDate : %s", evaluation.getEvaluationDateBaseDate()));
         }
+        List<StockPortfolioEvaluation> result = tmpResult.stream().filter(s -> s.getAmount().signum() != 0).collect(Collectors.toList());
         return result;
     }
 
