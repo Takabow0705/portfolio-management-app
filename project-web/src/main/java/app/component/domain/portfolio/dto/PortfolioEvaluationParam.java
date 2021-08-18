@@ -1,13 +1,16 @@
 package app.component.domain.portfolio.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.LocalDate;
 import java.util.Objects;
 
 public class PortfolioEvaluationParam {
     private long portfolioId;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd")
     private LocalDate startDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd")
     private LocalDate endDate;
-    private LocalDate targetDate;
 
     public long getPortfolioId() {
         return portfolioId;
@@ -33,24 +36,25 @@ public class PortfolioEvaluationParam {
         this.endDate = endDate;
     }
 
-    public LocalDate getTargetDate() {
-        return targetDate;
-    }
-
-    public void setTargetDate(LocalDate targetDate) {
-        this.targetDate = targetDate;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PortfolioEvaluationParam that = (PortfolioEvaluationParam) o;
-        return portfolioId == that.portfolioId && Objects.equals(startDate, that.startDate) && Objects.equals(endDate, that.endDate) && Objects.equals(targetDate, that.targetDate);
+        return portfolioId == that.portfolioId && startDate.equals(that.startDate) && endDate.equals(that.endDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(portfolioId, startDate, endDate, targetDate);
+        return Objects.hash(portfolioId, startDate, endDate);
+    }
+
+    @Override
+    public String toString() {
+        return "PortfolioEvaluationParam{" +
+                "portfolioId=" + portfolioId +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                '}';
     }
 }

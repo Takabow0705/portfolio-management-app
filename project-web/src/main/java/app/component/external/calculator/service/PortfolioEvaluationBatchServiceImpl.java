@@ -16,9 +16,7 @@ public class PortfolioEvaluationBatchServiceImpl implements PortfolioEvaluationB
 
     @Override
     public PortfolioEvaluationResponse executeForceEvaluation(PortfolioEvaluationRequest req) {
-        PortfolioEvaluationBatchServiceGrpc.PortfolioEvaluationBatchServiceBlockingStub stub = PortfolioEvaluationBatchServiceGrpc.newBlockingStub(managedChannel);
-        PortfolioEvaluationResponse response = stub.executeForceEvaluation(req);
-        return response;
+        return null;
     }
 
     @Override
@@ -28,6 +26,8 @@ public class PortfolioEvaluationBatchServiceImpl implements PortfolioEvaluationB
 
     @Override
     public PortfolioEvaluationResponse executeRegularEvaluation(PortfolioEvaluationRequest req) {
-        return null;
+        PortfolioEvaluationBatchServiceGrpc.PortfolioEvaluationBatchServiceBlockingStub stub = PortfolioEvaluationBatchServiceGrpc.newBlockingStub(managedChannel);
+        PortfolioEvaluationResponse response = stub.executeRegularEvaluation(req);
+        return response;
     }
 }

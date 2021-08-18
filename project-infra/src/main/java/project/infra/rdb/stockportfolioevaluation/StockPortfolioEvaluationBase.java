@@ -26,7 +26,6 @@ public class StockPortfolioEvaluationBase implements Serializable{
     private LocalDate baseDate;
 
     @Column(name = "current_value")
-    @NotNull
     private BigDecimal currentValue;
 
     @Column(name = "book_value")
@@ -38,7 +37,6 @@ public class StockPortfolioEvaluationBase implements Serializable{
     private BigDecimal amount;
 
     @Column(name = "current_pl")
-    @NotNull
     private BigDecimal currentPl;
 
     @Column(name = "currency_code")
@@ -50,7 +48,6 @@ public class StockPortfolioEvaluationBase implements Serializable{
     private boolean isLockOut;
 
     @Column(name = "evaluation_data_base_date")
-    @NotNull
     private LocalDate evaluationDateBaseDate;
 
     @Column(name = "is_deleted")
