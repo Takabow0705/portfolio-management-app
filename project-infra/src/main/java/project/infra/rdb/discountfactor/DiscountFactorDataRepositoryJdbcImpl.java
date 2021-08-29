@@ -1,10 +1,9 @@
-package project.calculator.domain.repository.master.discountFactor;
+package project.infra.rdb.discountfactor;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-import project.calculator.data.enums.PaymentType;
 
 import java.math.BigDecimal;
 import java.sql.ResultSet;

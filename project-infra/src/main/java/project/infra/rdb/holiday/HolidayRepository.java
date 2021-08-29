@@ -1,4 +1,4 @@
-package project.calculator.domain.repository.master.holidays;
+package project.infra.rdb.holiday;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

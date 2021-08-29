@@ -1,12 +1,10 @@
-package project.calculator.data.enums;
-
-import project.calculator.data.converter.BigDecimalConverter;
+package project.infra.rdb.discountfactor;
 
 import java.math.BigDecimal;
 
 public enum PaymentType {
-    Annual(BigDecimalConverter.convertFrom("1"), "ANNUAL"),
-    SemiAnnual(BigDecimalConverter.convertFrom("0.5"), "SEMI_ANNUAL");
+    Annual(BigDecimal.valueOf(Integer.parseInt("1")), "ANNUAL"),
+    SemiAnnual(BigDecimal.valueOf(Integer.parseInt("0.5")), "SEMI_ANNUAL");
 
     private final BigDecimal step;
     private final String dbValue;
