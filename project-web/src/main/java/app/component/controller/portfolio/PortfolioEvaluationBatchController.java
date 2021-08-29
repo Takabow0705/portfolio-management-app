@@ -27,7 +27,7 @@ public class PortfolioEvaluationBatchController {
     @PostMapping("execute-regular")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public ResponseEntity<String> executeRegularEvaluation(@RequestBody PortfolioEvaluationParam param){
-        logger.atInfo().log("Receive Calculation Request param = %s", param.toString());
+        logger.atInfo().log("Receive Calculation Request param = %s, Type: Regular", param.toString());
         PortfolioEvaluationRequest req = PortfolioEvaluationRequest
                 .newBuilder()
                 .setPortfolioId(param.getPortfolioId())
@@ -38,18 +38,44 @@ public class PortfolioEvaluationBatchController {
         PortfolioEvaluationResponse res = this.portfolioEvaluationBatchService.executeRegularEvaluation(req);
 
         HttpHeaders headers = new HttpHeaders();
-        ResponseEntity<String> response = new ResponseEntity<String>(res.getStatusMsg().getStatus().toString(), headers, HttpStatus.OK);
+        ResponseEntity<String> response = new ResponseEntity<String>(res.toString(), headers, HttpStatus.OK);
         return response;
     }
 
     @PostMapping(path = "execute-force")
-    public String executeForceEvaluation(@ModelAttribute("param") PortfolioEvaluationParam param){
-        return "";
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public ResponseEntity<String> executeForceEvaluation(@RequestBody PortfolioEvaluationParam param){
+        logger.atInfo().log("Receive Calculation Request param = %s, Type: Force", param.toString());
+        PortfolioEvaluationRequest req = PortfolioEvaluationRequest
+                .newBuilder()
+                .setPortfolioId(param.getPortfolioId())
+                .setStartDate(param.getStartDate().format(DateTimeFormatter.ISO_LOCAL_DATE))
+                .setEndDate(param.getEndDate().format(DateTimeFormatter.ISO_LOCAL_DATE))
+                .build();
+
+        PortfolioEvaluationResponse res = this.portfolioEvaluationBatchService.executeForceEvaluation(req);
+
+        HttpHeaders headers = new HttpHeaders();
+        ResponseEntity<String> response = new ResponseEntity<String>(res.toString(), headers, HttpStatus.OK);
+        return response;
     }
 
     @PostMapping(path = "execute-revise")
-    public String executeReviseEvaluation(@ModelAttribute("param") PortfolioEvaluationParam param){
-        return "";
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public ResponseEntity<String>  executeReviseEvaluation(@RequestBody PortfolioEvaluationParam param){
+        logger.atInfo().log("Receive Calculation Request param = %s, Type: Revise", param.toString());
+        PortfolioEvaluationRequest req = PortfolioEvaluationRequest
+                .newBuilder()
+                .setPortfolioId(param.getPortfolioId())
+                .setStartDate(param.getStartDate().format(DateTimeFormatter.ISO_LOCAL_DATE))
+                .setEndDate(param.getEndDate().format(DateTimeFormatter.ISO_LOCAL_DATE))
+                .build();
+
+        PortfolioEvaluationResponse res = this.portfolioEvaluationBatchService.executeReviseEvaluation(req);
+
+        HttpHeaders headers = new HttpHeaders();
+        ResponseEntity<String> response = new ResponseEntity<String>(res.toString(), headers, HttpStatus.OK);
+        return response;
     }
 
 }
