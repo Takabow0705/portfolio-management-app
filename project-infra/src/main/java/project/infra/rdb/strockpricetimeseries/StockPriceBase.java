@@ -47,7 +47,7 @@ public class StockPriceBase implements Serializable {
 
     @Column(name = "is_deleted")
     @NotNull
-    private boolean isDeleted;
+    private boolean deleted;
 
     @Column(name = "update_timestamp")
     @NotNull
@@ -130,11 +130,11 @@ public class StockPriceBase implements Serializable {
     }
 
     public boolean isDeleted() {
-        return isDeleted;
+        return deleted;
     }
 
     public void setDeleted(boolean deleted) {
-        isDeleted = deleted;
+        deleted = deleted;
     }
 
     public Timestamp getUpdateTimestamp() {

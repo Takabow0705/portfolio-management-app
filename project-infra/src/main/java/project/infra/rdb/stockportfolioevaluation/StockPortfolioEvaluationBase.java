@@ -45,14 +45,14 @@ public class StockPortfolioEvaluationBase implements Serializable{
 
     @Column(name = "is_lock_out")
     @NotNull
-    private boolean isLockOut;
+    private boolean lockOut;
 
     @Column(name = "evaluation_data_base_date")
     private LocalDate evaluationDateBaseDate;
 
     @Column(name = "is_deleted")
     @NotNull
-    private boolean isDeleted;
+    private boolean deleted;
 
     @Column(name = "update_timestamp")
     @NotNull
@@ -103,11 +103,11 @@ public class StockPortfolioEvaluationBase implements Serializable{
     }
 
     public boolean isDeleted() {
-        return isDeleted;
+        return deleted;
     }
 
     public void setDeleted(boolean deleted) {
-        isDeleted = deleted;
+        this.deleted = deleted;
     }
 
     public Timestamp getUpdateTimestamp() {
@@ -151,11 +151,11 @@ public class StockPortfolioEvaluationBase implements Serializable{
     }
 
     public boolean isLockOut() {
-        return isLockOut;
+        return lockOut;
     }
 
     public void setLockOut(boolean lockOut) {
-        isLockOut = lockOut;
+        this.lockOut = lockOut;
     }
 
     public LocalDate getEvaluationDateBaseDate() {
@@ -262,7 +262,7 @@ public class StockPortfolioEvaluationBase implements Serializable{
                 ", amount=" + amount +
                 ", currentPl=" + currentPl +
                 ", currencyCode='" + currencyCode + '\'' +
-                ", isLockOut=" + isLockOut +
+                ", isLockOut=" + lockOut +
                 ", evaluationDateBaseDate=" + evaluationDateBaseDate +
                 '}';
     }

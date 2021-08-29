@@ -12,6 +12,8 @@ import java.util.Set;
 @Repository
 public interface StockPriceRepository extends JpaRepository<StockPrice, Long> {
 
-    @Query("select s from StockPrice s where :from <= s.baseDate and :to >= s.baseDate and s.stockCode in :stockCode and s.isDeleted = false")
+    @Query("select s from StockPrice s where :from <= s.baseDate and :to >= s.baseDate and s.stockCode in :stockCode and s.deleted = false")
     public List<StockPrice> retrieveByStockCode(@Param("stockCode") Set<String> stockCode, @Param("from") LocalDate startDate, @Param("to") LocalDate endDate);
+
+    public List<StockPrice> findAllByBaseDateInAndDeletedFalse(Set<LocalDate> dates);
 }
