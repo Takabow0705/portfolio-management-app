@@ -46,6 +46,9 @@ public class MovingAverageUnitPriceCalculator implements UnitPriceCalculator<Lis
      */
     public static UnitPriceCalculator<List<StockPortfolioEvaluation>> generate(List<StockExecution> execution, List<StockPrice> stockPrice, BusinessDays businessDays){
         Set<String> stockCodes = execution.stream().map(StockExecution::getStockCode).collect(Collectors.toSet());
+        if (stockPrice == null){
+            throw new IllegalStateException(String.format("StockPrice is null. Expected -> %s", stockCodes));
+        }
         Set<String> marketDateCodes = stockPrice.stream().map(StockPriceBase::getStockCode).collect(Collectors.toSet());
         if(stockCodes.isEmpty() || stockCodes.size() != 1){
             throw new IllegalArgumentException(String.format("Calculation target must have only 1 stock code. Actual Num -> %d", stockPrice.size()));
@@ -89,13 +92,11 @@ public class MovingAverageUnitPriceCalculator implements UnitPriceCalculator<Lis
 
             BigDecimal currentValue = null;
             BigDecimal currentPl = null;
-            boolean isLockOut = true;
             LocalDate evaluationDateBaseDate = null;
 
             if (stockPrice != null){
                 currentValue = stockPrice.getClosePrice();
                 currentPl = currentValue.subtract(prevBookValue);
-                isLockOut = stockPrice.getBaseDate().equals(businessday);
                 evaluationDateBaseDate = stockPrice.getBaseDate();
             }
 
@@ -108,7 +109,7 @@ public class MovingAverageUnitPriceCalculator implements UnitPriceCalculator<Lis
             evaluation.setBookValue(prevBookValue);
             evaluation.setAmount(prevAmount);
             evaluation.setCurrentPl(currentPl);
-            evaluation.setLockOut(isLockOut);
+            evaluation.setLockOut(stockPrice == null || !stockPrice.getBaseDate().equals(businessday));
             evaluation.setCurrencyCode(tPosition.getCurrencyCode());
             evaluation.setEvaluationDateBaseDate(evaluationDateBaseDate);
             evaluation.setCreateUser("Calculator_" + Thread.currentThread().getName());
@@ -131,8 +132,13 @@ public class MovingAverageUnitPriceCalculator implements UnitPriceCalculator<Lis
      * @return
      */
     private StockPrice retrieveStockPrice(LocalDate baseDate){
+        LocalDate currentDate = this.stockPrice.stream()
+                .filter(s -> s.getBaseDate().isBefore(baseDate.plusDays(1)))
+                .map(StockPriceBase::getBaseDate)
+                .max(LocalDate::compareTo)
+                .orElse(null);
         StockPrice stockPrice = this.stockPrice.stream()
-                .filter(s -> baseDate.equals(s.getBaseDate()) || s.getBaseDate().isBefore(baseDate))
+                .filter(s -> s.getBaseDate().equals(currentDate))
                 .findFirst().orElse(null);
         return stockPrice;
     }

@@ -28,7 +28,13 @@ public class PortfolioEvaluationGrpcService extends PortfolioEvaluationBatchServ
     @Override
     public void executeForceEvaluation(PortfolioEvaluationRequest request,
                                        StreamObserver<PortfolioEvaluationResponse> responseObserver) {
-
+        this.portfolioEvaluationService.executeForceEvaluation(request);
+        logger.info(String.format("Registered Force Evaluation Job. Param: %s", request.toString()));
+        PortfolioEvaluationResponse response = PortfolioEvaluationResponse.newBuilder()
+                .setStatusMsg(StatusMsg.newBuilder().setStatus(Status.OK).setDetail("").build())
+                .build();
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
     }
 
     /**
@@ -36,9 +42,16 @@ public class PortfolioEvaluationGrpcService extends PortfolioEvaluationBatchServ
     @Override
     public void executeReviseEvaluation(PortfolioEvaluationRequest request,
                                         StreamObserver<PortfolioEvaluationResponse> responseObserver) {
+        this.portfolioEvaluationService.executeReviseEvaluation(request);
+        logger.info(String.format("Registered Revise Evaluation Job. Param: %s", request.toString()));
+        StatusMsg statusMsg = StatusMsg.newBuilder().setStatus(Status.OK).build();
+        PortfolioEvaluationResponse response = PortfolioEvaluationResponse.newBuilder().setStatusMsg(statusMsg).build();
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
     }
 
     /**
+     * 標準評価計算の実行メソッド
      */
     @Override
     public void executeRegularEvaluation(PortfolioEvaluationRequest request,
