@@ -12,7 +12,8 @@ message StatusMsg {
 }
 
 enum Status {
-    OK = 0;
-    ERROR = 1;
-    NOT_COMPLETED = 2;
+    DEFAULT = 0;
+    OK = 1;
+    ERROR = 2;
+    NOT_COMPLETED = 3;
 }

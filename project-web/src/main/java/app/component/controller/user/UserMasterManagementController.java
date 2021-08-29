@@ -1,20 +1,17 @@
 package app.component.controller.user;
 
-import java.util.List;
-
 import app.commons.dto.UserMasterDto;
+import app.commons.entities.user.UserMaster;
 import app.commons.enums.UserAuthentication;
 import app.component.service.userMaster.UserMasterManagementService;
+import com.google.common.flogger.FluentLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
-import com.google.common.flogger.FluentLogger;
-
-import app.commons.entities.user.UserMaster;
-
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/management/users")
@@ -89,14 +86,14 @@ public class UserMasterManagementController {
 	 * @param userMaster
 	 * @return
 	 */
-	@PutMapping(path = "{id}")
+	@PostMapping(path = "{id}")
 	public String updateUserMaster(@ModelAttribute UserMaster userMaster){
     	logger.atInfo().log("ユーザ情報の更新を開始");
     	this.userMasterManagementService.save(userMaster);
 		return "redirect:/management/users/";
 	}
 	
-	@DeleteMapping(path = "{id}")
+	@PostMapping(path = "{id}/delete")
 	public String delete(@PathVariable Long id){
 		this.userMasterManagementService.delete(id);
 		logger.atInfo().log("削除完了");

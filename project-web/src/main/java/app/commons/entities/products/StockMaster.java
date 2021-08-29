@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
-@Table(name = "stock_master_jp")
+@Table(name = "stock_master")
 public class StockMaster implements Serializable {
 
     /** serial version UID*/

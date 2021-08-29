@@ -22,4 +22,15 @@
             <offheap unit="MB">1</offheap>
         </resources>
     </cache>
+
+    <cache alias="holidays">
+        <value-type>java.util.HashSet</value-type>
+        <expiry>
+            <ttl unit="minutes">30</ttl>
+        </expiry>
+        <resources>
+            <heap>20</heap>
+            <offheap unit="MB">1</offheap>
+        </resources>
+    </cache>
 </config>

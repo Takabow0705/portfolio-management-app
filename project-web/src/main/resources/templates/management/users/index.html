@@ -72,7 +72,7 @@
                 <td th:text="${userMaster.isLocked()}" />
                 <td><a class="btn btn-default btn-xs" th:href="@{/management/users/{id}/update(id=${userMaster.getUserId()})}">編集</a></td>
                 <td>
-                    <form th:action="@{/management/users/{id}(id=${userMaster.getUserId()})}" th:method="delete">
+                    <form th:action="@{/management/users/{id}/delete(id=${userMaster.getUserId()})}" th:method="delete">
                         <input class="btn btn-default btn-xs" type="submit" value="削除" 　onClick="confirm()" />
                     </form>
                 </td>

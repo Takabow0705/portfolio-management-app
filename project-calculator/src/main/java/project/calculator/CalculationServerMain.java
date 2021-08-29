@@ -5,7 +5,10 @@ package project.calculator;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 
 /**
@@ -13,6 +16,15 @@ import org.springframework.cache.annotation.EnableCaching;
  * 基本的にgRPC通信のみを受け付けるように設計する。
  */
 @EnableCaching
+@EnableAsync
+@EnableJpaRepositories(basePackages = {
+        "project.infra.rdb",
+        "project.calculator" //ToDo 将来的に project-infra に移行する。
+})
+@EntityScan(basePackages = {
+        "project.infra.rdb",
+        "project.calculator"
+})
 @SpringBootApplication
 public class CalculationServerMain {
     public static void main(String[] args){

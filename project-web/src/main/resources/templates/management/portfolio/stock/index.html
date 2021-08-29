@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Stock PortfolioManagement Console</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="jumbotron.css" rel="stylesheet">
+    <script src="/js/jquery.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script language="JavaScript" type="text/javascript">
+        function confirm() {
+            var result = confirm('本当に削除しますか？\n（削除実行後はデータを元に戻せません）');
+            if (result) {
+                window.alert("削除を実行しました。");
+                return result;
+            } else {
+                window.alert("削除をキャンセルしました。");
+                return result;
+            }
+        }
+    </script>
+</head>
+
+<body>
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
+    <a class="navbar-brand" th:href="@{/}">Home</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0" _lpchecked="1" th:action="@{/logout}" th:method="post">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">ログアウト</button>
+        </form>
+    </div>
+</nav>
+<div class="pt-0 pb-1 pl-2 pr-3">
+    <span>pt-0 pb-1 pl-2 pr-3</span>
+</div>
+<div class="pt-0 pb-1 pl-2 pr-3">
+    <span>pt-0 pb-1 pl-2 pr-3</span>
+</div>
+<main role="main" class="container my-xl-3">
+    <h1 class="display-5">株式ポートフォリオリスト</h1>
+    <table class="table">
+        <tr>
+            <th>ポートフォリオ名称</th>
+            <th>詳細</th>
+            <th></th>
+            <th></th>
+
+        </tr>
+        <tr th:each="po:${portfolio}">
+            <td th:text="${po.getPortfolioName()}"/>
+            <td th:text="${po.getDetails()}"/>
+            <td><a class="btn btn-default btn-xs"
+                   th:href="@{/management/portfolio/stock/{id}/update(id=${po.getId()})}">編集</a></td>
+            <td>
+                <a class="btn btn-default btn-xs"
+                   th:href="@{/management/portfolio/stock/evaluation-history/{id}(id=${po.getId()})}">
+                    損益参照画面へ
+                </a>
+            </td>
+        </tr>
+    </table>
+    <div class="input_area">
+        <a class="btn btn-default" href="management/portfolio/stock/create">新規作成</a>
+    </div>
+</main>
+<hr>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <h2>株式約定管理</h2>
+            <p>株式取引の入力、訂正を行います</p>
+            <p><a class="btn btn-info" th:href="@{/management/portfolio/stock/execution}" role="button">管理画面へ</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>キャッシュフロー管理(※未実装)</h2>
+            <p>入出金の入力、訂正を行います</p>
+            <p><a class="btn btn-info" th:href="@{/management/cashflow}" role="button">管理画面へ</a></p>
+        </div>
+    </div>
+
+</div>
+</body>
+
+</html>
