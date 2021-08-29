@@ -3,8 +3,8 @@ package project.infra.rdb.discountfactor;
 import java.math.BigDecimal;
 
 public enum PaymentType {
-    Annual(BigDecimal.valueOf(Integer.parseInt("1")), "ANNUAL"),
-    SemiAnnual(BigDecimal.valueOf(Integer.parseInt("0.5")), "SEMI_ANNUAL");
+    Annual(new BigDecimal("1"), "ANNUAL"),
+    SemiAnnual(new BigDecimal("0.5"), "SEMI_ANNUAL");
 
     private final BigDecimal step;
     private final String dbValue;

@@ -4,10 +4,10 @@ import io.grpc.util.Status;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import project.calculator.data.BondPricingData;
-import project.calculator.data.enums.PaymentType;
 import project.calculator.data.response.CalculationResult;
 import project.calculator.domain.finance.bond.algo.CalculationStrategy;
-import project.calculator.domain.repository.master.discountFactor.DiscountFactorDataRepositoryMockImpl;
+import project.infra.rdb.discountfactor.DiscountFactorDataRepositoryMockImpl;
+import project.infra.rdb.discountfactor.PaymentType;
 
 import java.math.BigDecimal;
 
