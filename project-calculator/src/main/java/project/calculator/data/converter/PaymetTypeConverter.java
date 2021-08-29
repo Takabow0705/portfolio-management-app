@@ -1,7 +1,7 @@
 package project.calculator.data.converter;
 
 import io.grpc.finance.calculation.product.bond.PaymentTypeRpc;
-import project.calculator.data.enums.PaymentType;
+import project.infra.rdb.discountfactor.PaymentType;
 
 /**
  * gRPCで定義されたPaymentTypeをこちら側のPaymentType型に変換する。

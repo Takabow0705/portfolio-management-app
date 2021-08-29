@@ -1,7 +1,7 @@
 package project.calculator.domain.calendar;
 
 import org.springframework.stereotype.Service;
-import project.calculator.domain.repository.master.holidays.Holiday;
+import project.infra.rdb.holiday.Holiday;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;

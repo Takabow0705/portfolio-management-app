@@ -4,27 +4,26 @@ import io.grpc.util.Status;
 import io.grpc.util.StatusMsg;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
 import project.calculator.data.BondPricingData;
 import project.calculator.data.enums.PricingMethod;
 import project.calculator.data.response.CalculationResult;
 import project.calculator.domain.finance.bond.algo.CalculationStrategy;
-import project.calculator.domain.repository.master.discountFactor.DiscountFactorDataRepository;
+import project.infra.rdb.discountfactor.DiscountFactorDataRepository;
 
 import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Component
-@Qualifier("useDF")
+/**
+ * CalculationStrategyConfigクラスで管理するのでAutoConfiguration用アノテーションは不用
+ */
 public class BondTheoreticalPricingStrategy implements CalculationStrategy<BondPricingData> {
 
     private final DiscountFactorDataRepository discountFactorDataRepository;
     private static final Logger logger = LoggerFactory.getLogger(BondTheoreticalPricingStrategy.class);
 
-    public BondTheoreticalPricingStrategy(@Qualifier("prod") final DiscountFactorDataRepository discountFactorDataRepository) {
+    public BondTheoreticalPricingStrategy(DiscountFactorDataRepository discountFactorDataRepository) {
         this.discountFactorDataRepository = discountFactorDataRepository;
     }
 

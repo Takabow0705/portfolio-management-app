@@ -1,6 +1,6 @@
 package project.calculator.data;
 
-import project.calculator.data.enums.PaymentType;
+import project.infra.rdb.discountfactor.PaymentType;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
