@@ -1,4 +1,4 @@
-package project.calculator.domain.repository.master.discountFactor;
+package project.infra.rdb.discountfactor;
 
 import java.io.Serializable;
 import java.math.BigDecimal;

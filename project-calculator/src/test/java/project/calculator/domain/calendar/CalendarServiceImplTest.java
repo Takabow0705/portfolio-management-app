@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
-import project.calculator.domain.repository.master.holidays.Holiday;
+import project.infra.rdb.holiday.Holiday;
 
 import java.time.LocalDate;
 import java.util.Arrays;

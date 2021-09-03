@@ -1,4 +1,4 @@
-package project.calculator.domain.repository.master.discountFactor;
+package project.infra.rdb.discountfactor;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;

@@ -1,4 +1,4 @@
-package project.calculator.domain.repository.master.holidays;
+package project.infra.rdb.holiday;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

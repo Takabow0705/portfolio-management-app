@@ -4,8 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-import project.calculator.domain.repository.master.holidays.Holiday;
-import project.calculator.domain.repository.master.holidays.HolidayRepository;
+import project.infra.rdb.holiday.Holiday;
+import project.infra.rdb.holiday.HolidayRepository;
 
 import java.util.Set;
 import java.util.stream.Collectors;

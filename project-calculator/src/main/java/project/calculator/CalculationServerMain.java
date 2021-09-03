@@ -18,12 +18,10 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @EnableCaching
 @EnableAsync
 @EnableJpaRepositories(basePackages = {
-        "project.infra.rdb",
-        "project.calculator" //ToDo 将来的に project-infra に移行する。
+        "project.infra.rdb"
 })
 @EntityScan(basePackages = {
-        "project.infra.rdb",
-        "project.calculator"
+        "project.infra.rdb"
 })
 @SpringBootApplication
 public class CalculationServerMain {

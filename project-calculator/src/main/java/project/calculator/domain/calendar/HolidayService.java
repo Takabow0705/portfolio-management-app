@@ -1,6 +1,6 @@
 package project.calculator.domain.calendar;
 
-import project.calculator.domain.repository.master.holidays.Holiday;
+import project.infra.rdb.holiday.Holiday;
 
 import java.util.Set;
 

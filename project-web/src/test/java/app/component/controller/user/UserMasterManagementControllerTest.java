@@ -164,7 +164,7 @@ public class UserMasterManagementControllerTest {
 
         given(userMasterManagementService.findAll()).willReturn(userMasterList);
 
-        mockMvc.perform(delete("/management/users/1").with(csrf()))
+        mockMvc.perform(post("/management/users/1/delete").with(csrf()))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(model().hasNoErrors())
                 .andExpect(view().name("redirect:/management/users/"));

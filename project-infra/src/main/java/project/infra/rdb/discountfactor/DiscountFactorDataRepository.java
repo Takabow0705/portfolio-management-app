@@ -1,4 +1,4 @@
-package project.calculator.domain.repository.master.discountFactor;
+package project.infra.rdb.discountfactor;
 
 import java.math.BigDecimal;
 import java.util.List;
