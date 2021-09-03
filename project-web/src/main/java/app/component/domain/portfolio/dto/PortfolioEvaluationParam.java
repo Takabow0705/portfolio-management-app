@@ -1,15 +1,23 @@
 package app.component.domain.portfolio.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.time.LocalDate;
 import java.util.Objects;
 
+/**
+ * 評価対象データの絞り込み条件
+ */
+@Schema(description = "評価対象データの絞り込み条件")
 public class PortfolioEvaluationParam {
+    @Schema(description = "評価計算対象のポートフォリオID")
     private long portfolioId;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd")
+    @Schema(pattern = "([0-9]{8})", example = "20210401",description = "評価データの抽出開始日")
     private LocalDate startDate;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyyMMdd")
+    @Schema(pattern = "([0-9]{8})", example = "20210409",description = "評価データの抽出終了日")
     private LocalDate endDate;
 
     public long getPortfolioId() {

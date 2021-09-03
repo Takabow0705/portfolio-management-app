@@ -45,7 +45,7 @@ public class PortfolioEvaluationBatchServiceImpl implements PortfolioEvaluationB
      PortfolioEvaluationResponse fallback(PortfolioEvaluationRequest request, Exception e){
         logger.atWarning().log("Request was not executed. Reason: [%s]", e.getCause());
         PortfolioEvaluationResponse res = PortfolioEvaluationResponse.newBuilder()
-                .setStatusMsg(StatusMsg.newBuilder().setStatus(Status.ERROR).setDetail(e.getMessage()).build())
+                .setStatusMsg(StatusMsg.newBuilder().setStatus(Status.ERROR).setDetail("Calculatorサーバへの接続不可").build())
                 .build();
         return res;
     }
