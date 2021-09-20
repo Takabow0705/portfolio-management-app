@@ -12,8 +12,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
@@ -42,6 +46,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .invalidateHttpSession(true)
             .logoutSuccessUrl("/login")
             .permitAll();
+        //CORS設定
+        http.cors().configurationSource(corsConfigurationSource());
     }
 
     /**
@@ -55,6 +61,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         jsonApiAuthenticationFilter.setAuthenticationFailureHandler((req, res, ex) -> res.setStatus(HttpServletResponse.SC_UNAUTHORIZED));
         jsonApiAuthenticationFilter.setAllowSessionCreation(true);
         return jsonApiAuthenticationFilter;
+    }
+
+    /**
+     * SPA用のCORS関連設定
+     * @return
+     */
+    public CorsConfigurationSource corsConfigurationSource(){
+        CorsConfiguration corsConfiguration = new CorsConfiguration();
+        corsConfiguration.setAllowedOrigins(Arrays.asList("https://localhost:5000", "http://localhost:5000"));
+        corsConfiguration.addAllowedMethod(CorsConfiguration.ALL);
+        corsConfiguration.addAllowedHeader(CorsConfiguration.ALL);
+        corsConfiguration.setAllowCredentials(true);
+        UrlBasedCorsConfigurationSource corsConfigurationSource = new UrlBasedCorsConfigurationSource();
+        corsConfigurationSource.registerCorsConfiguration("/api/**", corsConfiguration);
+        return corsConfigurationSource;
     }
 
     @Override
