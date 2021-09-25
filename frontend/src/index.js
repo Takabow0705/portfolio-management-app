@@ -1,4 +1,5 @@
 import ReactDOM from "react-dom";
+import "./scss/index.scss";
 import React from "react";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import {LoginPage} from "./components/Login";
