@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {checkSession} from "../utils/checkSession";
 import {Redirect} from "react-router";
+import {Header} from "./Header";
+import {PageBody} from "./PageBody";
 
 export const Home = () => {
     let authorized = false;
@@ -24,6 +26,9 @@ export const Home = () => {
     }, [])
 
     return (
-        <h1>Application Home!</h1>
+        <div className={"container-scroller"}>
+            <Header>Header</Header>
+            <PageBody></PageBody>
+        </div>
     )
 }
