@@ -1,6 +1,10 @@
 import React, {useEffect, useState} from 'react';
+
 export const MainPanel = (props) => {
-    return(
-        <div className={"main-panel"}>MainPanel</div>
+    return (
+        <>
+            <div id={"layoutSidenav_content"}>MainPanel</div>
+            <footer className="py-4 bg-light mt-auto"></footer>
+        </>
     )
 }

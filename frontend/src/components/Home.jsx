@@ -26,7 +26,7 @@ export const Home = () => {
     }, [])
 
     return (
-        <div className={"container-scroller"}>
+        <div className={"sb-nav-fixed"}>
             <Header>Header</Header>
             <PageBody></PageBody>
         </div>
