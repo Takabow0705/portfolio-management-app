@@ -1,0 +1,81 @@
+[
+  {
+    "id": "1",
+    "menu": "ポートフォリオ運用",
+    "subMenus": [
+      {
+        "id": "1",
+        "name": "ブック管理",
+        "href": "/ManageBook"
+      },
+      {
+        "id": "2",
+        "name": "市場データ登録",
+        "href": "/RegisterMarketData"
+      },
+      {
+        "id": "3",
+        "name": "損益評価計算実行",
+        "href": "/ExecuteEvaluation"
+      },
+      {
+        "id": "4",
+        "name": "分析計算実行",
+        "href": "/ExecuteVaRCalculation"
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "menu": "取引管理",
+    "subMenus": [
+      {
+        "id": "1",
+        "name": "株式約定管理",
+        "href": "/ManageExecution"
+      },
+      {
+        "id": "2",
+        "name": "入出金管理",
+        "href": "/ManageCash"
+      }
+    ]
+  },
+  {
+    "id": "3",
+    "menu": "マスターデータ管理",
+    "subMenus": [
+      {
+        "id": "1",
+        "name": "ユーザ管理",
+        "href": "/ManageUser"
+      },
+      {
+        "id": "2",
+        "name": "株式データ管理",
+        "href": "/ManageStockMaster"
+      },
+      {
+        "id": "3",
+        "name": "通貨データ管理",
+        "href": "/ManageCurrencyMaster"
+      }
+    ]
+  },
+  {
+    "id": "4",
+    "menu": "システム管理",
+    "subMenus": [
+      {
+        "id": "1",
+        "name": "システムログ照会",
+        "href": "/SystemLog"
+      },
+      {
+        "id": "2",
+        "name": "システムステータス管理",
+        "href": "/ManageStockMaster"
+      }
+    ]
+  }
+]

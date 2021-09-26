@@ -1,9 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {createContext, useEffect, useState} from 'react';
 import {checkSession} from "../utils/checkSession";
 import {Redirect} from "react-router";
 import {Header} from "./Header";
 import {PageBody} from "./PageBody";
+import sideBar from "../config/sidebar-config.json";
 
+export const SideBarContext = createContext();
 export const Home = () => {
     let authorized = false;
 
@@ -26,9 +28,11 @@ export const Home = () => {
     }, [])
 
     return (
+        <SideBarContext.Provider value={{sideBar}}>
         <div className={"sb-nav-fixed"}>
             <Header>Header</Header>
             <PageBody></PageBody>
         </div>
+        </SideBarContext.Provider>
     )
 }
