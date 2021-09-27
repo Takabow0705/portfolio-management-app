@@ -8,10 +8,15 @@ scripts/logs/*
 #ignore intellij auto-generated files
 **/*.iml
 .idea
+*.code-workspace
+
 
 ## ignore eclipse auto-generated files
 .classpath
 .project
 .settings/*
 
-#
+## ignore node modules
+node_modules
+bundle.js
+bundle.css
