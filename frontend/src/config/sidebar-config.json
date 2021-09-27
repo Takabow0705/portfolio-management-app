@@ -1,49 +1,75 @@
 [
   {
-    "id": "1",
+    "id": "10",
     "menu": "ポートフォリオ運用",
     "subMenus": [
       {
         "id": "1",
         "name": "ブック管理",
         "href": "/ManageBook"
-      },
-      {
-        "id": "2",
-        "name": "市場データ登録",
-        "href": "/RegisterMarketData"
-      },
-      {
-        "id": "3",
-        "name": "損益評価計算実行",
-        "href": "/ExecuteEvaluation"
-      },
-      {
-        "id": "4",
-        "name": "分析計算実行",
-        "href": "/ExecuteVaRCalculation"
       }
     ]
   },
   {
-    "id": "2",
-    "menu": "取引管理",
+    "id": "20",
+    "menu": "資金・取引管理",
     "subMenus": [
       {
         "id": "1",
-        "name": "株式約定管理",
-        "href": "/ManageExecution"
+        "name": "株式約定登録",
+        "href": "/RegisterExecution"
       },
       {
         "id": "2",
-        "name": "入出金管理",
+        "name": "株式約定履歴照会",
+        "href": "/ManageExecution"
+      },
+      {
+        "id": "3",
+        "name": "入出金登録",
+        "href": "/RegisterCash"
+      },
+      {
+        "id": "4",
+        "name": "入出金履歴照会",
         "href": "/ManageCash"
       }
     ]
   },
   {
-    "id": "3",
-    "menu": "マスターデータ管理",
+    "id": "25",
+    "menu": "ポートフォリオ分析",
+    "subMenus": [
+      {
+        "id": "1",
+        "name": "市場データ登録",
+        "href": "/RegisterMarketData"
+      },
+      {
+        "id": "2",
+        "name": "損益評価計算",
+        "href": "/ExecuteEvaluation"
+      },
+      {
+        "id": "3",
+        "name": "感応度計算",
+        "href": "/ExecuteBetaCalculation"
+      },
+      {
+        "id": "4",
+        "name": "VaR計算",
+        "href": "/ExecuteVaRCalculation"
+      },
+      {
+        "id": "5",
+        "name": "収益率計算",
+        "href": "/ExecuteReturnCalculation"
+      }
+    ]
+  },
+  {
+    "id": "30",
+    "menu": "マスタ管理",
     "subMenus": [
       {
         "id": "1",
@@ -52,18 +78,18 @@
       },
       {
         "id": "2",
-        "name": "株式データ管理",
+        "name": "株式マスタ管理",
         "href": "/ManageStockMaster"
       },
       {
         "id": "3",
-        "name": "通貨データ管理",
+        "name": "通貨マスタ管理",
         "href": "/ManageCurrencyMaster"
       }
     ]
   },
   {
-    "id": "4",
+    "id": "40",
     "menu": "システム管理",
     "subMenus": [
       {
