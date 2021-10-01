@@ -1,11 +1,10 @@
 package commons.enums;
 
 import org.junit.jupiter.api.Test;
-
-import app.commons.enums.UserAuthentication;
+import project.infra.rdb.user.UserAuthentication;
 
 import static org.hamcrest.Matchers.equalTo;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 public class UserAuthenticationTest {
 

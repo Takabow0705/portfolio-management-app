@@ -7,6 +7,8 @@ import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import project.infra.rdb.stockmaster.StockMaster;
+import project.infra.rdb.stockmaster.StockMasterRepository;
 import testcase.testdata.dto.SearchConditionFactory;
 import testcase.testdata.entity.StockMasterDataFactory;
 

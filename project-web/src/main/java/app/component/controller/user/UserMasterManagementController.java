@@ -1,7 +1,6 @@
 package app.component.controller.user;
 
 import app.commons.dto.UserMasterDto;
-import app.commons.enums.UserAuthentication;
 import app.component.service.userMaster.UserMasterManagementService;
 import com.google.common.flogger.FluentLogger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import project.infra.rdb.user.UserAuthentication;
 import project.infra.rdb.user.UserMaster;
 
 import java.util.List;

@@ -1,7 +1,6 @@
 package app.component.controller.user;
 
 import app.commons.dto.UserMasterDto;
-import app.commons.enums.UserAuthentication;
 import app.component.service.userMaster.UserMasterManagementService;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -12,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
+import project.infra.rdb.user.UserAuthentication;
 import project.infra.rdb.user.UserMaster;
 import testcase.testdata.entity.UserMasterDataFactory;
 
