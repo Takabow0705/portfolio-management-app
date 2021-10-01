@@ -1,7 +1,7 @@
 package testcase.testdata.entity;
 
-import app.commons.entities.user.UserMaster;
-import app.commons.enums.UserAuthentication;
+import project.infra.rdb.user.UserAuthentication;
+import project.infra.rdb.user.UserMaster;
 
 public class UserMasterDataFactory {
 

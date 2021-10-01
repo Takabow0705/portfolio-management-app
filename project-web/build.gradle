@@ -73,6 +73,7 @@ dependencies {
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
     //submodules
     implementation project(":project-grpc")
+    implementation project(":project-infra")
 
     //test tools
     testImplementation group: 'org.dbunit',     name: 'dbunit',             version: '2.5.3'

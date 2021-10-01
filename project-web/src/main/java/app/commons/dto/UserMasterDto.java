@@ -1,5 +1,9 @@
 package app.commons.dto;
 
+
+import project.infra.rdb.user.UserAuthentication;
+import project.infra.rdb.user.UserMaster;
+
 import java.util.Objects;
 
 /**
@@ -17,6 +21,19 @@ public class UserMasterDto {
     private String userAuthentication;
     /** メールアドレス*/
     private String mailAddress;
+
+    public static UserMaster createNewUserMaster(UserMasterDto userMasterDto){
+        return new UserMaster(
+                Long.getLong("-1")
+                ,0
+                ,userMasterDto.getUserName()
+                ,userMasterDto.getPassword()
+                , UserAuthentication.convertFrom(userMasterDto.getUserAuthentication())
+                ,false
+                ,false
+                ,userMasterDto.getMailAddress()
+        );
+    }
 
     public String getUserName() {
         return userName;

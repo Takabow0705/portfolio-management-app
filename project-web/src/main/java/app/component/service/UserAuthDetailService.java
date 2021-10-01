@@ -1,17 +1,18 @@
 package app.component.service;
 
 import app.commons.entities.user.UserAuthInfo;
-import app.commons.entities.user.UserMaster;
-import app.component.repository.UserMasterRepository;
 import com.google.common.flogger.FluentLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import project.infra.rdb.user.UserMaster;
+import project.infra.rdb.user.UserMasterRepository;
 
 public class UserAuthDetailService implements UserDetailsService {
 
     private static final FluentLogger logger = FluentLogger.forEnclosingClass();
+
     @Autowired
     private UserMasterRepository userMasterRepository;
 

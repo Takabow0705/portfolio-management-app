@@ -1,7 +1,5 @@
 package app.component.service.userMaster;
 
-import app.commons.entities.user.UserMaster;
-import app.component.repository.UserMasterRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -9,6 +7,8 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import project.infra.rdb.user.UserMaster;
+import project.infra.rdb.user.UserMasterRepository;
 import testcase.testdata.entity.UserMasterDataFactory;
 
 import java.util.Arrays;
@@ -17,6 +17,7 @@ import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 
@@ -30,12 +31,13 @@ class UserMasterManagementServiceImplTest {
     private PasswordEncoder passwordEncoder;
 
     @InjectMocks
-    private UserMasterManagementService target = new UserMasterManagementServiceImpl();
+    private UserMasterManagementService target;
 
     @BeforeEach
     void setup() {
         // 各テストの実行前にモックオブジェクトを初期化する
         MockitoAnnotations.initMocks(this);
+        this.target = mock(UserMasterManagementService.class);
     }
 
     /**

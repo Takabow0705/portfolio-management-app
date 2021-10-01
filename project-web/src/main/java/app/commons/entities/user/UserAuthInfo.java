@@ -1,11 +1,12 @@
 package app.commons.entities.user;
 
-import app.commons.enums.UserAuthentication;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.context.annotation.SessionScope;
+import project.infra.rdb.user.UserAuthentication;
+import project.infra.rdb.user.UserMaster;
 
 import java.io.Serializable;
 import java.util.Arrays;

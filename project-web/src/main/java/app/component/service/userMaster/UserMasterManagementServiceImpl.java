@@ -1,13 +1,12 @@
 package app.component.service.userMaster;
 
 import app.commons.dto.UserMasterDto;
-import app.commons.entities.user.UserMaster;
-import app.component.repository.UserMasterRepository;
 import com.google.common.flogger.FluentLogger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import project.infra.rdb.user.UserMaster;
+import project.infra.rdb.user.UserMasterRepository;
 
 import java.util.Collections;
 import java.util.List;
@@ -16,12 +15,17 @@ import java.util.stream.Collectors;
 @Service
 @Qualifier("userMasterServiceImpl")
 public class UserMasterManagementServiceImpl implements UserMasterManagementService{
-	
-	@Autowired
-	private UserMasterRepository userMasterRepository;
-	@Autowired
-	private PasswordEncoder passwordEncoder;
-    private static final FluentLogger logger = FluentLogger.forEnclosingClass();
+
+	private final UserMasterRepository userMasterRepository;
+
+	private final PasswordEncoder passwordEncoder;
+
+	public UserMasterManagementServiceImpl(UserMasterRepository userMasterRepository, PasswordEncoder passwordEncoder) {
+		this.userMasterRepository = userMasterRepository;
+		this.passwordEncoder = passwordEncoder;
+	}
+
+	private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 	
 	/**
 	 * <p>
@@ -70,7 +74,7 @@ public class UserMasterManagementServiceImpl implements UserMasterManagementServ
 	public void saveNewUser(UserMasterDto userMasterDto){
 		userMasterDto.setPassword(passwordEncoder.encode(userMasterDto.getPassword()));
 		logger.atInfo().log("以下のDTOを受信：%s", userMasterDto.toString());
-		UserMaster userMaster = UserMaster.of(userMasterDto);
+		UserMaster userMaster = UserMasterDto.createNewUserMaster(userMasterDto);
         logger.atInfo().log("以下のユーザを保存します。：%s", userMaster.toString());
 		this.userMasterRepository.save(userMaster);
 	}

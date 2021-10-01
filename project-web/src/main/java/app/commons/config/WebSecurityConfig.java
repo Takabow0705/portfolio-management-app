@@ -92,4 +92,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public UserAuthDetailService userAuthDetailService(){
         return new UserAuthDetailService();
     }
+
 }

@@ -1,7 +1,6 @@
 package app.component.controller.user;
 
 import app.commons.dto.UserMasterDto;
-import app.commons.entities.user.UserMaster;
 import app.commons.enums.UserAuthentication;
 import app.component.service.userMaster.UserMasterManagementService;
 import org.junit.jupiter.api.Test;
@@ -13,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
+import project.infra.rdb.user.UserMaster;
 import testcase.testdata.entity.UserMasterDataFactory;
 
 import java.util.Arrays;
@@ -23,7 +23,8 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @AutoConfigureMockMvc

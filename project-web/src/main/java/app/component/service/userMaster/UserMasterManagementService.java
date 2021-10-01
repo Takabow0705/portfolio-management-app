@@ -1,7 +1,7 @@
 package app.component.service.userMaster;
 
 import app.commons.dto.UserMasterDto;
-import app.commons.entities.user.UserMaster;
+import project.infra.rdb.user.UserMaster;
 
 import java.util.List;
 

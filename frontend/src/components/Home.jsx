@@ -7,21 +7,19 @@ import sideBar from "../config/sidebar-config.json";
 
 export const SideBarContext = createContext();
 export const Home = () => {
-    let authorized = false;
 
     useEffect(() => {
+        let authorized = false;
         (
             async () => {
                 try {
-                    const result = await checkSession();
-                    authorized = result;
-                    console.log("Home component authorized check => " + result)
+                    authorized= await checkSession();
+                    console.log("Home component authorized check => " + authorized)
                 } catch (e) {
                     authorized = false;
-                } finally {
-                    if (!authorized) {
-                        return <Redirect from="/home" to="/login"/>
-                    }
+                }
+                if (!authorized) {
+                    return <Redirect from="/home" to="/"/>
                 }
             }
         )()

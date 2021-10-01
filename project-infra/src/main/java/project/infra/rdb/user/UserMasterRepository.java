@@ -1,9 +1,7 @@
-package app.component.repository;
+package project.infra.rdb.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
-import app.commons.entities.user.UserMaster;
 
 /**
  * ユーザ情報の検索、永続化を担うJPA

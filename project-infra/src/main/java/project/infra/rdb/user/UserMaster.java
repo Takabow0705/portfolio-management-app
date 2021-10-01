@@ -1,7 +1,4 @@
-package app.commons.entities.user;
-
-import app.commons.dto.UserMasterDto;
-import app.commons.enums.UserAuthentication;
+package project.infra.rdb.user;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -39,24 +36,6 @@ public class UserMaster implements Serializable{
 		this.deleted = deleted;
 		this.locked = locked;
 		this.mailAddress = mailAddress;
-	}
-
-	/**
-	 * <p>
-	 * 空のユーザマスタエンティティを返します
-	 * </p>
-	 */
-	public static UserMaster of(UserMasterDto userMasterDto){
-		return new UserMaster(
-				Long.getLong("-1")
-				,0
-				,userMasterDto.getUserName()
-				,userMasterDto.getPassword()
-				,UserAuthentication.convertFrom(userMasterDto.getUserAuthentication())
-				,false
-				,false
-				,userMasterDto.getMailAddress()
-		);
 	}
 	
     /** ユーザID*/
