@@ -1,12 +1,12 @@
 package app.component.service.products.stockMaster;
 
 import app.commons.dto.SearchCondition;
-import app.commons.entities.products.StockMaster;
-import app.component.repository.product.StockMasterRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import project.infra.rdb.stockmaster.StockMaster;
+import project.infra.rdb.stockmaster.StockMasterRepository;
 
 import java.util.Collections;
 import java.util.List;

@@ -1,6 +1,5 @@
 package app.component.controller.product.stock;
 
-import app.commons.entities.products.StockMaster;
 import app.component.service.products.stockMaster.StockMasterManagementService;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

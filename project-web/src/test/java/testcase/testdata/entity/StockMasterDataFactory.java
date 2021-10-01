@@ -1,7 +1,5 @@
 package testcase.testdata.entity;
 
-import app.commons.entities.products.StockMaster;
-
 import java.math.BigDecimal;
 
 public class StockMasterDataFactory {

@@ -1,7 +1,7 @@
 package app.component.service.products.stockMaster;
 
 import app.commons.dto.SearchCondition;
-import app.commons.entities.products.StockMaster;
+import project.infra.rdb.stockmaster.StockMaster;
 
 import java.util.List;
 

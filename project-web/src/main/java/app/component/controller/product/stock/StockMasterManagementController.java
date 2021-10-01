@@ -1,7 +1,6 @@
 package app.component.controller.product.stock;
 
 import app.commons.dto.SearchCondition;
-import app.commons.entities.products.StockMaster;
 import app.component.service.products.stockMaster.StockMasterManagementService;
 import com.google.common.flogger.FluentLogger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import project.infra.rdb.stockmaster.StockMaster;
 
 import java.util.List;
 
