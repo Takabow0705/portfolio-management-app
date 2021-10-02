@@ -1,5 +1,7 @@
 package app.component.domain.portfolio.dto;
 
+import project.infra.rdb.stockportfolio.StockPortfolio;
+
 public class StockPortfolioReferenceDto {
 
     private long id;
@@ -13,6 +15,16 @@ public class StockPortfolioReferenceDto {
     private boolean isDeleted;
 
     public StockPortfolioReferenceDto() {}
+
+    public StockPortfolioReferenceDto createFrom(StockPortfolio stockPortfolio){
+        return new StockPortfolioReferenceDto(
+                stockPortfolio.getId()
+                ,stockPortfolio.getUserId()
+                ,stockPortfolio.getPortfolioName()
+                ,stockPortfolio.getDetails()
+                ,stockPortfolio.isDeleted()
+        );
+    }
 
     public StockPortfolioReferenceDto(long id, long userId, String portfolioName, String details, boolean isDeleted) {
         this.id = id;

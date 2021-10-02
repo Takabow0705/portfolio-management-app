@@ -1,6 +1,6 @@
 package app.component.controller.product.bond;
 
-import app.commons.entities.products.BondMaster;
+
 import app.component.service.products.bondMaster.BondMasterManagementService;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
+import project.infra.rdb.bondmaster.BondMaster;
 
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;

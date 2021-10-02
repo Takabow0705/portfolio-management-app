@@ -1,10 +1,11 @@
 package app.component.service.products.bondMaster;
 
-import app.commons.entities.products.BondMaster;
-import app.component.repository.product.BondMasterRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import project.infra.rdb.bondmaster.BondMaster;
+import project.infra.rdb.bondmaster.BondMasterRepository;
 
 import java.util.Collections;
 import java.util.List;

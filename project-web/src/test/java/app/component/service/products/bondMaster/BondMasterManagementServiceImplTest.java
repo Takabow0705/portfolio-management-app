@@ -1,14 +1,13 @@
 package app.component.service.products.bondMaster;
 
-import app.commons.entities.products.BondMaster;
-import app.component.repository.product.BondMasterRepository;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import project.infra.rdb.bondmaster.BondMaster;
+import project.infra.rdb.bondmaster.BondMasterRepository;
 
 import java.util.Collections;
 import java.util.List;

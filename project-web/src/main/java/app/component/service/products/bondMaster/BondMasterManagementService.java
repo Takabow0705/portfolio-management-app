@@ -1,6 +1,7 @@
 package app.component.service.products.bondMaster;
 
-import app.commons.entities.products.BondMaster;
+
+import project.infra.rdb.bondmaster.BondMaster;
 
 import java.util.List;
 
