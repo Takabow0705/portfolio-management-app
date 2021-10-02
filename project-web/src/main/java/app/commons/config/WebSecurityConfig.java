@@ -1,7 +1,7 @@
 package app.commons.config;
 
-import app.commons.filter.JsonApiAuthenticationFilter;
-import app.component.service.UserAuthDetailService;
+import app.presentation.filter.JsonApiAuthenticationFilter;
+import app.usecase.auth.UserAuthDetailService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;

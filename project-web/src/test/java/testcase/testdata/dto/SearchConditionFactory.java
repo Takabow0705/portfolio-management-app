@@ -1,6 +1,6 @@
 package testcase.testdata.dto;
 
-import app.commons.dto.SearchCondition;
+import app.domain.product.stockmaster.SearchCondition;
 
 public class SearchConditionFactory {
 
