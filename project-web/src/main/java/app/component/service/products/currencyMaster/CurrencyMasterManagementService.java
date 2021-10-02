@@ -1,6 +1,7 @@
 package app.component.service.products.currencyMaster;
 
-import app.commons.entities.products.CurrencyMaster;
+
+import project.infra.rdb.currencymaster.CurrencyMaster;
 
 import java.util.List;
 

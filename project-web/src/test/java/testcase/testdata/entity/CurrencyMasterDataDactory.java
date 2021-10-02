@@ -1,6 +1,7 @@
 package testcase.testdata.entity;
 
-import app.commons.entities.products.CurrencyMaster;
+
+import project.infra.rdb.currencymaster.CurrencyMaster;
 
 public class CurrencyMasterDataDactory {
 

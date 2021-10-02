@@ -2,7 +2,6 @@ package app.component.domain.portfolio.service.impl;
 
 import app.commons.entities.portfolio.StockPortfolio;
 import app.commons.entities.portfolio.execution.StockExecution;
-import app.commons.entities.products.CurrencyMaster;
 import app.commons.entities.user.UserAuthInfo;
 import app.commons.file.csv.StockExecutionOutputCsv;
 import app.commons.file.csv.StockExecutionRegistrationCsv;
@@ -11,7 +10,6 @@ import app.component.domain.portfolio.dto.StockExecutionDownloadParam;
 import app.component.domain.portfolio.repository.StockExecutionRepository;
 import app.component.domain.portfolio.repository.StockPortfolioRepository;
 import app.component.domain.portfolio.service.StockExecutionManagementService;
-import app.component.repository.product.CurrencyMasterRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.dataformat.csv.CsvGenerator;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
@@ -23,6 +21,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import project.infra.rdb.currencymaster.CurrencyMaster;
+import project.infra.rdb.currencymaster.CurrencyMasterRepository;
 import project.infra.rdb.stockmaster.StockMaster;
 import project.infra.rdb.stockmaster.StockMasterRepository;
 

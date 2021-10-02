@@ -1,6 +1,5 @@
 package app.component.controller.product.currency;
 
-import app.commons.entities.products.CurrencyMaster;
 import app.component.service.products.currencyMaster.CurrencyMasterManagementService;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -11,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
+import project.infra.rdb.currencymaster.CurrencyMaster;
 import testcase.testdata.entity.CurrencyMasterDataDactory;
 
 import java.util.Arrays;

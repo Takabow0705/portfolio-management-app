@@ -1,13 +1,13 @@
 package app.component.service.products.currencyMaster;
 
-import app.commons.entities.products.CurrencyMaster;
-import app.component.repository.product.CurrencyMasterRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import project.infra.rdb.currencymaster.CurrencyMaster;
+import project.infra.rdb.currencymaster.CurrencyMasterRepository;
 
 import java.util.Collections;
 import java.util.List;
