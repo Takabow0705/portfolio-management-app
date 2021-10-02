@@ -37,7 +37,7 @@ public class JsonApiAuthenticationFilter extends AbstractAuthenticationProcessin
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException, ServletException {
         Map<String, Object> requestObject;
-        logger.atInfo().log("Receive API Authentication Request. [Host: %s:%s, Locale: %s]", request.getRemoteHost(), request.getRemotePort(), request.getLocale());
+        logger.atInfo().log("Receive API Authentication Request. [Host: %s:%s, User-Agent: %s]", request.getRemoteHost(), request.getRemotePort(), request.getHeader("User-Agent"));
         try {
             requestObject = objectMapper.readValue(request.getInputStream(), Map.class);
         } catch (IOException e) {

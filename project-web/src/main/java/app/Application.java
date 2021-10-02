@@ -15,6 +15,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 })
 @ComponentScan(basePackages = {
         "project.infra.rdb"
+        ,"app"
 })
 @SpringBootApplication
 public class Application {
