@@ -1,14 +1,13 @@
 package app.component.domain.portfolio.service.impl;
 
 
-import app.commons.entities.portfolio.StockPortfolio;
 import app.component.domain.portfolio.dto.PortfolioBasicStats;
 import app.component.domain.portfolio.dto.StockPortfolioDto;
 import app.component.domain.portfolio.dto.StockPortfolioReferenceDto;
-import app.component.domain.portfolio.repository.StockExecutionRepository;
-import app.component.domain.portfolio.repository.StockPortfolioRepository;
 import app.component.domain.portfolio.service.StockPortfolioService;
 import org.springframework.stereotype.Service;
+import project.infra.rdb.stockexecution.StockExecutionRepository;
+import project.infra.rdb.stockportfolio.StockPortfolioRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,7 +33,7 @@ public class StockPortfolioServiceImpl implements StockPortfolioService {
         return this.stockPortfolioRepository.findByUserId(userId)
                 .stream()
                 .filter(s -> !s.isDeleted())
-                .map(StockPortfolio::createFrom)
+                .map(StockPortfolioReferenceDto::createFrom)
                 .collect(Collectors.toList());
     }
 

@@ -1,14 +1,10 @@
 package app.component.domain.portfolio.service.impl;
 
-import app.commons.entities.portfolio.StockPortfolio;
-import app.commons.entities.portfolio.execution.StockExecution;
 import app.commons.entities.user.UserAuthInfo;
 import app.commons.file.csv.StockExecutionOutputCsv;
 import app.commons.file.csv.StockExecutionRegistrationCsv;
 import app.component.domain.portfolio.dto.CsvUploadResult;
 import app.component.domain.portfolio.dto.StockExecutionDownloadParam;
-import app.component.domain.portfolio.repository.StockExecutionRepository;
-import app.component.domain.portfolio.repository.StockPortfolioRepository;
 import app.component.domain.portfolio.service.StockExecutionManagementService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.dataformat.csv.CsvGenerator;
@@ -23,8 +19,12 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import project.infra.rdb.currencymaster.CurrencyMaster;
 import project.infra.rdb.currencymaster.CurrencyMasterRepository;
+import project.infra.rdb.stockexecution.StockExecutionRepository;
+import project.infra.rdb.stockexecution.entity.StockExecution;
 import project.infra.rdb.stockmaster.StockMaster;
 import project.infra.rdb.stockmaster.StockMasterRepository;
+import project.infra.rdb.stockportfolio.StockPortfolio;
+import project.infra.rdb.stockportfolio.StockPortfolioRepository;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -120,7 +120,7 @@ public class StockExecutionManagementServiceImpl implements StockExecutionManage
             return result;
         }
         // stock_executionのエンティティに変換
-        List<StockExecution> stockExecutions = csv.stream().map(StockExecution::createFrom).collect(Collectors.toList());
+        List<StockExecution> stockExecutions = csv.stream().map(StockExecutionRegistrationCsv::convertToExecution).collect(Collectors.toList());
         // updateUser createUserを追加する。
         for(StockExecution execution : stockExecutions){
             execution.setUpdateUser(session.getUsername());

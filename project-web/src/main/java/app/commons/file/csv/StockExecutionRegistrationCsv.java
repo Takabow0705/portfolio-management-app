@@ -4,10 +4,14 @@ import com.github.mygreen.supercsv.annotation.CsvBean;
 import com.github.mygreen.supercsv.annotation.CsvColumn;
 import com.github.mygreen.supercsv.annotation.format.CsvBooleanFormat;
 import com.github.mygreen.supercsv.annotation.format.CsvDateTimeFormat;
+import project.infra.rdb.stockexecution.BuySellType;
+import project.infra.rdb.stockexecution.entity.StockExecution;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @CsvBean(header = true, validateHeader = true)
@@ -42,6 +46,24 @@ public class StockExecutionRegistrationCsv implements Serializable {
     @CsvColumn(number = 9, label = "is_deleted")
     @CsvBooleanFormat(readForTrue = {"true", "1"}, readForFalse = {"false", "0"}, ignoreCase = true)
     private boolean isDeleted;
+
+    public static StockExecution convertToExecution(StockExecutionRegistrationCsv csv){
+        return new StockExecution(
+                Long.valueOf(csv.getStockPortfolioId())
+                ,csv.getStockCode()
+                ,csv.getBookValue()
+                ,csv.getCurrencyCode()
+                ,csv.getAmount()
+                ,csv.getExecutionDate()
+                ,csv.getValueDate()
+                ,BuySellType.convertFrom(csv.getBuySellType())
+                ,csv.getIsDeleted()
+                ,Timestamp.valueOf(LocalDateTime.now())
+                ,""
+                ,Timestamp.valueOf(LocalDateTime.now())
+                ,""
+        );
+    }
 
     public long getStockPortfolioId() {
         return stockPortfolioId;

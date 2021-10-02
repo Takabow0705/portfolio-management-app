@@ -1,9 +1,9 @@
 package app.commons.file.csv;
 
-import app.commons.entities.portfolio.execution.StockExecution;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import project.infra.rdb.stockexecution.entity.StockExecution;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

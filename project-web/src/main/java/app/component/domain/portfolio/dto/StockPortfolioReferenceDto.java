@@ -16,7 +16,7 @@ public class StockPortfolioReferenceDto {
 
     public StockPortfolioReferenceDto() {}
 
-    public StockPortfolioReferenceDto createFrom(StockPortfolio stockPortfolio){
+    public static StockPortfolioReferenceDto createFrom(StockPortfolio stockPortfolio){
         return new StockPortfolioReferenceDto(
                 stockPortfolio.getId()
                 ,stockPortfolio.getUserId()

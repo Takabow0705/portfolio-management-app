@@ -11,5 +11,4 @@ import java.io.Serializable;
 @Table(name = "stock_portfolio")
 public class StockPortfolio extends StockPortfolioBase implements Serializable {
     private static final long serialVersionUID = 1l;
-
 }
