@@ -1,5 +1,7 @@
 package project.infra.rdb.stockportfolio;
 
+import project.infra.rdb.cashaccount.CashAccount;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -43,6 +45,10 @@ public class StockPortfolioBase implements Serializable {
     @Column(name = "create_user")
     @NotNull
     private String createUser;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id", referencedColumnName = "stock_portfolio_id")
+    private CashAccount cashAccount;
 
     public long getId() {
         return id;

@@ -16,7 +16,6 @@ import java.util.List;
 public class StockExecution extends StockExecutionBase implements Serializable {
     private static final long serialVersionUID = 1l;
 
-    //ToDo project-web側のStockExecutionクラスと統合する
     /**
      * 引数の日付 >= 約定日 を満たすデータを取得するSpecificationを返す
      * @param data
