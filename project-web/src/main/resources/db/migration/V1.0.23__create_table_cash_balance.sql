@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS  `unrealized_cashflow_attr`(
     FOREIGN KEY unrealized_cashflow_attr_fkey1 (id) references unrealized_cashflow(id)
 );
 
-CREATE TABLE IF NOT EXISTS  `unrealized_cashflow_history`(
+CREATE TABLE IF NOT EXISTS  `cashflow_history`(
     id BIGINT NOT NULL AUTO_INCREMENT,
     cash_account_id BIGINT NOT NULL,
     base_date   DATE NOT NULL,
@@ -65,13 +65,13 @@ CREATE TABLE IF NOT EXISTS  `unrealized_cashflow_history`(
     create_timestamp DATETIME NOT NULL,
     create_user varchar(500) NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY unrealized_cashflow_history_fkey1 (currency_code) references currency_master(currency_code),
-    FOREIGN KEY unrealized_cashflow_history_fkey2 (cash_account_id) references cash_account(id)
+    FOREIGN KEY cashflow_history_fkey1 (currency_code) references currency_master(currency_code),
+    FOREIGN KEY cashflow_history_fkey2 (cash_account_id) references cash_account(id)
 );
 
-CREATE TABLE IF NOT EXISTS  `unrealized_cashflow_attr_history`(
+CREATE TABLE IF NOT EXISTS  `cashflow_attr_history`(
     id BIGINT NOT NULL AUTO_INCREMENT,
-    unrealized_cashflow_history_id BIGINT NOT NULL,
+    cashflow_history_id BIGINT NOT NULL,
     purpose varchar(500),
     detail  varchar(500),
     deleted boolean NOT NULL default False,
@@ -80,5 +80,5 @@ CREATE TABLE IF NOT EXISTS  `unrealized_cashflow_attr_history`(
     create_timestamp DATETIME NOT NULL,
     create_user varchar(500) NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY unrealized_cashflow_history_attr_fkey1 (id) references unrealized_cashflow_history(id)
+    FOREIGN KEY cashflow_history_attr_fkey1 (id) references cashflow_history(id)
 );
