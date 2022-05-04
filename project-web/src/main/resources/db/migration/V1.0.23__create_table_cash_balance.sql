@@ -2,7 +2,7 @@ CREATE TABLE IF NOT EXISTS `cash_account`(
     id BIGINT NOT NULL AUTO_INCREMENT,
     stock_portfolio_id BIGINT NOT NULL,
     detail CHAR(5) NOT NULL,
-    createdAt DATE NOT NULL,
+    created_at DATE NOT NULL,
     PRIMARY KEY (id,stock_portfolio_id),
     FOREIGN KEY cash_account_fkey1 (stock_portfolio_id) references stock_portfolio(id)
 );

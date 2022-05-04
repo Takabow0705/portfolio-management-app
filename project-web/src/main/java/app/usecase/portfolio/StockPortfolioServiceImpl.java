@@ -26,9 +26,7 @@ public class StockPortfolioServiceImpl implements StockPortfolioService {
      * @return
      */
     public List<StockPortfolioReferenceDto> findByUserId(long userId) {
-        return this.stockPortfolioRepository.findByUserId(userId)
-                .stream()
-                .filter(s -> !s.isDeleted())
+        return this.stockPortfolioRepository.findByUserIdAndIsDeletedFalse(userId).stream()
                 .map(StockPortfolioReferenceDto::createFrom)
                 .collect(Collectors.toList());
     }

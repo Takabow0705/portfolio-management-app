@@ -9,4 +9,5 @@ import java.util.List;
 public interface StockPortfolioRepository extends JpaRepository<StockPortfolio, Long> {
 
     public List<StockPortfolio> findByUserId(Long userId);
+    public List<StockPortfolio> findByUserIdAndIsDeletedFalse(Long userId);
 }
