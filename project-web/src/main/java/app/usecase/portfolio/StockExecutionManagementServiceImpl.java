@@ -1,21 +1,27 @@
 package app.usecase.portfolio;
 
+import app.domain.auth.UserAuthInfo;
 import app.domain.execution.StockExecutionOutputCsv;
 import app.domain.execution.StockExecutionRegistrationCsv;
 import app.domain.portfolio.CsvUploadResult;
+import app.domain.portfolio.StockExectionCsvDto;
 import app.domain.portfolio.StockExecutionDownloadParam;
-import app.domain.auth.UserAuthInfo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.dataformat.csv.CsvGenerator;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
+import com.github.mygreen.supercsv.io.CsvAnnotationBeanReader;
 import com.google.common.flogger.FluentLogger;
 import io.netty.util.internal.StringUtil;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+import org.supercsv.exception.SuperCsvException;
+import org.supercsv.prefs.CsvPreference;
 import project.infra.rdb.currencymaster.CurrencyMaster;
 import project.infra.rdb.currencymaster.CurrencyMasterRepository;
 import project.infra.rdb.stockexecution.StockExecutionRepository;
@@ -25,8 +31,13 @@ import project.infra.rdb.stockmaster.StockMasterRepository;
 import project.infra.rdb.stockportfolio.StockPortfolio;
 import project.infra.rdb.stockportfolio.StockPortfolioRepository;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -86,8 +97,10 @@ public class StockExecutionManagementServiceImpl implements StockExecutionManage
     @Transactional(propagation = Propagation.REQUIRES_NEW
             ,isolation = Isolation.READ_COMMITTED
             ,rollbackFor = {IOException.class, SQLException.class})
-    public CsvUploadResult uploadCsv(List<StockExecutionRegistrationCsv> csv, UserAuthInfo session) {
-        CsvUploadResult result = new CsvUploadResult();
+    public CsvUploadResult uploadCsv(StockExectionCsvDto dto, UserAuthInfo session) {
+        Pair<CsvUploadResult, List<StockExecutionRegistrationCsv>> processResultPair = processCsv(dto.getMultipartFile());
+        CsvUploadResult result = processResultPair.getFirst();
+        List<StockExecutionRegistrationCsv> csv = processResultPair.getSecond();
         // stock_portfolio_idがポートフォリオに存在するか
         // 存在しないIDを指定している場合は一律にエラーとする
         Set<Long> stockPortfolioIds = this.stockPortfolioRepository.findByUserId(session.getUserId()).stream().map(StockPortfolio::getId).collect(Collectors.toSet());
@@ -129,5 +142,32 @@ public class StockExecutionManagementServiceImpl implements StockExecutionManage
         logger.atInfo().log("Registered %d Stock Executions", stockExecutions.size());
         result.setStatus(CsvUploadResult.UploadStatus.OK);
         return result;
+    }
+
+    /**
+     * MultipartFileの読み込み処理を行う。
+     * CSVの形式はStockExecutionRegistrationCsvで定義した形式であることを期待する。
+     * @param file
+     * @return
+     */
+    private Pair<CsvUploadResult, List<StockExecutionRegistrationCsv>> processCsv(MultipartFile file){
+        CsvAnnotationBeanReader<StockExecutionRegistrationCsv> reader = null;
+        CsvUploadResult csvUploadResult = new CsvUploadResult();
+        List<StockExecutionRegistrationCsv> csv = Collections.emptyList();
+
+        try(InputStream in = file.getInputStream()){
+            reader = new CsvAnnotationBeanReader<StockExecutionRegistrationCsv>(StockExecutionRegistrationCsv.class
+                    ,new BufferedReader(new InputStreamReader(in, Charset.defaultCharset()))
+                    , CsvPreference.STANDARD_PREFERENCE);
+            csv = reader.readAll();
+        }catch (IOException e){
+            logger.atSevere().log("IO Error: %s", e.getMessage());
+        }catch (SuperCsvException e){
+            csvUploadResult.registerErrorMesasge(reader.getErrorMessages());
+            csvUploadResult.setStatus(CsvUploadResult.UploadStatus.ERROR);
+            logger.atWarning().log("CSV Parse Error. Cause -> %s", csvUploadResult.getErrorMessages());
+        }finally {
+            return Pair.of(csvUploadResult, csv);
+        }
     }
 }

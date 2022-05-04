@@ -2,12 +2,10 @@ package app.presentation.controller.portfolio;
 
 import app.domain.auth.UserAuthInfo;
 import app.domain.execution.StockExecutionOutputCsv;
-import app.domain.execution.StockExecutionRegistrationCsv;
 import app.domain.portfolio.CsvUploadResult;
 import app.domain.portfolio.StockExectionCsvDto;
 import app.domain.portfolio.StockExecutionDownloadParam;
 import app.usecase.portfolio.StockExecutionManagementService;
-import com.github.mygreen.supercsv.io.CsvAnnotationBeanReader;
 import com.google.common.flogger.FluentLogger;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -20,15 +18,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.supercsv.exception.SuperCsvException;
-import org.supercsv.prefs.CsvPreference;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.Charset;
-import java.util.List;
 
 @Controller
 @RequestMapping("/management/portfolio/stock/execution")
@@ -59,26 +48,9 @@ public class StockExecutionRegisterController {
         }
         CsvUploadResult csvUploadResult = new CsvUploadResult();
         logger.atInfo().log("Upload File %s", stockExectionCsvDto.getMultipartFile().getName());
-
-        CsvAnnotationBeanReader<StockExecutionRegistrationCsv> reader = null;
-        try(InputStream in = stockExectionCsvDto.getMultipartFile().getInputStream()){
-            reader = new CsvAnnotationBeanReader<StockExecutionRegistrationCsv>(StockExecutionRegistrationCsv.class
-                    ,new BufferedReader(new InputStreamReader(in, Charset.defaultCharset()))
-                    , CsvPreference.STANDARD_PREFERENCE);
-            List<StockExecutionRegistrationCsv> csv = reader.readAll();
-            csvUploadResult.merge(this.stockExecutionManagementService.uploadCsv(csv, session));
-        }catch (IOException e){
-            logger.atSevere().log("IO Error: %s", e.getMessage());
-        }catch (SuperCsvException e){
-            csvUploadResult.registerErrorMesasge(reader.getErrorMessages());
-            csvUploadResult.setStatus(CsvUploadResult.UploadStatus.ERROR);
-            logger.atWarning().log("CSV Parse Error. Cause -> %s", csvUploadResult.getErrorMessages());
-        }finally {
-            StockExectionCsvDto dto = new StockExectionCsvDto();
-            StockExecutionDownloadParam param = new StockExecutionDownloadParam();
-            model.addAttribute("stockExectionCsvDto", dto);
-            model.addAttribute("stockExecutionDownloadParam", param);
-        }
+        this.stockExecutionManagementService.uploadCsv(stockExectionCsvDto, session);
+        model.addAttribute("stockExectionCsvDto", new StockExectionCsvDto());
+        model.addAttribute("stockExecutionDownloadParam", new StockExecutionDownloadParam());
         return "management/portfolio/stock/execution/index";
     }
 
