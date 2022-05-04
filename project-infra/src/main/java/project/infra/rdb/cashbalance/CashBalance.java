@@ -6,6 +6,6 @@ import java.io.Serializable;
 
 @Table(name = "cash_balance")
 @Entity
-public class CashBalance implements Serializable {
+public class CashBalance extends CashBalanceBase implements Serializable {
     private static final long serialVersionUID = 1l;
 }

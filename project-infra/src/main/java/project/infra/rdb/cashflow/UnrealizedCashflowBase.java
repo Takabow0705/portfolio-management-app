@@ -14,7 +14,7 @@ public class UnrealizedCashflowBase implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(name = "base_data")
+    @Column(name = "base_date")
     @NotNull
     private LocalDate baseDate;
     @Column(name = "currency_code")
@@ -29,6 +29,12 @@ public class UnrealizedCashflowBase implements Serializable {
     @Column(name = "amount")
     @NotNull
     private BigDecimal amount;
+    @Column(name = "settlement_date")
+    @NotNull
+    private LocalDate settlementDate;
+    @Column(name = "execution_date")
+    @NotNull
+    private LocalDate executionDate;
     @Column(name = "deleted")
     @NotNull
     private boolean deleted;

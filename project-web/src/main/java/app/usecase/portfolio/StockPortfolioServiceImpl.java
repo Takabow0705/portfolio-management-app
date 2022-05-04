@@ -1,8 +1,6 @@
 package app.usecase.portfolio;
 
 
-import app.domain.portfolio.PortfolioBasicStats;
-import app.domain.portfolio.StockPortfolioDto;
 import app.domain.portfolio.StockPortfolioReferenceDto;
 import org.springframework.stereotype.Service;
 import project.infra.rdb.stockexecution.StockExecutionRepository;
@@ -18,17 +16,16 @@ public class StockPortfolioServiceImpl implements StockPortfolioService {
 
     private final StockExecutionRepository stockExecutionRepository;
 
-    public StockPortfolioServiceImpl(StockPortfolioRepository stockPortfolioRepository, StockExecutionRepository stockExecutionRepository){
+    public StockPortfolioServiceImpl(StockPortfolioRepository stockPortfolioRepository, StockExecutionRepository stockExecutionRepository) {
         this.stockPortfolioRepository = stockPortfolioRepository;
         this.stockExecutionRepository = stockExecutionRepository;
     }
 
     /**
-     *
      * @param userId
      * @return
      */
-    public List<StockPortfolioReferenceDto> findByUserId(long userId){
+    public List<StockPortfolioReferenceDto> findByUserId(long userId) {
         return this.stockPortfolioRepository.findByUserId(userId)
                 .stream()
                 .filter(s -> !s.isDeleted())
@@ -44,15 +41,5 @@ public class StockPortfolioServiceImpl implements StockPortfolioService {
     @Override
     public void update(StockPortfolioReferenceDto dto) {
 
-    }
-
-    @Override
-    public List<StockPortfolioDto> getPortfolioStockList(StockPortfolioReferenceDto dto) {
-        return null;
-    }
-
-    @Override
-    public PortfolioBasicStats calculateWeeklyBasicStats(StockPortfolioReferenceDto dto) {
-        return null;
     }
 }
