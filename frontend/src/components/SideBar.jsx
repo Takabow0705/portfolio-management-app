@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {SideBarItem} from "./SideBarItem";
-import {SideBarContext} from "./Home";
+import {SideBarContext} from "./Layout";
 
 export const SideBar = () => {
     const {sideBar} = useContext(SideBarContext);

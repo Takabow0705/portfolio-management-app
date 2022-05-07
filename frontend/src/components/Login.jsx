@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {LoginClient} from '../utils/loginClient'
-import {Redirect} from "react-router";
-import {Alert} from "bootstrap";
-import {ModalBody} from "react-bootstrap";
+import {Navigate} from "react-router";
+
 
 export const LoginPage = () => {
     const [username, setUsername] = useState("");
@@ -23,7 +22,8 @@ export const LoginPage = () => {
     }
 
     if (redirect){
-        return <Redirect from="/login" to="/home" />
+        console.log("login component flg = "+redirect)
+        return <Navigate from="/login" to="/app/home" />
     }
 
     return (

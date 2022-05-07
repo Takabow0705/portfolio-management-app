@@ -6,7 +6,7 @@
       {
         "id": "1",
         "name": "ブック管理",
-        "href": "/ManageBook"
+        "href": "/app/manageBook"
       }
     ]
   },
@@ -17,22 +17,22 @@
       {
         "id": "1",
         "name": "株式約定登録",
-        "href": "/RegisterExecution"
+        "href": "/app/registerExecution"
       },
       {
         "id": "2",
         "name": "株式約定履歴照会",
-        "href": "/ManageExecution"
+        "href": "/app/manageExecution"
       },
       {
         "id": "3",
         "name": "入出金登録",
-        "href": "/RegisterCash"
+        "href": "/app/registerCash"
       },
       {
         "id": "4",
         "name": "入出金履歴照会",
-        "href": "/ManageCash"
+        "href": "/app/manageCash"
       }
     ]
   },
@@ -43,27 +43,27 @@
       {
         "id": "1",
         "name": "市場データ登録",
-        "href": "/RegisterMarketData"
+        "href": "/app/registerMarketData"
       },
       {
         "id": "2",
         "name": "損益評価計算",
-        "href": "/ExecuteEvaluation"
+        "href": "/app/executeEvaluation"
       },
       {
         "id": "3",
         "name": "感応度計算",
-        "href": "/ExecuteBetaCalculation"
+        "href": "/app/executeBetaCalculation"
       },
       {
         "id": "4",
         "name": "VaR計算",
-        "href": "/ExecuteVaRCalculation"
+        "href": "/app/executeVaRCalculation"
       },
       {
         "id": "5",
         "name": "収益率計算",
-        "href": "/ExecuteReturnCalculation"
+        "href": "/app/executeReturnCalculation"
       }
     ]
   },
@@ -74,17 +74,17 @@
       {
         "id": "1",
         "name": "ユーザ管理",
-        "href": "/ManageUser"
+        "href": "/app/manageUser"
       },
       {
         "id": "2",
         "name": "株式マスタ管理",
-        "href": "/ManageStockMaster"
+        "href": "/app/manageStockMaster"
       },
       {
         "id": "3",
         "name": "通貨マスタ管理",
-        "href": "/ManageCurrencyMaster"
+        "href": "/app/manageCurrencyMaster"
       }
     ]
   },
@@ -95,12 +95,12 @@
       {
         "id": "1",
         "name": "システムログ照会",
-        "href": "/SystemLog"
+        "href": "/app/systemLog"
       },
       {
         "id": "2",
         "name": "システムステータス管理",
-        "href": "/ManageStockMaster"
+        "href": "/app/manageStockMaster"
       }
     ]
   }
