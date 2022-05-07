@@ -1,5 +1,9 @@
 package app.domain.portfolio;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -49,7 +53,15 @@ public final class CsvUploadResult {
         return clone;
     }
 
-
+    /**
+     * アップロード結果をHTTPレスポンス形式に変換する。
+     * @return
+     */
+    public ResponseEntity<CsvUploadResult> convertToHttpResponse(){
+        HttpHeaders headers = new HttpHeaders();
+        ResponseEntity<CsvUploadResult> resultResponseEntity = new ResponseEntity<>(this, headers, HttpStatus.OK);
+        return resultResponseEntity;
+    }
     public enum UploadStatus{
         OK,
         ERROR,
