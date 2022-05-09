@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
 @RequestMapping("/api/v1/system/check-session")
 public class CheckSessionController {
@@ -16,8 +18,11 @@ public class CheckSessionController {
 
     @PostMapping
     //ToDo APIDocs
-    public ResponseEntity<Object> check(){
-        logger.atInfo().log("Check Session Status");
+    public ResponseEntity<Object> check(HttpServletRequest req){
+        logger.atInfo().log(String.format("Receive Session Check Request. Host: %s:%s, User-Agent: %s",
+                req.getRemoteHost(),
+                req.getRemotePort(),
+                req.getHeader("User-Agent")));
         HttpHeaders headers = new HttpHeaders();
         ResponseEntity<Object> response = new ResponseEntity<>(null, headers, HttpStatus.OK);
         return response;
