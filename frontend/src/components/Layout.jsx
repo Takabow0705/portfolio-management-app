@@ -25,7 +25,7 @@ export const Layout = () => {
 
     if (!authorized) {
         console.log("redirect to login page")
-        return <Navigate from="/app/home" to="/login"/>
+        return <Navigate  to="/"/>
     }
 
     return (

@@ -7,7 +7,7 @@ export const SideBarItem = ({id, menu, subMenus}) => {
     return (
         <>
             <a className={expanded ? "nav-link" : "nav-link collapsed"}
-               href={"#"}
+               href={"/#/app"}
                data-toggle={"collapse"}
                data-target={`#collapseLayouts_${id}`}
                aria-expanded={expanded}

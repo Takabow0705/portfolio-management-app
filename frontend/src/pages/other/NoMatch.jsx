@@ -6,7 +6,7 @@ export const NoMatch = () => {
         <div>
         <h2>Nothing to see here!</h2>
         <p>
-          <Link to="/login">Go to the home page</Link>
+          <Link to="/">Go to the login page</Link>
         </p>
       </div>  
     );

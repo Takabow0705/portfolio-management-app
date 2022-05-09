@@ -19,7 +19,12 @@ module.exports = {
     devServer: {
         port: 5000,
         hot: true,
-        historyApiFallback: true,
+        magicHtml: false,
+        historyApiFallback:  {
+            rewrites: [
+              { from: /./, to: 'index.html' }
+            ],
+        },
     },
     devtool: 'inline-source-map',
     performance: {
