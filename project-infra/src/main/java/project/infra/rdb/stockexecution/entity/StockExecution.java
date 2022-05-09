@@ -16,7 +16,6 @@ import java.util.List;
 public class StockExecution extends StockExecutionBase implements Serializable {
     private static final long serialVersionUID = 1l;
 
-    //ToDo project-web側のStockExecutionクラスと統合する
     /**
      * 引数の日付 >= 約定日 を満たすデータを取得するSpecificationを返す
      * @param data
@@ -65,7 +64,7 @@ public class StockExecution extends StockExecutionBase implements Serializable {
 
     public StockExecution(){}
 
-    private StockExecution(long stockPortfolioId, String stockCode, BigDecimal bookValue, String currencyCode, BigDecimal amount, LocalDate executionDate, LocalDate valueDate, BuySellType buySellType, boolean isDeleted, Timestamp updateTimestamp, String updateUser, Timestamp createTimestamp, String createUser) {
+    public StockExecution(long stockPortfolioId, String stockCode, BigDecimal bookValue, String currencyCode, BigDecimal amount, LocalDate executionDate, LocalDate valueDate, BuySellType buySellType, boolean isDeleted, Timestamp updateTimestamp, String updateUser, Timestamp createTimestamp, String createUser) {
      super(stockPortfolioId,stockCode,bookValue,currencyCode,amount,executionDate,valueDate,buySellType,isDeleted,updateTimestamp,updateUser,createTimestamp,createUser);
     }
 
