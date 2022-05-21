@@ -105,7 +105,7 @@
     </div>
 　　<hr>
     <h2 class="display-5">約定株式出力</h2>
-    <form th:action="@{/management/portfolio/stock/execution/download}" th:method="post" th:object="${stockExecutionDownloadParam}">
+    <form th:action="@{/management/portfolio/stock/execution/download}" th:method="post" th:object="${stockExecutionSearchParam}">
         <div class="form-group">
             <label class="control-label col-sm-2">出力対象期間指定</label>
             <div class="col-sm-9 form-inline">
