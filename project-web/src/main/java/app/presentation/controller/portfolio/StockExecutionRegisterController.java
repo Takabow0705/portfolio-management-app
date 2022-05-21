@@ -4,7 +4,7 @@ import app.domain.auth.UserAuthInfo;
 import app.domain.execution.StockExecutionOutputCsv;
 import app.domain.portfolio.CsvUploadResult;
 import app.domain.portfolio.StockExectionCsvDto;
-import app.domain.portfolio.StockExecutionDownloadParam;
+import app.domain.portfolio.StockExecutionSearchParam;
 import app.usecase.portfolio.StockExecutionManagementService;
 import com.google.common.flogger.FluentLogger;
 import org.springframework.http.HttpHeaders;
@@ -34,7 +34,7 @@ public class StockExecutionRegisterController {
     @GetMapping
     public String index(Model model){
         StockExectionCsvDto dto = new StockExectionCsvDto();
-        StockExecutionDownloadParam param = new StockExecutionDownloadParam();
+        StockExecutionSearchParam param = new StockExecutionSearchParam();
         model.addAttribute("stockExectionCsvDto", dto);
         model.addAttribute("stockExecutionDownloadParam", param);
         return "management/portfolio/stock/execution/index";
@@ -50,13 +50,13 @@ public class StockExecutionRegisterController {
         logger.atInfo().log("Upload File %s", stockExectionCsvDto.getMultipartFile().getName());
         this.stockExecutionManagementService.uploadCsv(stockExectionCsvDto, session);
         model.addAttribute("stockExectionCsvDto", new StockExectionCsvDto());
-        model.addAttribute("stockExecutionDownloadParam", new StockExecutionDownloadParam());
+        model.addAttribute("stockExecutionDownloadParam", new StockExecutionSearchParam());
         return "management/portfolio/stock/execution/index";
     }
 
     @PostMapping(path = "download")
     public ResponseEntity<String> download(@AuthenticationPrincipal UserAuthInfo session
-            , @ModelAttribute StockExecutionDownloadParam param
+            , @ModelAttribute StockExecutionSearchParam param
             , Model model) {
         if (session == null) {
             throw new SessionAuthenticationException("Session Info is null");

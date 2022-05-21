@@ -1,11 +1,12 @@
 package app.usecase.portfolio;
 
 import app.domain.auth.UserAuthInfo;
+import app.domain.execution.StockExecutionInquiryDto;
 import app.domain.execution.StockExecutionOutputCsv;
 import app.domain.execution.StockExecutionRegistrationCsv;
 import app.domain.portfolio.CsvUploadResult;
 import app.domain.portfolio.StockExectionCsvDto;
-import app.domain.portfolio.StockExecutionDownloadParam;
+import app.domain.portfolio.StockExecutionSearchParam;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.dataformat.csv.CsvGenerator;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
@@ -13,6 +14,9 @@ import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import com.github.mygreen.supercsv.io.CsvAnnotationBeanReader;
 import com.google.common.flogger.FluentLogger;
 import io.netty.util.internal.StringUtil;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
@@ -25,7 +29,9 @@ import org.supercsv.prefs.CsvPreference;
 import project.infra.rdb.currencymaster.CurrencyMaster;
 import project.infra.rdb.currencymaster.CurrencyMasterRepository;
 import project.infra.rdb.stockexecution.StockExecutionRepository;
+import project.infra.rdb.stockexecution.StockExecutionViewRepository;
 import project.infra.rdb.stockexecution.entity.StockExecution;
+import project.infra.rdb.stockexecution.entity.StockExecutionView;
 import project.infra.rdb.stockmaster.StockMaster;
 import project.infra.rdb.stockmaster.StockMasterRepository;
 import project.infra.rdb.stockportfolio.StockPortfolio;
@@ -53,20 +59,24 @@ public class StockExecutionManagementServiceImpl implements StockExecutionManage
 
     private final CurrencyMasterRepository currencyMasterRepository;
 
+    private final StockExecutionViewRepository stockExecutionViewRepository;
+
     private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
     public StockExecutionManagementServiceImpl(StockExecutionRepository stockExecutionRepository
     ,StockPortfolioRepository stockPortfolioRepository
     ,StockMasterRepository stockMasterRepository
-    ,CurrencyMasterRepository currencyMasterRepository){
+    ,CurrencyMasterRepository currencyMasterRepository
+    ,StockExecutionViewRepository stockExecutionViewRepository){
         this.stockExecutionRepository = stockExecutionRepository;
         this.stockPortfolioRepository = stockPortfolioRepository;
         this.stockMasterRepository = stockMasterRepository;
         this.currencyMasterRepository = currencyMasterRepository;
+        this.stockExecutionViewRepository = stockExecutionViewRepository;
     }
 
     @Override
-    public String downloadCsv(StockExecutionDownloadParam param) {
+    public String downloadCsv(StockExecutionSearchParam param) {
         List<Long> userPortfolioIds = this.stockPortfolioRepository.findByUserId(param.getUserId()).stream().map(StockPortfolio::getId).collect(Collectors.toList());
         // 所持するポートフォリオが無いなら空で返す。
         if (userPortfolioIds.isEmpty()){
@@ -142,6 +152,27 @@ public class StockExecutionManagementServiceImpl implements StockExecutionManage
         logger.atInfo().log("Registered %d Stock Executions", stockExecutions.size());
         result.setStatus(CsvUploadResult.UploadStatus.OK);
         return result;
+    }
+
+    @Override
+    public Page<StockExecutionInquiryDto> search(StockExecutionSearchParam param) {
+        List<Long> userPortfolioIds = this.stockPortfolioRepository.findByUserId(param.getUserId()).stream().map(StockPortfolio::getId).collect(Collectors.toList());
+        // 所持するポートフォリオが無いなら空で返す。
+        if (userPortfolioIds.isEmpty()){
+            return Page.empty();
+        }
+
+        Specification<StockExecutionView> specs = Specification.where(StockExecutionView.executionDateAfter(param.getFromDate()))
+                .and(StockExecutionView.executionDateBefore(param.getToDate()))
+                .and(StockExecutionView.isOwnUser(userPortfolioIds));
+        List<StockExecutionInquiryDto> executions = this.stockExecutionViewRepository.findAll(specs)
+                .stream()
+                .map(StockExecutionInquiryDto::map)
+                .collect(Collectors.toList());
+        Collections.sort(executions);
+        int start = param.getPage() * param.getSize() > executions.size() ? 0 : param.getPage() * param.getSize();
+        int end = start + param.getSize() > executions.size() ? executions.size() : start + param.getSize();
+        return new PageImpl<StockExecutionInquiryDto>(executions.subList(start, end), Pageable.unpaged(), executions.size());
     }
 
     /**
