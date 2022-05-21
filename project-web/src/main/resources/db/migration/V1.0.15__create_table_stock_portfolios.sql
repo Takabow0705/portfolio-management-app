@@ -1,7 +1,7 @@
 CREATE TABLE stock_portfolio (
     id BIGINT NOT NULL AUTO_INCREMENT,
     user_id int(11) unsigned NOT NULL,
-	portofolio_name varchar(500),
+	portfolio_name varchar(500),
 	details varchar(500),
     is_deleted boolean NOT NULL default False,
     update_timestamp DATETIME NOT NULL,
