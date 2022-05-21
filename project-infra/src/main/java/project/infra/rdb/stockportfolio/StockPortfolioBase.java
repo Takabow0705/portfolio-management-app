@@ -20,7 +20,7 @@ public class StockPortfolioBase implements Serializable {
     @NotNull
     private long userId;
 
-    @Column(name = "portofolio_name")
+    @Column(name = "portfolio_name")
     private String portfolioName;
 
     @Column(name = "details")
