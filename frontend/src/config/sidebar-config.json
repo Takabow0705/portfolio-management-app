@@ -21,7 +21,7 @@
       },
       {
         "id": "2",
-        "name": "株式約定履歴照会",
+        "name": "株式約定照会",
         "href": "/app/manageExecution"
       },
       {

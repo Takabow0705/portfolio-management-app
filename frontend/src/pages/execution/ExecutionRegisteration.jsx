@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { upload } from '../../utils/stockExecution'
 
-export const RegisterExecution = () => {
+export const ExecutionRegisteration = () => {
     const [multipartFile, setMultipartFile] = useState("")
     const submit = async (event) => {
         // formのデフォルト挙動をキャンセル
